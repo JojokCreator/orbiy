@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import Button from "./reusable/Button.astro";
 import { Icon } from "astro-icon/components";
-import logo from "../assets/logo.svg";
 
 const menu = [
 	{
@@ -32,7 +31,6 @@ const menu = [
 	{
 		Pricing: {
 			link: "/about-us",
-			values: [{ text: "About Us", link: "/about-us" }],
 		},
 	},
 	{
@@ -61,7 +59,7 @@ const menu = [
 				class="group relative mx-6"
 			>
 				<div
-					class="relative flex h-[50px] w-[50px] transform items-center justify-end overflow-hidden ring-0 ring-gray-300 ring-opacity-30 transition-all duration-200"
+					class="ring-opacity-30 relative flex h-[50px] w-[50px] transform items-center justify-end overflow-hidden ring-0 ring-gray-300 transition-all duration-200"
 				>
 					<div
 						class="flex h-[25px] w-[25px] origin-center transform flex-col justify-between overflow-hidden transition-all duration-300"
@@ -96,7 +94,7 @@ const menu = [
 			</div>
 		</div>
 		<div
-			class="absolute left-0 top-20 z-50 hidden w-screen translate-x-full bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all duration-500 ease-in-out lg:static lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:shadow-none"
+			class="absolute top-20 left-0 z-50 hidden w-screen translate-x-full bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all duration-500 ease-in-out lg:static lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:shadow-none"
 			id="menu"
 		>
 			<ul
@@ -112,23 +110,27 @@ const menu = [
 								>
 									{Object.keys(item)}
 								</a>
-								<span>
-									<Icon
-										name="chevronDown"
-										class="group-aria-expanded-within:rotate-180 transition-transform duration-300 ease-in-out group-hover:rotate-180"
-									/>
-								</span>
+								{Object.values(item)[0].values && (
+									<span>
+										<Icon
+											name="chevronDown"
+											class="transition-transform duration-300 ease-in-out group-hover:rotate-180 group-aria-expanded-within:rotate-180"
+										/>
+									</span>
+								)}
 							</div>
-							<ul class="dropdown group-aria-expanded-within:flex top-14 z-50 h-fit max-h-0 w-fit min-w-48 flex-col overflow-hidden bg-white py-1 text-gray-800 shadow-xl transition-all duration-500 ease-in-out lg:absolute lg:hidden lg:max-h-fit lg:overflow-visible lg:group-hover:flex">
-								{Object.values(item)[0].values.map((subItem: { text: string; link: string }) => (
-									<a
-										href={subItem.link}
-										class="my-0.5 block whitespace-nowrap border-b border-white px-2 py-1 text-lg font-normal text-gray-500 hover:bg-blue-500 hover:text-white"
-									>
-										{subItem.text}
-									</a>
-								))}
-							</ul>
+							{Object.values(item)[0].values && (
+								<ul class="dropdown top-14 z-50 h-fit max-h-0 w-fit min-w-48 flex-col overflow-hidden bg-white py-1 text-gray-800 shadow-xl transition-all duration-500 ease-in-out group-aria-expanded-within:flex lg:absolute lg:hidden lg:max-h-fit lg:overflow-visible lg:group-hover:flex">
+									{Object.values(item)[0].values.map((subItem: { link: string; text: string }) => (
+										<a
+											href={subItem.link}
+											class="my-0.5 block border-b border-white px-2 py-1 text-lg font-normal whitespace-nowrap text-gray-500 hover:bg-blue-500 hover:text-white"
+										>
+											{subItem.text}
+										</a>
+									))}
+								</ul>
+							)}
 						</li>
 					))
 				}
@@ -136,14 +138,14 @@ const menu = [
 					<Button
 						buttonText="Sign In"
 						link="https://dashboard.lemverify.io/#/signin"
-						width="w-32"
+						type="filled"
 					/>
 				</li>
 				<li>
 					<Button
 						buttonText="Start Now"
 						link="https://dashboard.lemverify.io/#/signup"
-						width="w-32"
+						type="outline"
 					/>
 				</li>
 			</ul>
@@ -151,44 +153,49 @@ const menu = [
 	</nav>
 </header>
 
-<script>
-	document.querySelectorAll(".item").forEach((ahref) => {
+<script is:inline>
+	document.addEventListener("DOMContentLoaded", () => {
+		const hamburgerToggle = document.getElementById("hamburgerToggle");
+		const menu = document.getElementById("menu");
+		const menuItems = document.querySelectorAll(".item");
+		const dropdownGroups = document.querySelectorAll(".group.menu");
+
 		if (window.innerWidth < 1024) {
-			// Add event parameter to the event listener function
-			ahref.addEventListener("click", (e) => {
-				e.preventDefault();
+			menuItems.forEach((ahref) => {
+				ahref.addEventListener("click", (e) => {
+					e.preventDefault();
+				});
 			});
 		}
-	});
-	document.querySelectorAll(".group.menu").forEach((dropdown) => {
-		dropdown.addEventListener("click", () => {
-			const currentDropdown = dropdown.querySelector(".dropdown");
-			const allDropdowns = document.querySelectorAll(".dropdown");
 
-			allDropdowns.forEach((dropdown) => {
-				if (dropdown !== currentDropdown) {
-					dropdown.classList.remove("max-h-72");
-				}
+		dropdownGroups.forEach((dropdown) => {
+			dropdown.addEventListener("click", () => {
+				const currentDropdown = dropdown.querySelector(".dropdown");
+				const allDropdowns = document.querySelectorAll(".dropdown");
+
+				allDropdowns.forEach((otherDropdown) => {
+					if (otherDropdown !== currentDropdown) {
+						otherDropdown.classList.remove("max-h-72");
+					}
+				});
+				currentDropdown?.classList.toggle("max-h-72");
 			});
-			currentDropdown!.classList.toggle("max-h-72");
 		});
-	});
 
-	document.getElementById("hamburgerToggle")!.addEventListener("click", () => {
-		const hamburgerToggle = document.getElementById("hamburgerToggle")!;
-		const menu = document.getElementById("menu")!;
-		const isExpanded = hamburgerToggle.getAttribute("aria-expanded") === "true";
-		if (isExpanded) {
-			menu.classList.add("translate-x-full");
-			setTimeout(() => {
-				menu.classList.add("hidden");
-			}, 200);
-		} else {
-			menu.classList.remove("hidden");
-			setTimeout(() => {
-				menu.classList.remove("translate-x-full");
-			}, 200);
-		}
-		hamburgerToggle.setAttribute("aria-expanded", String(!isExpanded));
+		hamburgerToggle?.addEventListener("click", () => {
+			const isExpanded = hamburgerToggle.getAttribute("aria-expanded") === "true";
+			if (isExpanded) {
+				menu?.classList.add("translate-x-full");
+				setTimeout(() => {
+					menu?.classList.add("hidden");
+				}, 200);
+			} else {
+				menu?.classList.remove("hidden");
+				setTimeout(() => {
+					menu?.classList.remove("translate-x-full");
+				}, 200);
+			}
+			hamburgerToggle.setAttribute("aria-expanded", String(!isExpanded));
+		});
 	});
 </script>

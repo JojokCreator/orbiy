@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+
+const { image, title, category, snippet, slug } = Astro.props;
+const strapiUrl = import.meta.env.STRAPI_URL;
+---
+
+<li class="flex justify-center">
+	<a href={slug + "/"} class="card group my-4 w-full rounded-md bg-white md:w-64 lg:w-11/12">
+		<figure class="relative aspect-video">
+			<Image src={image} alt="Blog" class="h-auto w-full object-cover group-hover:cursor-pointer" />
+			<div
+				class="text-primary absolute top-2 right-2 h-8 w-24 rounded-xl bg-white py-2 text-center text-sm font-semibold tracking-tight text-black"
+			>
+				{category}
+			</div>
+		</figure>
+		<div class="card-body justify-between">
+			<h2
+				class="card-title group-hover:text-primary !font-body mt-0 line-clamp-3 h-20 items-start !text-xl !font-semibold"
+			>
+				{title}
+			</h2>
+			<div class="font-body mt-2 line-clamp-3 h-20 overflow-y-hidden text-lg">
+				{snippet}
+			</div>
+		</div>
+	</a>
+</li>

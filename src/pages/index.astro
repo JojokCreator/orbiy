@@ -1,7 +1,42 @@
 ---
+import ImageText from "../components/reusable/ImageText.astro";
+import Faq from "../components/reusable/Faq.astro";
+import Modal from "../components/reusable/Modal.astro";
 import Layout from "../layouts/Layout.astro";
+import placeholder from "../assets/placeholder.svg";
+import type { Props as ButtonProps } from "../components/reusable/Button.astro";
+import SliderComponent from "../components/reusable/SliderComponent.astro";
+
+interface Props {
+	title: string;
+	header?: string | { icon: string } | undefined;
+	image: ImageMetadata;
+	imageSide?: "left" | "right";
+	button?: ButtonProps | false;
+	first: boolean;
+	breakOut?: "left" | "right" | false;
+	titleColor?: string;
+	bg?: string;
+}
+
+const sampleProps: Props = {
+	title: "Another Title",
+	header: undefined,
+	image: placeholder as ImageMetadata,
+	imageSide: "left",
+	button: undefined,
+	first: true,
+	breakOut: false,
+	titleColor: "red",
+	bg: "lightblue",
+};
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class="h-screen"></main>
+	<ImageText {...sampleProps}>
+		<p>Some Text here</p>
+	</ImageText>
+	<Faq />
+	<Modal id="test" />
+	<SliderComponent />
 </Layout>

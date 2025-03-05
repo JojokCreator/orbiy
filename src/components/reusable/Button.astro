@@ -1,6 +1,44 @@
-<a
-  href="#_"
-  class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
->
-  Button Text
+---
+const { class: className, type, buttonText, link, arrow } = Astro.props as Props;
+import { Icon } from "astro-icon/components";
+import { twMerge } from "tailwind-merge";
+
+export type Props = {
+	buttonText: string;
+	link: string;
+	type: string;
+	width?: string;
+	class?: string;
+	arrow?: boolean;
+};
+const filledClasses = `
+  bg-orange whitespace-nowrap active:focus:animate-click hover:opacity-80 relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-lg transition-all duration-500 ease-in-out
+`;
+const filledBlueClasses = `
+  bg-accent-darkblue whitespace-nowrap active:focus:animate-click hover:opacity-80 relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-lg transition-all duration-500 ease-in-out hover:opacity-80
+`;
+const darkClasses = `
+  bg-background-dark text-white active:focus:animate-click inline-flex whitespace-nowrap items-center justify-center px-4 py-3 text-base max-h-12 hover:shadow-[0_0_10px_2px_rgba(75,58,179,0.3)] rounded-lg transition duration-500 ease-in-out hover:opacity-80
+`;
+const outlineClasses = `
+  bg-[#F3F3FB] inline-flex whitespace-nowrap items-center justify-center px-4 py-3 text-text-primary text-base max-h-12 hover:shadow-[0_0_10px_2px_rgba(75,58,179,0.3)] rounded-lg transition duration-500 ease-in-out
+`;
+
+const typeClasses =
+	type === "filled"
+		? filledClasses
+		: type === "filledBlue"
+			? filledBlueClasses
+			: type === "dark"
+				? darkClasses
+				: outlineClasses;
+
+const combinedClasses = twMerge(typeClasses, className);
+---
+
+<a href={link} class={combinedClasses}>
+	<span class="active:focus:animate-click inline-flex items-center text-center">
+		{buttonText}
+		{arrow && <Icon name="arrowRight" class="ml-2 text-inherit" />}
+	</span>
 </a>

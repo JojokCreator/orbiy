@@ -1,0 +1,93 @@
+---
+const faqs = [
+	{
+		question: "Does Daylite work on Windows or Android?",
+		answers: [
+			"Daylite is a native macOS and iOS app, and is not compatible with Windows or Android devices.",
+		],
+	},
+	{
+		question: "What is Daylite CRM?",
+		answers: [
+			"Daylite CRM helps small business owners track all of their client communications and stay on top of follow-ups in one place, so they can spend less time managing their client list and spend more time building stronger client relationships.",
+		],
+	},
+	{
+		question: "What is Daylite Sales?",
+		answers: [
+			"Daylite Sales helps small businesses reduce the time it takes to manage and close their sales opportunities. Track and oversee your ongoing sales opportunities, and capture all of your prospects' details. Streamline your sales processes to increase your sales efficiency and free up your time so you can regain control and focus on closing your deals.",
+		],
+	},
+	{
+		question: "What is Daylite Projects?",
+		answers: [
+			"Daylite Projects helps small business owners keep track of all the crucial details and organize all the moving pieces of their projects all in one place, so they can spend less time managing projects and spend more time completing their deliverables.",
+		],
+	},
+	{
+		question: "What is Daylite Business?",
+		answers: [
+			"Daylite Business helps you manage your entire business. With all the benefits of CRM, Sales, and Projects, the Business plan allows you to spend less time managing clients, deals, and projects, so you have more freedom to do what you love.",
+		],
+	},
+	{
+		question: "What types of businesses work well with Daylite?",
+		answers: [
+			"The Daylite app is designed for Apple-based small businesses in services-based industries such as real estate, legal, financial, agencies, consulting, and coaching, to name a few.",
+			"Companies that sell services often have different needs than those selling products, and Daylite provides the tools to help those small businesses do so successfully.",
+			"If a business is predominately selling physical products, such as in a retail environment, Daylite is not the right solution.",
+		],
+	},
+];
+---
+
+<section class="mx-auto max-w-6xl py-12 sm:py-16">
+	<div class="mt-10 flex flex-col sm:mt-20 sm:flex-row sm:gap-16">
+		<h2 class="max-w-xs px-4 text-center font-bold sm:text-start 2xl:px-0">
+			Frequently Asked Questions
+		</h2>
+		<div class="w-full grow">
+			{
+				faqs.map((faq) => (
+					<details class="group border-background-light-hover group w-full overflow-hidden border-b transition-all duration-500 ease-in-out hover:cursor-pointer sm:rounded-xl sm:rounded-b-none [&::details-content]:h-0 [&::details-content]:transition-[block-size,content-visibility] [&::details-content]:duration-1000 [&[open]::details-content]:h-auto">
+						<summary class="text-accent-blue hover:bg-background-light/40 [&>p]:after:bg-background-light relative flex p-4 pt-7 pb-5 text-sm sm:text-2xl [&>p]:after:float-left [&>p]:after:flex [&>p]:after:h-8 [&>p]:after:w-8 [&>p]:after:-translate-x-2 [&>p]:after:-translate-y-2 [&>p]:after:items-center [&>p]:after:justify-center [&>p]:after:rounded-full [&>p]:after:text-2xl [&>p]:after:transition-transform [&>p]:after:duration-300 [&>p]:after:ease-out [&>p]:after:content-['›'] group-open:[&>p]:after:rotate-90 sm:[&>p]:after:h-10 sm:[&>p]:after:w-10 sm:[&>p]:after:-translate-y-1">
+							<p>{faq.question}</p>
+						</summary>
+						<div class="p-4">
+							{faq.answers.map((answer) => (
+								<p class="text-lg sm:text-xl">{answer}</p>
+							))}
+						</div>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</section>
+<style is:global>
+	:root {
+		interpolate-size: allow-keywords;
+	}
+	details::details-content {
+		block-size: 0;
+		transition:
+			block-size 1s,
+			content-visibility 1s;
+		transition-behavior: allow-discrete;
+	}
+	details[open]::details-content {
+		block-size: auto;
+	}
+	.aa-Panel {
+		z-index: 100000 !important;
+		top: 42px !important;
+	}
+	.aa-SubmitIcon {
+		margin-left: 0.5rem;
+	}
+	@media (min-width: 640px) {
+		div.slider {
+			padding: 7px;
+		}
+	}
+</style>

@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { id } = Astro.props;
+---
+
+<button
+	class="px-2 pt-4 pb-3.5 xl:mr-8"
+	aria-label="search"
+	onclick={`window.${"modal" + id}.showModal(); document.body.classList.add('overflow-hidden')`}
+>
+	Test
+</button>
+<dialog
+	id={"modal" + id}
+	class="dialog-open:block dialog-open:opacity-100 dialog-open:backdrop:bg-black/20 dialog-open:starting:-translate-y-[25vh] dialog-open:starting:opacity-0 fixed inset-0 top-2 left-1/2 !mt-10 w-screen -translate-x-1/2 transform overflow-visible rounded-xl bg-white p-4 pb-10 opacity-0 shadow-lg backdrop-blur-lg transition-[overlay,display,opacity,transform] transition-discrete duration-500 backdrop:bg-black backdrop:bg-black/0 backdrop:backdrop-blur-lg backdrop:transition-[overlay,display,opacity,transform] backdrop:transition-discrete backdrop:duration-300 sm:w-1/2"
+>
+	<form method="dialog" class="bg-white">
+		<button class="z-50 float-right pb-4 hover:opacity-90 focus:outline-none"
+			><Icon name="close" size={24} class="text-blue" /></button
+		>
+		<h2
+			class="text-color-heading mt-2 mb-4 w-full text-center text-xl font-bold sm:mb-8 sm:text-2xl"
+		>
+			Test
+		</h2>
+	</form>
+</dialog>
+
+<script>
+	const modals = document.querySelectorAll("dialog");
+	modals.forEach((modal) => {
+		modal.addEventListener("close", () => {
+			document.body.classList.remove("overflow-hidden");
+		});
+		modal.addEventListener("click", (event) => {
+			if ((event.target as HTMLElement).nodeName === "DIALOG") {
+				modal.close();
+			}
+		});
+	});
+</script>
