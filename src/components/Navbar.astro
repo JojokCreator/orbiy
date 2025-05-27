@@ -44,7 +44,7 @@ const menu = [
 
 <header class="w-screen">
 	<nav
-		class="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between bg-white px-4 py-4 text-lg text-gray-700 lg:py-0"
+		class="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between bg-white px-4 py-2 text-lg text-gray-700 lg:py-0"
 	>
 		<div class="z-[50]">
 			<a href="/">
@@ -56,40 +56,11 @@ const menu = [
 				role="button"
 				id="hamburgerToggle"
 				aria-label="Toggle Hamburger Menu"
-				class="group relative mx-6"
+				class="group relative grid h-16 w-16 place-items-center"
 			>
 				<div
-					class="ring-opacity-30 relative flex h-[50px] w-[50px] transform items-center justify-end overflow-hidden ring-0 ring-gray-300 transition-all duration-200"
+					class="h-[2px] w-[30px] rounded-full bg-black transition-all duration-150 group-aria-expanded:h-0 group-aria-expanded:bg-white before:absolute before:h-[2px] before:w-[30px] before:-translate-y-[10px] before:rounded-full before:bg-black before:transition-all before:duration-150 before:content-[''] group-aria-expanded:before:translate-y-0 group-aria-expanded:before:rotate-45 after:absolute after:h-[2px] after:w-[30px] after:translate-y-[10px] after:rounded-full after:bg-black after:transition-all after:duration-150 after:content-[''] group-aria-expanded:after:translate-y-0 group-aria-expanded:after:-rotate-45"
 				>
-					<div
-						class="flex h-[25px] w-[25px] origin-center transform flex-col justify-between overflow-hidden transition-all duration-300"
-					>
-						<div
-							class="h-[3px] w-9 origin-left transform bg-sky-950 transition-all delay-100 duration-300 group-aria-expanded:translate-y-7"
-						>
-						</div>
-						<div
-							class="h-[3px] w-9 transform rounded bg-sky-950 transition-all delay-75 duration-300 group-aria-expanded:translate-y-6"
-						>
-						</div>
-						<div
-							class="h-[3px] w-9 origin-left transform bg-sky-950 transition-all duration-300 group-aria-expanded:translate-y-6"
-						>
-						</div>
-
-						<div
-							class="absolute top-2.5 flex w-0 -translate-x-10 transform items-center justify-between transition-all duration-500 group-aria-expanded:w-12 group-aria-expanded:translate-x-0"
-						>
-							<div
-								class="absolute h-[3px] w-7 rotate-0 transform bg-sky-950 transition-all delay-300 duration-500 group-aria-expanded:rotate-45"
-							>
-							</div>
-							<div
-								class="absolute h-[3px] w-7 -rotate-0 transform bg-sky-950 transition-all delay-300 duration-500 group-aria-expanded:-rotate-45"
-							>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -106,7 +77,7 @@ const menu = [
 							<div class="flex items-center justify-center space-x-2 px-2 lg:justify-between xl:px-4">
 								<a
 									href={Object.values(item)[0].link}
-									class="item my-2 py-2 text-lg font-bold text-sky-950 transition duration-300 ease-in-out hover:text-blue-500"
+									class="item text-text my-2 py-2 text-lg font-bold transition duration-300 ease-in-out hover:text-blue-500"
 								>
 									{Object.keys(item)}
 								</a>

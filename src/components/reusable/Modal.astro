@@ -5,7 +5,7 @@ const { id } = Astro.props;
 ---
 
 <button
-	class="px-2 pt-4 pb-3.5 xl:mr-8"
+	class="bg-primary active:focus:animate-click relative inline-flex max-h-12 items-center justify-center overflow-hidden rounded-lg p-4 px-5 py-3 pt-4 pb-3.5 text-base whitespace-nowrap text-white transition-all duration-500 ease-in-out hover:cursor-pointer hover:opacity-80 xl:mr-8"
 	aria-label="search"
 	onclick={`window.${"modal" + id}.showModal(); document.body.classList.add('overflow-hidden')`}
 >
@@ -13,10 +13,10 @@ const { id } = Astro.props;
 </button>
 <dialog
 	id={"modal" + id}
-	class="dialog-open:block dialog-open:opacity-100 dialog-open:backdrop:bg-black/20 dialog-open:starting:-translate-y-[25vh] dialog-open:starting:opacity-0 fixed inset-0 top-2 left-1/2 !mt-10 w-screen -translate-x-1/2 transform overflow-visible rounded-xl bg-white p-4 pb-10 opacity-0 shadow-lg backdrop-blur-lg transition-[overlay,display,opacity,transform] transition-discrete duration-500 backdrop:bg-black backdrop:bg-black/0 backdrop:backdrop-blur-lg backdrop:transition-[overlay,display,opacity,transform] backdrop:transition-discrete backdrop:duration-300 sm:w-1/2"
+	class="transition:transform fixed inset-0 top-2 left-1/2 !mt-10 w-screen -translate-x-1/2 translate-y-[2vh] transform overflow-visible rounded-xl opacity-0 shadow-lg backdrop-blur-lg transition-all transition-discrete duration-500 backdrop:bg-black/0 backdrop:backdrop-blur-lg backdrop:transition-[overlay,display,opacity,transform] open:block open:translate-y-0 open:opacity-100 open:backdrop:bg-black/20 sm:w-1/2 dark:open:backdrop:bg-neutral-700/20 open:starting:translate-y-[2vh] open:starting:opacity-0"
 >
 	<form method="dialog" class="bg-white">
-		<button class="z-50 float-right pb-4 hover:opacity-90 focus:outline-none"
+		<button class="z-50 float-right pb-4 hover:cursor-pointer hover:opacity-90 focus:outline-none"
 			><Icon name="close" size={24} class="text-blue" /></button
 		>
 		<h2

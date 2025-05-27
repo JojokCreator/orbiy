@@ -1,0 +1,119 @@
+---
+import BlogCard from "./BlogCard.astro";
+import placeholder from "../../assets/placeholder.svg";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+const { title, linkAhref, linkText, posts, locale } = Astro.props;
+
+const samplePosts = [
+	{
+		image: placeholder,
+		title: "Title",
+		snippet: "Lorem Ipsmun sdsd sd sd",
+		category: "",
+		slug: "/",
+	},
+	{
+		image: placeholder,
+		title: "Title",
+		snippet: "Lorem Ipsmun sdsd sd sd",
+		category: "",
+		slug: "/",
+	},
+	{
+		image: placeholder,
+		title: "Title",
+		snippet: "Lorem Ipsmun sdsd sd sd",
+		category: "",
+		slug: "/",
+	},
+	{
+		image: placeholder,
+		title: "Title",
+		snippet: "Lorem Ipsmun sdsd sd sd",
+		category: "",
+		slug: "/",
+	},
+	{
+		image: placeholder,
+		title: "Title",
+		snippet: "Lorem Ipsmun sdsd sd sd",
+		category: "",
+		slug: "/",
+	},
+	{
+		image: placeholder,
+		title: "Title",
+		snippet: "Lorem Ipsmun sdsd sd sd",
+		category: "",
+		slug: "/",
+	},
+];
+---
+
+<div class="mx-auto max-w-6xl px-4 py-14 2xl:px-0">
+	<div class="flex items-center justify-between px-4 py-2 2xl:px-0">
+		<h2 class="z-10 mb-6 text-4xl font-bold sm:text-5xl">{title}</h2>
+	</div>
+	<swiper-container navigation="true" pagination="true" init="false">
+		{
+			samplePosts.map((post) => (
+				<swiper-slide>
+					<div class="px-4 sm:px-2">
+						<BlogCard
+							title={post.title}
+							image={post.image}
+							snippet={post.snippet}
+							category={post.category}
+							slug={post.slug}
+						/>
+					</div>
+				</swiper-slide>
+			))
+		}
+	</swiper-container>
+</div>
+
+<script>
+	import { register, type SwiperContainer } from "swiper/element";
+	import { Navigation, Pagination } from "swiper/modules";
+
+	register();
+
+	const swiperEl = document.querySelector("swiper-container") as SwiperContainer;
+
+	const params = {
+		pagination: {
+			// el: ".swiper-pagination",
+			clickable: true,
+		},
+		modules: [Navigation, Pagination],
+		injectStyles: [
+			`
+			:host {
+				--swiper-navigation-size: 24px !important;
+				.swiper-button-next {
+					right: 0px;
+				}
+				.swiper-button-prev {
+					left: 0px;
+				}
+			}
+			`,
+		],
+		injectStylesUrls: [
+			"node_modules/swiper/modules/navigation-element.min.css",
+			"node_modules/swiper/modules/pagination-element.min.css",
+		],
+		breakpoints: {
+			768: {
+				slidesPerView: 3,
+			},
+		},
+	};
+
+	Object.assign(swiperEl, params);
+
+	swiperEl.initialize();
+</script>

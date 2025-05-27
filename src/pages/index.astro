@@ -6,6 +6,7 @@ import Layout from "../layouts/Layout.astro";
 import placeholder from "../assets/placeholder.svg";
 import type { Props as ButtonProps } from "../components/reusable/Button.astro";
 import SliderComponent from "../components/reusable/SliderComponent.astro";
+import SwiperComponent from "../components/reusable/SwiperComponent.astro";
 
 interface Props {
 	title: string;
@@ -37,6 +38,9 @@ const sampleProps: Props = {
 		<p>Some Text here</p>
 	</ImageText>
 	<Faq />
-	<Modal id="test" />
-	<SliderComponent />
+	<div class="flex justify-center py-12">
+		<Modal id="test" />
+	</div>
+	<!-- <SliderComponent /> -->
+	<SwiperComponent />
 </Layout>

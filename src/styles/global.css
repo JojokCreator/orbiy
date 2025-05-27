@@ -3,25 +3,28 @@
 @theme {
     /* --font-sans: 'Roboto', sans-serif; */
     --font-sans: '-apple-system', 'Roboto', sans-serif;
+    --color-text: oklch(10.98% 0.01 270.31);
 
-    --color-background: #FFFFFF;
-    --color-background-light: #F7F7F7;
-    --color-background-light-hover: #e7e5e4;
-    --color-background-dark: #1e1e1e;
-    --color-text-primary: rgba(0, 0, 0, 0.8);
-    --color-text-secondary: rgba(0, 0, 0, 0.55);
-    --color-text-dark: #dfdfdf;
-    --color-text-dark-mute: #979797;
-    --color-orange: #F75B00;
-    --color-link: #0D74E3;
-
-    --color-accent-blue: #0096C6;
-    --color-accent-green: #00A33F;
-    --color-accent-purple: #AC3EF5;
-    --color-accent-teal: #005E66;
-    --color-accent-red: #B22B00;
-    --color-accent-darkblue: #3622BB;
-    --color-accent-orange: #FF9F0A;
+    --color-base-100: oklch(99.43% 0.001 286.38);
+    --color-base-200: oklch(97.33% 0.008 271.33);
+    --color-base-300: oklch(48.52% 0.0225 279.09);
+    --color-base-content: oklch(42.06% 0.049 276.53);
+    --color-primary: oklch(62.31% 0.188 259.81);
+    --color-primary-content: oklch(97.05% 0.014 254.6);
+    --color-secondary: oklch(55.79% 0.022 301.91);
+    --color-secondary-content: oklch(95.05% 0.003 308.43);
+    --color-accent: oklch(65.59% 0.212 354.31);
+    --color-accent-content: oklch(97.14% 0.014 343.2);
+    --color-neutral: oklch(45.11% 0.172 270.31);
+    --color-neutral-content: oklch(82.15% 0.055 277.12);
+    --color-info: oklch(70.38% 0.123 182.5);
+    --color-info-content: oklch(98.36% 0.014 180.72);
+    --color-success: oklch(76.81% 0.204 130.85);
+    --color-success-content: oklch(98.57% 0.031 120.76);
+    --color-warning: oklch(79.52% 0.162 86.05);
+    --color-warning-content: oklch(98.73% 0.026 102.21);
+    --color-error: oklch(64.5% 0.215 16.44);
+    --color-error-content: oklch(96.94% 0.015 12.42);
 
     --animate-click: button-pop 0.2s ease-out;
 
