@@ -11,20 +11,20 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/sitemap": "^3.4.0",
+		"@astrojs/sitemap": "^3.4.1",
 		"@glidejs/glide": "^3.7.1",
-		"astro": "^5.8.0",
+		"astro": "^5.11.1",
 		"astro-icon": "^1.1.5",
-		"swiper": "^11.2.8",
-		"tailwind-merge": "^3.3.0",
+		"swiper": "^11.2.10",
+		"tailwind-merge": "^3.3.1",
 		"typescript": "^5.8.3"
 	},
 	"devDependencies": {
-		"@tailwindcss/vite": "^4.1.7",
+		"@tailwindcss/vite": "^4.1.11",
 		"@types/glidejs__glide": "^3.6.6",
-		"prettier": "^3.5.3",
+		"prettier": "^3.6.2",
 		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-tailwindcss": "^0.6.11",
-		"tailwindcss": "^4.1.7"
+		"prettier-plugin-tailwindcss": "^0.6.14",
+		"tailwindcss": "^4.1.11"
 	}
 }
