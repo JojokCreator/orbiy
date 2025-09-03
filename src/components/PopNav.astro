@@ -1,0 +1,151 @@
+---
+import Button from "./reusable/Button.astro";
+import { Icon } from "astro-icon/components";
+
+const menuItems = [
+	{
+		title: "Features",
+		link: "/#features",
+	},
+	{
+		title: "AI Insights",
+		link: "/#ai-insights",
+	},
+	{
+		title: "Ask Bond",
+		link: "/#ask-bond",
+	},
+	{
+		title: "My Profile",
+		link: "/#my-profile",
+	},
+	{
+		title: "Apply For Waitlist",
+		link: "/contact",
+	},
+];
+---
+
+<header class="z-[999] w-screen bg-black px-4 2xl:px-0">
+	<div
+		class="border-midtone fixed top-0 left-0 z-50 mx-auto w-screen border-b bg-black px-4 lg:static lg:w-auto lg:max-w-7xl lg:py-2 xl:px-0"
+	>
+		<div class="flex h-16 items-center justify-between bg-black">
+			<div class="lg:flex lg:items-center lg:gap-12">
+				<a class="flex w-52 items-center gap-2 text-lg" href="/">
+					<Icon name="logo" class="h-auto w-28 flex-shrink-0" aria-label="home link" />
+				</a>
+			</div>
+			<div
+				class="flex h-13 w-13 items-center justify-center space-x-2 focus:outline-none lg:h-auto lg:w-auto"
+			>
+				<div
+					id="mobile-menu"
+					class="top-[64px] hidden h-[calc(100vh-64px)] w-screen translate-y-[5vh] transform overflow-visible rounded-xl bg-transparent opacity-0 backdrop-blur-lg transition-all transition-discrete duration-500 backdrop:top-[64px] backdrop:bg-black/0 backdrop:backdrop-blur-lg backdrop:transition-[overlay,display,opacity,transform] backdrop:transition-discrete backdrop:duration-1000 open:block open:translate-y-0 open:opacity-100 open:backdrop:bg-black/40 lg:mt-0 lg:block lg:h-auto lg:w-auto lg:translate-y-0 lg:opacity-100 lg:duration-0 dark:open:backdrop:bg-black/20 open:starting:-translate-y-[5vh] open:starting:opacity-0"
+				>
+					<nav class="relative grid h-[calc(100vh-180px)] place-items-center lg:block lg:h-auto">
+						<ul class="flex flex-col items-center justify-center gap-6 text-sm lg:flex-row">
+							{
+								menuItems.map((item: { link: string; title: string }) => (
+									<li class="last:block lg:last:hidden">
+										<a
+											aria-current={Astro.url.pathname.includes(item.link)}
+											class={`text-2xl text-white hover:text-gray-400 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg`}
+											href={item.link}
+										>
+											{item.title}
+										</a>
+									</li>
+								))
+							}
+						</ul>
+					</nav>
+				</div>
+				<button
+					aria-label="Hamburger Toggle"
+					id="mobile-menu-button"
+					popovertarget="mobile-menu"
+					group-aria-pressed="false"
+					group-aria-label="Toggle mobile menu"
+					class="active:!bg-green/20 group relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full transition-colors duration-200 ease-in-out lg:hidden"
+				>
+					<span
+						class="z-50 h-[1px] w-7 rounded-full !bg-black transition-all duration-150 group-aria-pressed:h-0 group-aria-pressed:bg-white before:absolute before:h-[1px] before:w-7 before:-translate-x-3.5 before:-translate-y-3 before:rounded-full before:bg-black before:transition-all before:duration-150 before:content-[''] group-aria-pressed:before:translate-y-0 group-aria-pressed:before:rotate-45 after:absolute after:h-[1px] after:w-7 after:-translate-x-3.5 after:translate-y-3 after:rounded-full after:bg-black after:transition-all after:duration-150 after:content-[''] group-aria-pressed:after:translate-y-0 group-aria-pressed:after:-rotate-45 hover:cursor-pointer lg:hidden dark:!bg-white dark:before:bg-white dark:after:bg-white"
+					>
+					</span>
+				</button>
+			</div>
+			<Button
+				class="hidden w-52 items-center text-center lg:flex"
+				link="/contact"
+				type="filled"
+				buttonText="Apply for Waitlist"
+			/>
+		</div>
+	</div>
+</header>
+
+<script>
+	function initializeMobileMenu() {
+		const mobileMenuButton = document.getElementById("mobile-menu-button") as HTMLButtonElement;
+		const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
+
+		if (mobileMenuButton && mobileMenu) {
+			function handleMobileMenuState() {
+				if (window.innerWidth < 768) {
+					mobileMenu.setAttribute("popover", "auto");
+
+					if (!mobileMenuButton.hasAttribute("group-aria-pressed")) {
+						mobileMenuButton.setAttribute("group-aria-pressed", "false");
+					}
+
+					if (!mobileMenu.hasAttribute("data-toggle-listener-added")) {
+						mobileMenu.addEventListener("toggle", handlePopoverToggle);
+						mobileMenu.setAttribute("data-toggle-listener-added", "true");
+					}
+				} else {
+					mobileMenu.removeAttribute("popover");
+					mobileMenu.removeAttribute("data-toggle-listener-added");
+					mobileMenuButton.removeAttribute("group-aria-pressed");
+
+					if (mobileMenu.matches(":popover-open")) {
+						mobileMenu.hidePopover();
+					}
+
+					if (mobileMenu.hasAttribute("data-toggle-listener-added")) {
+						mobileMenu.removeEventListener("toggle", handlePopoverToggle);
+					}
+					document.body.classList.remove("overflow-y-hidden");
+				}
+			}
+
+			function handleLinkClick() {
+				if (window.innerWidth < 768) {
+					mobileMenu.hidePopover();
+				}
+			}
+
+			const menuLinks = mobileMenu.querySelectorAll("a");
+			menuLinks.forEach((link) => {
+				link.addEventListener("click", handleLinkClick);
+			});
+
+			function handlePopoverToggle(event: Event) {
+				const target = event.target as HTMLElement;
+
+				if (target.matches(":popover-open")) {
+					mobileMenuButton.ariaPressed = "true";
+					document.body.classList.add("overflow-y-hidden");
+				} else {
+					mobileMenuButton.ariaPressed = "false";
+					document.body.classList.remove("overflow-y-hidden");
+				}
+			}
+			window.addEventListener("resize", () => {
+				handleMobileMenuState();
+			});
+			handleMobileMenuState();
+		}
+	}
+	initializeMobileMenu();
+</script>

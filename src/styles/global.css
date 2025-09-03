@@ -2,7 +2,7 @@
 
 @theme {
     /* --font-sans: 'Roboto', sans-serif; */
-    --font-sans: '-apple-system', 'Roboto', sans-serif;
+    --font-sans: var(--font-poppins);
     --color-text: oklch(10.98% 0.01 270.31);
 
     --color-base-100: oklch(99.43% 0.001 286.38);

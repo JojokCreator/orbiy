@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
@@ -10,4 +10,11 @@ export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
 	},
+	experimental: {
+        fonts: [{
+            provider: fontProviders.google(),
+            name: "Poppins",
+            cssVariable: "--font-poppins"
+        }]
+    }
 });

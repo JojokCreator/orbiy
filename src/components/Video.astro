@@ -1,0 +1,42 @@
+---
+const { desktopVideoId, mobileVideoId, autoplay = false } = Astro.props;
+---
+
+<div class="z-50 flex items-center justify-center bg-black p-4">
+	<div class="aspect-video h-auto w-screen">
+		<iframe
+			id="videoFrame"
+			src=""
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen
+			class="h-full w-full object-contain"
+		>
+		</iframe>
+	</div>
+</div>
+
+<script is:inline define:vars={{ desktopVideoId, mobileVideoId, autoplay }}>
+	// Choose video based on screen width
+	function loadVideo() {
+		const isMobile = window.innerWidth < 768;
+		const videoId = isMobile ? mobileVideoId : desktopVideoId;
+		const autoplayParam = autoplay ? 1 : 0;
+		const baseUrl = `https://www.youtube.com/embed/${videoId}`;
+		const params = new URLSearchParams({
+			autoplay: autoplayParam,
+			rel: 0,
+			controls: 0,
+			modestbranding: 1,
+			disablekb: 1,
+			mute: autoplayParam,
+			iv_load_policy: 3,
+			fs: 0,
+		});
+		console.log(`${baseUrl}?${params}`);
+
+		document.getElementById("videoFrame").src = `${baseUrl}?${params}`;
+	}
+
+	window.addEventListener("load", loadVideo);
+	window.addEventListener("resize", loadVideo);
+</script>
