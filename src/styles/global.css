@@ -30,7 +30,7 @@
 
     --breakpoint-md: 53.75rem;
     --breakpoint-7xl: 1080px;
-    --breakpoint-8xl: 96rem;
+    --breakpoint-8xl: 80rem;
 
 
     @keyframes button-pop {
@@ -121,6 +121,29 @@
         h2 {
             font-size: 3.375rem;
             line-height: 4rem;
+        }
+    }
+
+    .site-container {
+        max-width: var(--breakpoint-8xl);
+        margin: 0 auto;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
+    @media (min-width: 840px) {
+        .site-container {
+            padding-top: 64px;
+            padding-bottom: 64px;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        .site-container {
+            padding-left: 0;
+            padding-right: 0;
         }
     }
 }

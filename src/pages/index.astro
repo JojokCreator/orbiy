@@ -5,7 +5,7 @@ import Modal from "../components/reusable/Modal.astro";
 import Layout from "../layouts/Layout.astro";
 import placeholder from "../assets/placeholder.svg";
 import type { Props as ButtonProps } from "../components/reusable/Button.astro";
-import Api from "../components/API.astro";
+import SwiperComponent from "../components/reusable/SwiperComponent.astro";
 
 interface Props {
 	title: string;
@@ -41,5 +41,5 @@ const sampleProps: Props = {
 		<Modal id="test" />
 	</div>
 	<!-- <SliderComponent /> -->
-	<!-- <SwiperComponent /> -->
+	<SwiperComponent />
 </Layout>

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:inclusive-components.design)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

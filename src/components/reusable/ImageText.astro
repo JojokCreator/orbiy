@@ -30,21 +30,23 @@ const {
 
 <section class={`${bg} w-screen`}>
 	<div
-		class={`${bg} mx-auto max-w-7xl ${first ? "pt-24 sm:pt-28" : "pt-8 sm:pt-16"} overflow-clip 2xl:overflow-visible`}
+		class={`${bg} site-container ${first ? "pt-24 md:pt-28" : "pt-8 md:pt-16"} overflow-clip 2xl:overflow-visible`}
 	>
 		<div
-			class={`md:flex items-center md:items-end ${imageSide === "left" ? "flex-row-reverse" : ""}`}
+			class={`md:flex items-center md:items-center ${imageSide === "left" ? "flex-row-reverse" : ""}`}
 		>
 			<div
 				class={`md:w-2/3 h-full px-4 ${
-					imageSide === "right" ? "sm:ml-6 md:pl-8 md:pr-4" : "sm:mr-6 md:pr-8 md:pl-4"
-				} flex flex-col justify-between gap-4 sm:gap-8`}
+					imageSide === "right"
+						? "md:ml-6 md:pl-8 md:pr-4"
+						: "md:mr-6 md:pr-8 md:pl-4"
+				} flex flex-col justify-between gap-4 md:gap-8`}
 			>
 				<div>
 					{
 						typeof header === "string" ? (
 							<p
-								class={`${bg === "bg-background-dark" ? "text-text-dark-mute" : "text-text-secondary"} mb-4 w-fit border-b border-b-gray-400 text-lg font-semibold tracking-wide uppercase sm:text-xl/10`}
+								class={`${bg === "bg-background-dark" ? "text-text-dark-mute" : "text-text-secondary"} mb-4 w-fit border-b border-b-gray-400 text-lg font-semibold tracking-wide uppercase md:text-xl/10`}
 							>
 								{header}
 							</p>
@@ -60,7 +62,6 @@ const {
 						)
 					}
 				</div>
-
 				<slot />
 				{
 					button && button.link && (
