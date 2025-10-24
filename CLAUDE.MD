@@ -70,6 +70,135 @@ For reusable layouts, place in `src/layouts/` directory.
 - `src/components/reusable/` - Reusable UI components
 - `src/icons/` - SVG icons for use with astro-icon
 
+### SEO Structured Data Implementation
+
+All pages now include comprehensive structured data for Google rich snippets:
+
+**Implemented Rich Snippets:**
+- **Organization schema** - Homepage with business info, services catalog, social links
+- **Service schema** - Primary service pages with detailed service offerings
+- **FAQ schema** - All pages with FAQ sections (FAQ.astro, FAQComponent.astro, contact, AI benchmark)  
+- **Breadcrumb schema** - Blog and app detail pages with navigation paths
+- **BlogPosting schema** - Blog articles with enhanced author, publisher, and metadata
+- **SoftwareApplication schema** - App showcase pages with technical details
+- **Person schema** - Author profiles with job titles, images, social links
+
+**Reusable Components Created:**
+- `BreadcrumbStructuredData.astro` - For navigation-rich snippets
+- `OrganizationStructuredData.astro` - For business/brand recognition  
+
+### DRY (Don't Repeat Yourself) Principles
+
+1. **Component Reusability**:
+
+   - Extract common UI patterns into `/src/components/reusable/`
+   - Use composition over duplication for similar layouts
+   - Create shared utility functions for common operations
+   - Leverage Astro's component slots for flexible content insertion
+
+2. **Shared Components Strategy**:
+
+   - **Atoms**: Basic building blocks (buttons, inputs, icons) in `/src/components/reusable/atoms/`
+   - **Molecules**: Combinations of atoms (cards, form groups) in `/src/components/reusable/molecules/`
+   - **Organisms**: Complex components (headers, sections) in `/src/components/reusable/organisms/`
+   - Use TypeScript interfaces for consistent prop types across components
+
+3. **Style Sharing**:
+   - Define common Tailwind utilities in `tailwind.config.mjs`
+   - Create CSS component classes for frequently used combinations
+   - Use CSS custom properties for theme values that change across contexts
+
+### Mobile Optimization
+
+1. **Responsive Design**:
+
+   - Mobile-first approach: Start with mobile styles, enhance for larger screens
+   - Use Tailwind's responsive utilities (sm:, md:, lg:, xl:, 2xl:)
+   - Test all breakpoints: 320px, 375px, 768px, 1024px, 1440px
+   - Avoid horizontal scrolling at all costs
+
+2. **Touch Optimization**:
+
+   - Minimum touch target size: 44x44px (Apple HIG) or 48x48px (Material Design)
+   - Add appropriate spacing between interactive elements
+   - Use `hover:` states only with `lg:` prefix for desktop-only interactions
+
+3. **Performance on Mobile**:
+   - Lazy load images below the fold using `loading="lazy"`
+   - Use responsive images with srcset for different screen densities
+   - Minimize JavaScript execution on mobile devices
+   - Consider reduced motion preferences with `prefers-reduced-motion`
+
+### Page Load Speed Optimization
+
+1. **Asset Optimization**:
+
+   - Use WebP/AVIF formats for images with fallbacks
+   - Implement critical CSS inlining for above-the-fold content
+   - Defer non-critical JavaScript with `defer` or `async` attributes
+   - Preload critical fonts and hero images
+
+2. **Code Splitting**:
+
+   - Use dynamic imports for large components
+   - Implement route-based code splitting
+   - Load third-party scripts only when needed
+
+3. **Performance Metrics**:
+   - Target Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1
+   - Optimize Time to First Byte (TTFB) < 600ms
+   - Keep total page weight under 1MB for mobile
+   - Use Lighthouse CI for continuous monitoring
+
+**Implementation Guidelines:**
+- **FAQ sections**: Always include FAQ schema using FAQ.astro or FAQComponent.astro
+- **Navigation paths**: Use BreadcrumbStructuredData.astro on detail pages (blogs, apps, services)
+- **Service pages**: Include serviceSchema frontmatter for featured services
+- **Blog posts**: Author should be a reference (string) to author collection, not embedded data
+- **Contact/landing pages**: Include Organization schema where appropriate
+
+## SEO Structure
+
+1. **Semantic HTML**:
+
+   - Use proper heading hierarchy (h1 → h2 → h3)
+   - Only one h1 per page
+   - Use semantic elements (nav, main, article, section, aside)
+   - Include skip navigation links for accessibility
+
+2. **Meta Information**:
+
+   - Unique, descriptive title tags (50-60 characters)
+   - Compelling meta descriptions (150-160 characters)
+   - Open Graph tags for social sharing
+   - Structured data (JSON-LD) for rich snippets
+
+3. **Technical SEO**:
+
+   - Implement canonical URLs for duplicate content
+   - Use descriptive, keyword-rich URLs
+   - Create XML sitemap (already configured)
+   - Ensure proper 301 redirects for moved content
+   - Add hreflang tags for international content (if applicable)
+
+4. **Content Optimization**:
+   - Focus on user intent and search queries
+   - Use descriptive alt text for all images
+   - Implement internal linking strategy
+   - Keep content fresh with regular updates
+
+   ### Component Development Checklist
+
+When creating new components:
+
+- [ ] Mobile-first responsive design
+- [ ] Accessibility (ARIA labels, keyboard navigation)
+- [ ] Performance (lazy loading, code splitting)
+- [ ] SEO (semantic HTML, meta tags)
+- [ ] Reusability (props, slots, composition)
+- [ ] Documentation (TypeScript types, comments)
+- [ ] Text highlighting follows the pattern (bold for outcomes, underline for metrics)
+
 ## Animations
 This project uses **tailwindcss-motion** for animations (preferred over other animation libraries).
 

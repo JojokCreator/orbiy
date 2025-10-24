@@ -1,5 +1,11 @@
 ---
-const { class: className, type, buttonText, link, arrow } = Astro.props as Props;
+const {
+	class: className,
+	type,
+	buttonText,
+	link,
+	arrow,
+} = Astro.props as Props;
 import { Icon } from "astro-icon/components";
 import { twMerge } from "tailwind-merge";
 
@@ -11,33 +17,20 @@ export type Props = {
 	class?: string;
 	arrow?: boolean;
 };
-const filledClasses = `
-  bg-primary whitespace-nowrap active:focus:animate-click hover:opacity-80 relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-lg transition-all duration-500 ease-in-out
+const filledClasses = `bg-primary whitespace-nowrap active:focus:animate-click text-[#dedede] relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-primary-content
 `;
-const filledBlueClasses = `
-  bg-accent-darkblue whitespace-nowrap active:focus:animate-click hover:opacity-80 relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-lg transition-all duration-500 ease-in-out hover:opacity-80
-`;
-const darkClasses = `
-  bg-background-dark text-white active:focus:animate-click inline-flex whitespace-nowrap items-center justify-center px-4 py-3 text-base max-h-12 hover:shadow-[0_0_10px_2px_rgba(75,58,179,0.3)] rounded-lg transition duration-500 ease-in-out hover:opacity-80
-`;
-const outlineClasses = `
-  bg-[#F3F3FB] inline-flex whitespace-nowrap items-center justify-center px-4 py-3 text-text-primary text-base max-h-12 hover:shadow-[0_0_10px_2px_rgba(75,58,179,0.3)] rounded-lg transition duration-500 ease-in-out
+const filledDarkClasses = `bg-neutral whitespace-nowrap active:focus:animate-click text-base-100 relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-black
 `;
 
-const typeClasses =
-	type === "filled"
-		? filledClasses
-		: type === "filledBlue"
-			? filledBlueClasses
-			: type === "dark"
-				? darkClasses
-				: outlineClasses;
+const typeClasses = type === "filled" ? filledClasses : filledDarkClasses;
 
 const combinedClasses = twMerge(typeClasses, className);
 ---
 
 <a href={link} class={combinedClasses}>
-	<span class="active:focus:animate-click inline-flex items-center text-center">
+	<span
+		class="active:focus:animate-click relative z-10 inline-flex items-center text-center"
+	>
 		{buttonText}
 		{arrow && <Icon name="arrowRight" class="ml-2 text-inherit" />}
 	</span>

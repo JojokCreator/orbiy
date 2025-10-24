@@ -1,39 +1,43 @@
 ---
+import { useStoryblokApi } from "@storyblok/astro";
 import Button from "./reusable/Button.astro";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 
-const menuItems = [
-	{
-		title: "Features",
-		link: "/#features",
-	},
-	{
-		title: "AI Insights",
-		link: "/#ai-insights",
-	},
-	{
-		title: "Ask Bond",
-		link: "/#ask-bond",
-	},
-	{
-		title: "My Profile",
-		link: "/#my-profile",
-	},
-	{
-		title: "Apply For Waitlist",
-		link: "/contact",
-	},
-];
+let siteConfig;
+
+// Fetch site-config from Storyblok
+const sbApi = useStoryblokApi();
+try {
+	const { data: siteConfigData } = await sbApi.get(
+		"cdn/stories/site-config",
+		{
+			version: import.meta.env.DEV ? "draft" : "published",
+			resolve_links: "url",
+		},
+	);
+	siteConfig = siteConfigData.story?.content;
+} catch (error) {
+	console.error("Error fetching site-config:", error);
+}
+
+const { logo, nav_links, cta_button } = siteConfig;
 ---
 
-<header class="z-[999] w-screen bg-black px-4 2xl:px-0">
+<header class="z-[999] w-screen lg:absolute px-4 2xl:px-0">
 	<div
-		class="border-midtone fixed top-0 left-0 z-50 mx-auto w-screen border-b bg-black px-4 lg:static lg:w-auto lg:max-w-7xl lg:py-2 xl:px-0"
+		class="fixed top-0 left-0 z-50 mx-auto w-screen px-4 lg:static lg:w-auto lg:max-w-7xl lg:py-2 xl:px-0"
 	>
-		<div class="flex h-16 items-center justify-between bg-black">
+		<div class="flex h-16 items-center justify-between">
 			<div class="lg:flex lg:items-center lg:gap-12">
 				<a class="flex w-52 items-center gap-2 text-lg" href="/">
-					<Icon name="logo" class="h-auto w-28 flex-shrink-0" aria-label="home link" />
+					<Image
+						src={logo.filename}
+						alt={logo.alt || "Logo"}
+						width={150}
+						height={50}
+						class="h-auto w-28 flex-shrink-0 object-contain"
+					/>
 				</a>
 			</div>
 			<div
@@ -41,22 +45,33 @@ const menuItems = [
 			>
 				<div
 					id="mobile-menu"
-					class="top-[64px] hidden h-[calc(100vh-64px)] w-screen translate-y-[5vh] transform overflow-visible rounded-xl bg-transparent opacity-0 backdrop-blur-lg transition-all transition-discrete duration-500 backdrop:top-[64px] backdrop:bg-black/0 backdrop:backdrop-blur-lg backdrop:transition-[overlay,display,opacity,transform] backdrop:transition-discrete backdrop:duration-1000 open:block open:translate-y-0 open:opacity-100 open:backdrop:bg-black/40 lg:mt-0 lg:block lg:h-auto lg:w-auto lg:translate-y-0 lg:opacity-100 lg:duration-0 dark:open:backdrop:bg-black/20 open:starting:-translate-y-[5vh] open:starting:opacity-0"
+					class="top-[64px] hidden h-[calc(100vh-64px)] w-screen translate-y-[5vh] transform overflow-visible rounded-xl bg-transparent opacity-0 transition-all transition-discrete duration-500 lg:mt-0 lg:block lg:h-auto lg:w-auto lg:translate-y-0 lg:opacity-100 lg:duration-0 open:block open:translate-y-0 open:opacity-100 open:starting:-translate-y-[5vh] open:starting:opacity-0"
 				>
-					<nav class="relative grid h-[calc(100vh-180px)] place-items-center lg:block lg:h-auto">
-						<ul class="flex flex-col items-center justify-center gap-6 text-sm lg:flex-row">
+					<nav
+						class="relative grid h-[calc(100vh-180px)] place-items-center lg:block lg:h-auto"
+					>
+						<ul
+							class="flex flex-col items-center justify-center gap-6 text-sm lg:flex-row"
+						>
 							{
-								menuItems.map((item: { link: string; title: string }) => (
-									<li class="last:block lg:last:hidden">
-										<a
-											aria-current={Astro.url.pathname.includes(item.link)}
-											class={`text-2xl text-white hover:text-gray-400 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg`}
-											href={item.link}
-										>
-											{item.title}
-										</a>
-									</li>
-								))
+								nav_links.map(
+									(item: {
+										[x: string]: unknown;
+										link: { url: string };
+									}) => (
+										<li>
+											<a
+												aria-current={Astro.url.pathname.includes(
+													item.link.url,
+												)}
+												class={`text-2xl text-white hover:text-gray-400 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg`}
+												href={item.link.url}
+											>
+												{item.label}
+											</a>
+										</li>
+									),
+								)
 							}
 						</ul>
 					</nav>
@@ -75,20 +90,28 @@ const menuItems = [
 					</span>
 				</button>
 			</div>
-			<Button
-				class="hidden w-52 items-center text-center lg:flex"
-				link="/contact"
-				type="filled"
-				buttonText="Apply for Waitlist"
-			/>
+			{
+				cta_button && (
+					<Button
+						class="hidden w-52 items-center text-center lg:flex"
+						link={cta_button[0].link}
+						type={cta_button[0].style || "filled"}
+						buttonText={cta_button[0].text}
+					/>
+				)
+			}
 		</div>
 	</div>
 </header>
 
 <script>
 	function initializeMobileMenu() {
-		const mobileMenuButton = document.getElementById("mobile-menu-button") as HTMLButtonElement;
-		const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
+		const mobileMenuButton = document.getElementById(
+			"mobile-menu-button",
+		) as HTMLButtonElement;
+		const mobileMenu = document.getElementById(
+			"mobile-menu",
+		) as HTMLElement;
 
 		if (mobileMenuButton && mobileMenu) {
 			function handleMobileMenuState() {
@@ -96,12 +119,23 @@ const menuItems = [
 					mobileMenu.setAttribute("popover", "auto");
 
 					if (!mobileMenuButton.hasAttribute("group-aria-pressed")) {
-						mobileMenuButton.setAttribute("group-aria-pressed", "false");
+						mobileMenuButton.setAttribute(
+							"group-aria-pressed",
+							"false",
+						);
 					}
 
-					if (!mobileMenu.hasAttribute("data-toggle-listener-added")) {
-						mobileMenu.addEventListener("toggle", handlePopoverToggle);
-						mobileMenu.setAttribute("data-toggle-listener-added", "true");
+					if (
+						!mobileMenu.hasAttribute("data-toggle-listener-added")
+					) {
+						mobileMenu.addEventListener(
+							"toggle",
+							handlePopoverToggle,
+						);
+						mobileMenu.setAttribute(
+							"data-toggle-listener-added",
+							"true",
+						);
 					}
 				} else {
 					mobileMenu.removeAttribute("popover");
@@ -113,7 +147,10 @@ const menuItems = [
 					}
 
 					if (mobileMenu.hasAttribute("data-toggle-listener-added")) {
-						mobileMenu.removeEventListener("toggle", handlePopoverToggle);
+						mobileMenu.removeEventListener(
+							"toggle",
+							handlePopoverToggle,
+						);
 					}
 					document.body.classList.remove("overflow-y-hidden");
 				}

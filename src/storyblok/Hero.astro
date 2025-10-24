@@ -1,0 +1,49 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { getImage } from "astro:assets";
+import Button from "../components/reusable/Button.astro";
+
+const { blok } = Astro.props;
+const { title, description, button, image } = blok;
+
+// Get optimized background image
+let backgroundImageUrl = "";
+if (image?.filename) {
+  const { src } = await getImage({
+    src: image.filename,
+    format: "webp",
+    quality: 80,
+    width: 1920,
+    height: 1080,
+  });
+  backgroundImageUrl = src;
+}
+---
+
+<section
+  class="relative h-screen w-screen overflow-hidden bg-black py-8 md:py-24"
+  style={`background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+  {...storyblokEditable(blok)}
+>
+  <div class="absolute inset-0 bg-black/40"></div>
+  <div
+    class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
+  >
+    <h1 class="mb-6 text-base-100">
+      {title}
+    </h1>
+
+    <p class="mb-8 text-base-200">
+      {description}
+    </p>
+    {
+      button && button.length > 0 && (
+        <Button
+          type="filled"
+          buttonText={button[0].text}
+          link={button[0].link?.url}
+        />
+      )
+    }
+  </div>
+</section>

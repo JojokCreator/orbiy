@@ -1,0 +1,64 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { getImage } from "astro:assets";
+import Button from "../components/reusable/Button.astro";
+
+const { blok } = Astro.props;
+const { background_image, title, features, features_button } = blok;
+
+// Get optimized background image
+let backgroundImageUrl = "";
+if (background_image?.filename) {
+  const { src } = await getImage({
+    src: background_image.filename,
+    format: "webp",
+    quality: 80,
+    width: 1920,
+    height: 1080,
+  });
+  backgroundImageUrl = src;
+}
+---
+
+<section
+  class="relative w-screen overflow-hidden bg-black py-8 md:py-24"
+  style={`background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+  {...storyblokEditable(blok)}
+>
+  <div class="site-container">
+    <div class="flex-0 w-full lg:w-1/2 lg:ml-auto bg-secondary p-12 rounded-sm">
+      <div class="pb-6 border-b border-base-100">
+        <h2 class="text-base-100">
+          {title}
+        </h2>
+      </div>
+      <div class="space-y-8">
+        {
+          features?.map((feature: { title: string; description: string }) => (
+            <div class="flex items-start space-x-4">
+              <div class="flex-1 border-b border-base-100 py-6">
+                <p class="text-base-100 mb-2 text-xl md:text-2xl">
+                  {feature.title}
+                </p>
+                <p class="text-base-100 text-base md:text-sm">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      {
+        features_button && features_button.length > 0 && (
+          <div class="mt-12">
+            <Button
+              type="filled"
+              buttonText={features_button[0].text}
+              link={features_button.url}
+            />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import Layout from "../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const sbApi = useStoryblokApi();
+
+	const { data } = await sbApi.get("cdn/stories", {
+		content_type: "page",
+		version: import.meta.env.DEV ? "draft" : "published",
+	});
+
+	const stories = Object.values(data.stories);
+	return stories
+		.map((story) => {
+			return {
+				params: { slug: story.slug === "home" ? "" : story.slug },
+				props: { story: story }
+			};
+		});
+}
+
+const { slug } = Astro.params;
+
+// Handle root path and home slug - serve home content
+const storySlug = (!slug || slug === '' || slug === 'home') ? 'home' : slug;
+
+// Use story from props if available (build time), otherwise fetch (dev time)
+let story = Astro.props.story;
+if (!story) {
+	const sbApi = useStoryblokApi();
+	const { data } = await sbApi.get(`cdn/stories/${storySlug}`, {
+		version: import.meta.env.DEV ? "draft" : "published",
+	});
+	story = data.story;
+}
+
+// Set SEO title/description for home
+const isHome = (!slug || slug === '' || slug === 'home');
+const pageTitle = isHome ? 'Home' : story.name || story.content?.title || 'Page';
+const pageDescription = isHome
+  ? story.content?.description || 'Welcome to our home page'
+  : story.content?.description || `Page: ${story.name}`;
+---
+
+<Layout>
+		<StoryblokComponent blok={story.content} />
+</Layout>
