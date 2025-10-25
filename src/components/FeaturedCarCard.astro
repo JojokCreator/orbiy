@@ -16,14 +16,14 @@ const { car } = Astro.props;
   <!-- Car Image -->
   <div class="relative h-fit mb-6 rounded-t-lg overflow-hidden bg-gray-100">
     {
-      car.data.image.src ? (
+      car.data.horizontalImage ? (
         <Image
-          src={car.data.image.src}
-          alt={car.data.image.alt}
+          src={car.data.horizontalImage}
+          alt={car.data.imageAlt}
           class="w-full h-auto object-contain"
         />
       ) : (
-        <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+        <div class="w-full h-full bg-gray-200 flex items-center justify-center aspect-video min-h-52">
           <span class="text-gray-500">Image Coming Soon</span>
         </div>
       )

@@ -43,6 +43,154 @@
     "metadata": {}
   },
   {
+    "name": "Featured Cars",
+    "display_name": "Featured Cars",
+    "description": "A featured cars section",
+    "created_at": "2025-10-24T12:43:41.373Z",
+    "updated_at": "2025-10-24T12:43:41.373Z",
+    "id": 104940426751555,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "title_section"
+      },
+      "header": {
+        "type": "textarea",
+        "display_name": "Section Header",
+        "pos": 2,
+        "id": "header_section"
+      },
+      "featured_cars_button": {
+        "type": "bloks",
+        "display_name": "Footer CTA Button",
+        "maximum": 1,
+        "component_whitelist": [
+          "button"
+        ],
+        "pos": 18,
+        "id": "Q9Bs4DkgSpKbgR2Dma7OJQ"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Featured Cars",
+    "component_group_uuid": null,
+    "color": "#8B5CF6",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "feature_item",
+    "display_name": "Feature Item",
+    "description": "Individual feature card with icon, title and description",
+    "created_at": "2025-10-24T09:01:38.464Z",
+    "updated_at": "2025-10-24T09:10:54.841Z",
+    "id": 104885856119297,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Feature Title",
+        "pos": 1,
+        "id": "feature_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Feature Description",
+        "pos": 2,
+        "id": "feature_description"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Feature Item",
+    "component_group_uuid": null,
+    "color": "#8B5CF6",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "Features",
+    "display_name": "Features",
+    "description": "A features section with background image and grid of feature cards",
+    "created_at": "2025-10-24T09:01:39.887Z",
+    "updated_at": "2025-10-25T02:02:12.390Z",
+    "id": 104885861943810,
+    "schema": {
+      "background_image": {
+        "type": "asset",
+        "display_name": "Background Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 0,
+        "id": "bg_image"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "title_section"
+      },
+      "features": {
+        "type": "bloks",
+        "display_name": "Features",
+        "component_whitelist": [
+          "feature_item"
+        ],
+        "pos": 3,
+        "id": "features_list",
+        "restrict_type": "",
+        "restrict_components": true
+      },
+      "features_button": {
+        "type": "bloks",
+        "display_name": "Footer CTA Button",
+        "maximum": 1,
+        "component_whitelist": [
+          "button"
+        ],
+        "pos": 18,
+        "id": "Q9Bs4DkgSpKbgR2Dma7OJQ",
+        "minimum": 1,
+        "restrict_type": "",
+        "restrict_components": true
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Features",
+    "component_group_uuid": null,
+    "color": "#8B5CF6",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "footer",
     "display_name": "Site Footer",
     "description": null,
@@ -393,7 +541,7 @@
     "display_name": "Site Navigation Bar",
     "description": null,
     "created_at": "2025-10-24T05:47:03.292Z",
-    "updated_at": "2025-10-24T06:54:50.794Z",
+    "updated_at": "2025-10-24T09:10:55.822Z",
     "id": 104838034613718,
     "schema": {
       "logo": {
@@ -706,155 +854,6 @@
     "metadata": {}
   },
   {
-    "name": "Features",
-    "display_name": "Features",
-    "description": "A features section with background image and grid of feature cards",
-    "created_at": "2025-10-24T10:00:00.000Z",
-    "updated_at": "2025-10-24T10:00:00.000Z",
-    "id": 104860000000000,
-    "schema": {
-      "background_image": {
-        "type": "asset",
-        "display_name": "Background Image",
-        "filetypes": [
-          "images"
-        ],
-        "pos": 0,
-        "id": "bg_image"
-      },
-      "title": {
-        "type": "text",
-        "display_name": "Section Title",
-        "pos": 1,
-        "id": "title_section"
-      },
-      "subtitle": {
-        "type": "textarea",
-        "display_name": "Section Subtitle",
-        "pos": 2,
-        "id": "subtitle_section"
-      },
-      "features": {
-        "type": "bloks",
-        "display_name": "Features",
-        "component_whitelist": [
-          "feature_item"
-        ],
-        "pos": 3,
-        "id": "features_list"
-      },
-      "features_button": {
-        "type": "bloks",
-        "display_name": "Footer CTA Button",
-        "maximum": 1,
-        "component_whitelist": [
-          "button"
-        ],
-        "pos": 18,
-        "id": "Q9Bs4DkgSpKbgR2Dma7OJQ"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Features",
-    "component_group_uuid": null,
-    "color": "#8B5CF6",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "Featured Cars",
-    "display_name": "Featured Cars",
-    "description": "A featured cars section",
-    "created_at": "2025-10-24T10:00:00.000Z",
-    "updated_at": "2025-10-24T10:00:00.000Z",
-    "id": 104860000000000,
-    "schema": {
-      "title": {
-        "type": "text",
-        "display_name": "Section Title",
-        "pos": 1,
-        "id": "title_section"
-      },
-      "subtitle": {
-        "type": "textarea",
-        "display_name": "Section Subtitle",
-        "pos": 2,
-        "id": "subtitle_section"
-      },
-      "featured_cars_button": {
-        "type": "bloks",
-        "display_name": "Footer CTA Button",
-        "maximum": 1,
-        "component_whitelist": [
-          "button"
-        ],
-        "pos": 18,
-        "id": "Q9Bs4DkgSpKbgR2Dma7OJQ"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Features",
-    "component_group_uuid": null,
-    "color": "#8B5CF6",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "feature_item",
-    "display_name": "Feature Item",
-    "description": "Individual feature card with icon, title and description",
-    "created_at": "2025-10-24T10:00:00.000Z",
-    "updated_at": "2025-10-24T10:00:00.000Z",
-    "id": 104860000000001,
-    "schema": {
-      "title": {
-        "type": "text",
-        "display_name": "Feature Title",
-        "pos": 1,
-        "id": "feature_title"
-      },
-      "description": {
-        "type": "textarea",
-        "display_name": "Feature Description",
-        "pos": 2,
-        "id": "feature_description"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Feature Item",
-    "component_group_uuid": null,
-    "color": "#8B5CF6",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
     "name": "social_link_item",
     "display_name": "Social Link Item",
     "description": null,
@@ -891,6 +890,195 @@
     "real_name": "Social Link Item",
     "component_group_uuid": null,
     "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "faq_item",
+    "display_name": "FAQ Item",
+    "description": "Individual FAQ item with question and answer",
+    "created_at": "2025-10-25T02:15:00.000Z",
+    "updated_at": "2025-10-25T02:15:00.000Z",
+    "id": 104950000000001,
+    "schema": {
+      "question": {
+        "type": "text",
+        "display_name": "Question",
+        "pos": 0,
+        "id": "faq_question"
+      },
+      "answer": {
+        "type": "textarea",
+        "display_name": "Answer",
+        "pos": 1,
+        "id": "faq_answer"
+      }
+    },
+    "image": null,
+    "preview_field": "question",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "FAQ Item",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "FaqSection",
+    "display_name": "FAQ Section",
+    "description": "FAQ section with header, title, image on left and FAQ items on right with optional button",
+    "created_at": "2025-10-25T02:20:00.000Z",
+    "updated_at": "2025-10-25T02:20:00.000Z",
+    "id": 104950000000002,
+    "schema": {
+      "header": {
+        "type": "text",
+        "display_name": "Section Header",
+        "pos": 0,
+        "id": "faq_section_header"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "faq_section_title"
+      },
+      "image": {
+        "type": "asset",
+        "display_name": "Section Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 2,
+        "id": "faq_section_image"
+      },
+      "faqs": {
+        "type": "bloks",
+        "display_name": "FAQ Items",
+        "component_whitelist": [
+          "faq_item"
+        ],
+        "pos": 3,
+        "id": "faq_items_list",
+        "restrict_type": "",
+        "restrict_components": true
+      },
+      "button": {
+        "type": "bloks",
+        "display_name": "Section Button",
+        "maximum": 1,
+        "component_whitelist": [
+          "button"
+        ],
+        "pos": 4,
+        "id": "faq_section_button",
+        "restrict_type": "",
+        "restrict_components": true
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "FAQ Section",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "grid_card",
+    "display_name": "Grid Card",
+    "description": "Grid card with full image and text overlay at the bottom",
+    "created_at": "2025-10-25T02:45:00.000Z",
+    "updated_at": "2025-10-25T02:45:00.000Z",
+    "id": 104950000000003,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "display_name": "Card Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 0,
+        "id": "grid_card_image"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Card Title",
+        "pos": 1,
+        "id": "grid_card_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Card Description",
+        "pos": 2,
+        "id": "grid_card_description"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Grid Card",
+    "component_group_uuid": null,
+    "color": "#F59E0B",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "ImageGrid",
+    "display_name": "Image Grid",
+    "description": "Image grid section with title, text and three grid cards",
+    "created_at": "2025-10-25T02:50:00.000Z",
+    "updated_at": "2025-10-25T02:50:00.000Z",
+    "id": 104950000000004,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "image_grid_title"
+      },
+      "text": {
+        "type": "textarea",
+        "display_name": "Section Text",
+        "pos": 2,
+        "id": "image_grid_text"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Image Grid",
+    "component_group_uuid": null,
+    "color": "#F59E0B",
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],

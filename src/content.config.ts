@@ -7,10 +7,9 @@ const cars = defineCollection({
     title: z.string(),
     price: z.string(),
     description: z.string(),
-    image: z.object({
-      src: image(),
-      alt: z.string(),
-    }),
+    horizontalImage: image(),
+    verticalImage: image(),
+    imageAlt: z.string().optional(),
     features: z.array(z.string()),
     featured: z.boolean().default(false),
   }),

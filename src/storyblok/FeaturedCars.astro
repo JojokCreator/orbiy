@@ -5,7 +5,7 @@ import Button from "../components/reusable/Button.astro";
 import FeaturedCarCard from "../components/FeaturedCarCard.astro";
 
 const { blok } = Astro.props;
-const { title, subtitle, featured_cars_button } = blok;
+const { title, header, featured_cars_button } = blok;
 
 // Get featured cars from the content collection
 const allCars = await getCollection("cars");
@@ -14,7 +14,7 @@ const featuredCars = allCars.filter((car) => car.data.featured);
 
 <section {...storyblokEditable(blok)} class="site-container py-8 md:py-24">
     <div>
-        <p class="text-base-300 font-semibold pb-2 md:pb-4">{subtitle}</p>
+        <p class="text-base-300 font-semibold pb-2 md:pb-4">{header}</p>
         <hr class="border-t border-base-300 h-1 w-full pb-6 md:pb-8" />
         <div>
             <h2 class="text-neutral">
@@ -25,11 +25,7 @@ const featuredCars = allCars.filter((car) => car.data.featured);
             {
                 featuredCars.length > 0 && (
                     <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[
-                            ...featuredCars,
-                            ...featuredCars,
-                            ...featuredCars,
-                        ].map((car) => (
+                        {featuredCars.map((car) => (
                             <FeaturedCarCard car={car} />
                         ))}
                     </div>

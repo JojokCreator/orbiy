@@ -4,6 +4,7 @@ import { loadEnv } from 'vite';
 import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import mkcert from "vite-plugin-mkcert";
 
 const env = loadEnv("", process.cwd(), 'STORYBLOK');
 
@@ -13,10 +14,12 @@ export default defineConfig({
 	integrations: [icon(), sitemap(),     
         storyblok({
         accessToken: env.STORYBLOK_TOKEN,
+        livePreview: true,
         components: {
             block: "storyblok/Hero",
             block: "storyblok/Features",
             block: "storyblok/FeaturedCars",
+            block: "storyblok/FaqSection",
         },
         apiOptions: {
           // Choose your Storyblok space region
@@ -24,13 +27,18 @@ export default defineConfig({
         },
       })],
 	vite: {
-		plugins: [tailwindcss()],
+    server: {
+      https: true,
+    },
+		plugins: [tailwindcss(), mkcert()],
 	},
+  output: 'server',
 	experimental: {
         fonts: [{
             provider: fontProviders.google(),
             name: "Poppins",
-            cssVariable: "--font-poppins"
+            cssVariable: "--font-poppins",
+            weights:["100 800"]
         }]
     }
 });
