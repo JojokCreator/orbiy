@@ -19,7 +19,7 @@ const { car } = Astro.props;
       car.data.horizontalImage ? (
         <Image
           src={car.data.horizontalImage}
-          alt={car.data.imageAlt}
+          alt={car.data.imageAlt || car.data.title}
           class="w-full h-auto object-contain"
         />
       ) : (

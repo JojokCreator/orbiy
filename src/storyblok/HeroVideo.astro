@@ -10,17 +10,7 @@ const {
   button,
   video,
   poster_image,
-  video_controls,
-  autoplay,
-  loop,
-  muted,
 } = blok;
-
-// Set default values for video settings
-const showControls = video_controls !== false;
-const shouldAutoplay = autoplay !== false;
-const shouldLoop = loop !== false;
-const isMuted = muted !== false;
 
 // Get optimized poster image if provided
 let posterUrl = "";
@@ -66,28 +56,6 @@ const isDev = import.meta.env.DEV;
 
   <div class="absolute inset-0 bg-black/40"></div>
 
-  {
-    showControls && (
-      <div class="absolute right-6 bottom-4 z-10 flex gap-4">
-        <button
-          id="playPauseBtn"
-          class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full bg-black/70 text-2xl text-white backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-black/90 active:scale-95"
-          aria-label="Play/Pause video"
-        >
-          <span id="playPauseIcon">⏸</span>
-        </button>
-
-        <button
-          id="muteBtn"
-          class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full bg-black/70 text-2xl text-white backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-black/90 active:scale-95"
-          aria-label="Mute/Unmute video"
-        >
-          <span id="muteIcon">🔇</span>
-        </button>
-      </div>
-    )
-  }
-
   <div
     class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
@@ -109,43 +77,3 @@ const isDev = import.meta.env.DEV;
     }
   </div>
 </section>
-
-<script>
-  {
-    showControls &&
-      `
-    const video = document.querySelector('video');
-    const playPauseBtn = document.getElementById("playPauseBtn");
-    const playPauseIcon = document.getElementById("playPauseIcon");
-    const muteBtn = document.getElementById("muteBtn");
-    const muteIcon = document.getElementById("muteIcon");
-
-    // Play/Pause functionality
-    playPauseBtn.addEventListener("click", () => {
-      if (video.paused) {
-        video.play();
-        playPauseIcon.textContent = "⏸";
-      } else {
-        video.pause();
-        playPauseIcon.textContent = "▶";
-      }
-    });
-
-    // Mute/Unmute functionality
-    muteBtn.addEventListener("click", () => {
-      if (video.muted) {
-        video.muted = false;
-        muteIcon.textContent = "🔊";
-      } else {
-        video.muted = true;
-        muteIcon.textContent = "🔇";
-      }
-    });
-
-    // Update play button when video ends
-    video.addEventListener("ended", () => {
-      playPauseIcon.textContent = "▶";
-    });
-    `;
-  }
-</script>

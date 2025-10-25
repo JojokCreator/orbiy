@@ -15,7 +15,7 @@ export default defineConfig({
 	integrations: [icon(), sitemap(),     
         storyblok({
         accessToken: env.STORYBLOK_TOKEN,
-        livePreview: true,
+        livePreview: isDev ? true : false,
         components: {
             block: "storyblok/Hero",
             block: "storyblok/HeroVideo",
@@ -24,7 +24,7 @@ export default defineConfig({
             block: "storyblok/FaqSection",
             block: "storyblok/ImageGrid",
         },
-        enableFallbackComponent: true,
+        enableFallbackComponent: isDev ? true : false,
         customFallbackComponent: 'storyblok/FallbackComponent',
         apiOptions: {
           region: 'eu', 

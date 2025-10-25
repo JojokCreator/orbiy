@@ -1,5 +1,4 @@
 ---
-import BlogCard from "./BlogCard.astro";
 import placeholder from "../../assets/placeholder.svg";
 import { Icon } from "astro-icon/components";
 const { title, linkAhref, linkText, posts, locale } = Astro.props;
@@ -60,19 +59,7 @@ const samplePosts = [
 		init="false"
 		class="!p-8 !pb-16"
 	>
-		{
-			samplePosts.map((post) => (
-				<swiper-slide>
-					<BlogCard
-						title={post.title}
-						image={post.image}
-						snippet={post.snippet}
-						category={post.category}
-						slug={post.slug}
-					/>
-				</swiper-slide>
-			))
-		}
+		{samplePosts.map((post) => <swiper-slide></swiper-slide>)}
 	</swiper-container>
 	<div class="absolute left-0 top-1/2 z-20 -translate-y-1/2">
 		<Icon

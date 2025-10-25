@@ -46,7 +46,7 @@ const { header, title, image, faqs, button } = blok;
       <div class="order-1 lg:order-2 p-8 md:p-12 rounded-sm">
         <div class="space-y-4">
           {
-            faqs?.map((faq: { question: string; answer: string }, index) => (
+            faqs?.map((faq: { question: string; answer: string }, index: number) => (
               <details
                 class="group w-full overflow-hidden border-b border-base-100 transition-all duration-300 ease-in-out hover:cursor-pointer"
                 open={index === 0}

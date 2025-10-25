@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 	const stories = Object.values(data.stories);
 	return stories
-		.map((story) => {
+		.map((story: any) => {
 			return {
 				params: { slug: story.slug === "home" ? "" : story.slug },
 				props: { story: story }
