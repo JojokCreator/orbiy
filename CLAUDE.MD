@@ -343,7 +343,7 @@ const { title, description, button } = blok;
   <h2>{title}</h2>
   <p>{description}</p>
   {button && (
-    <a href={button.url}>{button.text}</a>
+    <a href={button.cached_url}>{button.text}</a>
   )}
 </section>
 ```
@@ -356,14 +356,20 @@ const { title, description, button } = blok;
 
 3. **Link Resolution**: Use proper link resolution for Storyblok links:
    ```astro
-   link={item.link?.cached_url || item.link?.url || '#'}
+   link={item.link?.cached_url}
    ```
 
 4. **Image Handling**: Storyblok images are typically in the format:
    ```astro
-   {image.filename && (
-     <img src={image.filename} alt={image.alt} />
-   )}
+                     <Picture
+                  src={image.filename}
+                  formats={["avif", "webp"]}
+                  alt={image.alt}
+                  widths={[400, 600, 800]}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+                  inferSize={true}
+                  class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                />
    ```
 
 ### Common Storyblok Components
@@ -402,22 +408,3 @@ const featuredCars = await getCollection('cars', (car) => car.data.featured);
   ))}
 </section>
 ```
-
-### Link Resolution in Storyblok
-
-When working with Storyblok links, use this pattern for proper URL resolution:
-
-```astro
----
-const resolveLink = (link) => {
-  if (!link) return '#';
-  return link.cached_url || link.url || '#';
-};
----
-
-<a href={resolveLink(button.link)}>
-  {button.text}
-</a>
-```
-
-This ensures compatibility with both draft and published content states.

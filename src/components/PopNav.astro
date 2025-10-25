@@ -12,7 +12,6 @@ try {
 		"cdn/stories/site-config",
 		{
 			version: import.meta.env.DEV ? "draft" : "published",
-			resolve_links: "url",
 		},
 	);
 	siteConfig = siteConfigData.story?.content;
@@ -56,16 +55,16 @@ const { logo, nav_links, cta_button } = siteConfig;
 							{
 								nav_links.map(
 									(item: {
-										[x: string]: unknown;
-										link: { url: string };
+										label: string;
+										link: { cached_url: string };
 									}) => (
 										<li>
 											<a
 												aria-current={Astro.url.pathname.includes(
-													item.link.url,
+													item.link.cached_url,
 												)}
 												class={`text-2xl text-white hover:text-gray-400 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg`}
-												href={item.link.url}
+												href={item.link.cached_url}
 											>
 												{item.label}
 											</a>
@@ -112,9 +111,7 @@ const { logo, nav_links, cta_button } = siteConfig;
 		const mobileMenu = document.getElementById(
 			"mobile-menu",
 		) as HTMLElement;
-		const navbar = document.getElementById(
-			"navbar",
-		) as HTMLElement;
+		const navbar = document.getElementById("navbar") as HTMLElement;
 
 		if (mobileMenuButton && mobileMenu && navbar) {
 			function handleMobileMenuState() {
@@ -184,31 +181,35 @@ const { logo, nav_links, cta_button } = siteConfig;
 
 			// Add scroll-based navbar background for screens smaller than lg
 			function handleNavbarScroll() {
-				if (window.innerWidth < 1024) { // lg breakpoint
+				if (window.innerWidth < 1024) {
+					// lg breakpoint
 					if (window.scrollY > 50) {
-						navbar.classList.add('bg-black/90', 'backdrop-blur-md');
-						navbar.classList.remove('bg-transparent');
-						} else {
-						navbar.classList.remove('bg-black/90', 'backdrop-blur-md');
-						navbar.classList.add('bg-transparent');
+						navbar.classList.add("bg-black/90", "backdrop-blur-md");
+						navbar.classList.remove("bg-transparent");
+					} else {
+						navbar.classList.remove(
+							"bg-black/90",
+							"backdrop-blur-md",
+						);
+						navbar.classList.add("bg-transparent");
 					}
 				} else {
 					// Reset to transparent on larger screens
-					navbar.classList.remove('bg-black/90', 'backdrop-blur-md');
-					navbar.classList.add('bg-transparent');
+					navbar.classList.remove("bg-black/90", "backdrop-blur-md");
+					navbar.classList.add("bg-transparent");
 				}
 			}
 
-		window.addEventListener("resize", () => {
+			window.addEventListener("resize", () => {
+				handleMobileMenuState();
+				handleNavbarScroll();
+			});
+
+			window.addEventListener("scroll", handleNavbarScroll);
+
 			handleMobileMenuState();
 			handleNavbarScroll();
-		});
-
-		window.addEventListener("scroll", handleNavbarScroll);
-
-		handleMobileMenuState();
-		handleNavbarScroll();
+		}
 	}
-}
-initializeMobileMenu();
+	initializeMobileMenu();
 </script>

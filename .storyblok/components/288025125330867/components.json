@@ -1151,5 +1151,206 @@
     "internal_tag_ids": [],
     "content_type_asset_preview": null,
     "metadata": {}
+  },
+  {
+    "name": "ImageText",
+    "display_name": "Image with Text",
+    "description": "Image and text content with configurable layout",
+    "schema": {
+      "header": {
+        "type": "text",
+        "display_name": "Header",
+        "pos": 0,
+        "id": "image_text_header"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Title",
+        "pos": 1,
+        "id": "image_text_title"
+      },
+      "text": {
+        "type": "textarea",
+        "display_name": "Text Content",
+        "pos": 2,
+        "id": "image_text_text"
+      },
+      "button": {
+        "type": "bloks",
+        "display_name": "Button",
+        "pos": 3,
+        "id": "image_text_button"
+      },
+      "image": {
+        "type": "asset",
+        "display_name": "Image",
+        "pos": 4,
+        "id": "image_text_image",
+        "filetypes": [
+          "images"
+        ]
+      },
+      "image_side": {
+        "type": "options",
+        "display_name": "Image Position",
+        "pos": 5,
+        "id": "image_text_side",
+        "options": [
+          {
+            "name": "left",
+            "display_name": "Left"
+          },
+          {
+            "name": "right",
+            "display_name": "Right"
+          }
+        ],
+        "default_value": "left"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "ImageText",
+    "component_group_uuid": null,
+    "color": "#3B82F6",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "Process",
+    "display_name": "Process",
+    "description": "Process section with header, title and feature cards",
+    "schema": {
+      "header": {
+        "type": "text",
+        "display_name": "Header",
+        "pos": 0,
+        "id": "process_header"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Title",
+        "pos": 1,
+        "id": "process_title"
+      },
+      "features": {
+        "type": "bloks",
+        "display_name": "Process Features",
+        "component_whitelist": [
+          "process_item"
+        ],
+        "pos": 2,
+        "id": "process_features"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Process",
+    "component_group_uuid": null,
+    "color": "#EF4444",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "process_item",
+    "display_name": "Process Item",
+    "description": "Individual process feature card with title and text",
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Process Title",
+        "pos": 0,
+        "id": "process_item_title"
+      },
+      "text": {
+        "type": "textarea",
+        "display_name": "Process Text",
+        "pos": 1,
+        "id": "process_item_text"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "process_item",
+    "component_group_uuid": null,
+    "color": "#F87171",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "Contact",
+    "display_name": "Contact",
+    "description": "Contact section with company info and contact form",
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 0,
+        "id": "contact_title"
+      },
+      "subtitle": {
+        "type": "text",
+        "display_name": "Section Subtitle",
+        "pos": 1,
+        "id": "contact_subtitle"
+      },
+      "address": {
+        "type": "textarea",
+        "display_name": "Address",
+        "pos": 4,
+        "id": "company_address"
+      },
+      "phone": {
+        "type": "text",
+        "display_name": "Phone Number",
+        "pos": 5,
+        "id": "company_phone"
+      },
+      "email": {
+        "type": "text",
+        "display_name": "Email Address",
+        "pos": 6,
+        "id": "company_email"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Contact",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
   }
 ]

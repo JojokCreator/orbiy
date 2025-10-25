@@ -9,8 +9,10 @@
     --color-light-gray: oklch(0.8545 0 0);
     --color-blue-gray: oklch(0.6883 0.0198 250.67);
     --color-green: oklch(0.5641 0.0315 146.75);
+    --color-light-green: oklch(0.4525 0.0252 147.27);
     --color-dark-green: oklch(0.4182 0.0315 146.75);
     --color-red: oklch(0.1867 0.0215 357.75);
+    --color-red-light: oklch(0.2347 0.0254 357.55);
     --color-gray: oklch(0.2102 0.0016 17.28);
     --color-purple: oklch(82.15% 0.055 277.12);
     --color-teal: oklch(0.2402 0.0199 147.95);
