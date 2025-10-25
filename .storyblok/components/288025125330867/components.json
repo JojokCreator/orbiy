@@ -1003,6 +1003,73 @@
     "metadata": {}
   },
   {
+    "name": "HeroVideo",
+    "display_name": "Hero Video",
+    "description": "Hero section with background video instead of image",
+    "created_at": "2025-10-25T03:15:00.000Z",
+    "updated_at": "2025-10-25T03:15:00.000Z",
+    "id": 104960000000001,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Hero Title",
+        "pos": 0,
+        "id": "hero_video_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Hero Description",
+        "pos": 1,
+        "id": "hero_video_description"
+      },
+      "video": {
+        "type": "asset",
+        "display_name": "Background Video",
+        "filetypes": [
+          "videos"
+        ],
+        "pos": 2,
+        "id": "hero_video_background"
+      },
+      "button": {
+        "type": "bloks",
+        "display_name": "Hero Button",
+        "maximum": 1,
+        "component_whitelist": [
+          "button"
+        ],
+        "pos": 3,
+        "id": "hero_video_button",
+        "restrict_type": "",
+        "restrict_components": true
+      },
+      "poster_image": {
+        "type": "asset",
+        "display_name": "Poster Image (fallback)",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 4,
+        "id": "hero_video_poster"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Hero Video",
+    "component_group_uuid": null,
+    "color": "#8B5CF6",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "grid_card",
     "display_name": "Grid Card",
     "description": "Grid card with full image and text overlay at the bottom",

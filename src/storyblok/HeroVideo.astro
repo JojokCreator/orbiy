@@ -1,0 +1,151 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { getImage } from "astro:assets";
+import Button from "../components/reusable/Button.astro";
+
+const { blok } = Astro.props;
+const {
+  title,
+  description,
+  button,
+  video,
+  poster_image,
+  video_controls,
+  autoplay,
+  loop,
+  muted,
+} = blok;
+
+// Set default values for video settings
+const showControls = video_controls !== false;
+const shouldAutoplay = autoplay !== false;
+const shouldLoop = loop !== false;
+const isMuted = muted !== false;
+
+// Get optimized poster image if provided
+let posterUrl = "";
+if (poster_image?.filename) {
+  const { src } = await getImage({
+    src: poster_image.filename,
+    format: "webp",
+    quality: 80,
+    width: 1920,
+    height: 1080,
+  });
+  posterUrl = src;
+}
+
+const isDev = import.meta.env.DEV;
+---
+
+<section
+  class="relative h-screen w-screen overflow-hidden bg-black py-8 md:py-24"
+  {...storyblokEditable(blok)}
+>
+  {
+    !isDev && (
+      <div class="absolute inset-0">
+        <video
+          class="h-full w-full object-cover"
+          poster={posterUrl || undefined}
+          muted
+          autoplay
+          loop
+          playsinline
+        >
+          {video?.filename ? (
+            <source src={video.filename} type="video/mp4" />
+          ) : (
+            <source src="/video.mp4" type="video/mp4" />
+          )}
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    )
+  }
+
+  <div class="absolute inset-0 bg-black/40"></div>
+
+  {
+    showControls && (
+      <div class="absolute right-6 bottom-4 z-10 flex gap-4">
+        <button
+          id="playPauseBtn"
+          class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full bg-black/70 text-2xl text-white backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-black/90 active:scale-95"
+          aria-label="Play/Pause video"
+        >
+          <span id="playPauseIcon">⏸</span>
+        </button>
+
+        <button
+          id="muteBtn"
+          class="flex h-15 w-15 cursor-pointer items-center justify-center rounded-full bg-black/70 text-2xl text-white backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-black/90 active:scale-95"
+          aria-label="Mute/Unmute video"
+        >
+          <span id="muteIcon">🔇</span>
+        </button>
+      </div>
+    )
+  }
+
+  <div
+    class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
+  >
+    <h1 class="mb-6 text-base-100">
+      {title}
+    </h1>
+
+    <p class="mb-8 text-base-200">
+      {description}
+    </p>
+    {
+      button && button.length > 0 && (
+        <Button
+          type="filled"
+          buttonText={button[0].text}
+          link={button[0].link?.url}
+        />
+      )
+    }
+  </div>
+</section>
+
+<script>
+  {
+    showControls &&
+      `
+    const video = document.querySelector('video');
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const playPauseIcon = document.getElementById("playPauseIcon");
+    const muteBtn = document.getElementById("muteBtn");
+    const muteIcon = document.getElementById("muteIcon");
+
+    // Play/Pause functionality
+    playPauseBtn.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+        playPauseIcon.textContent = "⏸";
+      } else {
+        video.pause();
+        playPauseIcon.textContent = "▶";
+      }
+    });
+
+    // Mute/Unmute functionality
+    muteBtn.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false;
+        muteIcon.textContent = "🔊";
+      } else {
+        video.muted = true;
+        muteIcon.textContent = "🔇";
+      }
+    });
+
+    // Update play button when video ends
+    video.addEventListener("ended", () => {
+      playPauseIcon.textContent = "▶";
+    });
+    `;
+  }
+</script>

@@ -6,7 +6,8 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import mkcert from "vite-plugin-mkcert";
 
-const env = loadEnv("", process.cwd(), 'STORYBLOK');
+const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), 'STORYBLOK');
+const isDev = import.meta.env.DEV;
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,22 +18,25 @@ export default defineConfig({
         livePreview: true,
         components: {
             block: "storyblok/Hero",
+            block: "storyblok/HeroVideo",
             block: "storyblok/Features",
             block: "storyblok/FeaturedCars",
             block: "storyblok/FaqSection",
+            block: "storyblok/ImageGrid",
         },
+        enableFallbackComponent: true,
+        customFallbackComponent: 'storyblok/FallbackComponent',
         apiOptions: {
-          // Choose your Storyblok space region
-          region: 'eu', // optional,  or 'eu' (default)
+          region: 'eu', 
         },
       })],
 	vite: {
-    server: {
+    server: isDev ? {
       https: true,
-    },
+    } : undefined,
 		plugins: [tailwindcss(), mkcert()],
 	},
-  output: 'server',
+  output: isDev ? 'server' : 'static',
 	experimental: {
         fonts: [{
             provider: fontProviders.google(),
