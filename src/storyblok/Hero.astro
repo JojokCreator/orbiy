@@ -21,7 +21,7 @@ if (image?.filename) {
 ---
 
 <section
-  class="relative h-screen w-screen overflow-hidden bg-black py-8 md:py-24"
+  class="relative h-screen w-screen overflow-hidden bg-black vertical-p"
   style={`background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
   {...storyblokEditable(blok)}
 >
@@ -29,11 +29,11 @@ if (image?.filename) {
   <div
     class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
-    <h2 class="mb-6 text-base-100">
+    <h2 class="mb-6 text-white">
       {title}
     </h2>
 
-    <p class="mb-8 text-base-200">
+    <p class="mb-8 text-light-gray">
       {description}
     </p>
     {

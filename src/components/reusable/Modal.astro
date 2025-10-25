@@ -5,7 +5,7 @@ const { id } = Astro.props;
 ---
 
 <button
-	class="bg-primary active:focus:animate-click relative inline-flex max-h-12 items-center justify-center overflow-hidden rounded-lg p-4 px-5 py-3 pt-4 pb-3.5 text-base whitespace-nowrap text-white transition-all duration-500 ease-in-out hover:cursor-pointer hover:opacity-80 xl:mr-8"
+	class="bg-green active:focus:animate-click relative inline-flex max-h-12 items-center justify-center overflow-hidden rounded-lg p-4 px-5 py-3 pt-4 pb-3.5 text-base whitespace-nowrap text-white transition-all duration-500 ease-in-out hover:cursor-pointer hover:opacity-80 xl:mr-8"
 	aria-label="search"
 	onclick={`window.${"modal" + id}.showModal(); document.body.classList.add('overflow-hidden')`}
 >

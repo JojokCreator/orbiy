@@ -12,12 +12,12 @@ const allCars = await getCollection("cars");
 const featuredCars = allCars.filter((car) => car.data.featured);
 ---
 
-<section {...storyblokEditable(blok)} class="site-container py-8 md:py-24">
+<section {...storyblokEditable(blok)} class="site-container vertical-p">
     <div>
-        <p class="text-base-300 font-semibold pb-2 md:pb-4">{header}</p>
-        <hr class="border-t border-base-300 h-1 w-full pb-6 md:pb-8" />
+        <p class="text-blue-gray font-semibold pb-2 md:pb-4">{header}</p>
+        <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
         <div>
-            <h2 class="text-neutral">
+            <h2 class="text-gray">
                 {title}
             </h2>
 
@@ -34,7 +34,7 @@ const featuredCars = allCars.filter((car) => car.data.featured);
 
             {
                 featured_cars_button && featured_cars_button.length > 0 && (
-                    <div class="mt-12">
+                    <div class="mt-6 md:mt-12">
                         <Button
                             type="filledDark"
                             buttonText={featured_cars_button[0].text}

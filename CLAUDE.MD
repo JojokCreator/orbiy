@@ -51,13 +51,14 @@ const { title, description } = Astro.props;
   /* In global.css */
   @theme {
     --font-sans: var(--font-poppins);
-    --color-text: oklch(10.98% 0.01 270.31);
-    --color-base-100: oklch(99.43% 0.001 286.38);
+    --color-black: oklch(10.98% 0.01 270.31);
+    --color-white: oklch(0.9581 0 0);
+    --color-light-gray: oklch(0.8545 0 0);
   }
   ```
 - **Apply variables** using Tailwind:
   ```astro
-  <div class="bg-base-100 text-text">
+  <div class="bg-white text-black">
     Content
   </div>
   ```

@@ -11,7 +11,7 @@ const { car } = Astro.props;
 ---
 
 <div
-  class="bg-base-100/50 rounded-sm border-base-300 hover:shadow-xs transition-all duration-600 hover:-translate-y-0.5"
+  class="bg-white/50 rounded-sm border-blue-gray hover:shadow-xs transition-all duration-600 hover:-translate-y-0.5"
 >
   <!-- Car Image -->
   <div class="relative h-fit mb-6 rounded-t-lg overflow-hidden bg-gray-100">
@@ -30,10 +30,10 @@ const { car } = Astro.props;
     }
   </div>
   <div class="space-y-3 p-6">
-    <h3 class="text-xl md:text-2xl font-semibold text-neutral leading-tight">
+    <h3 class="text-xl md:text-2xl font-semibold text-gray leading-tight">
       {car.data.title}
     </h3>
-    <p class="text-neutral text-base line-clamp-3 py-4">
+    <p class="text-gray text-base line-clamp-4 my-4">
       {car.data.description}
     </p>
     <ul class="space-y-2">
@@ -46,9 +46,9 @@ const { car } = Astro.props;
         ))
       }
     </ul>
-    <p class="text-2xl md:text-3xl font-medium text-neutral py-4">
-      <span class="text-base text-base-300">From </span>{car.data.price}<span
-        class="text-base text-base-300"
+    <p class="text-2xl md:text-3xl font-medium text-gray py-4">
+      <span class="text-base text-blue-gray">From </span>{car.data.price}<span
+        class="text-base text-blue-gray"
       >
         /day</span
       >

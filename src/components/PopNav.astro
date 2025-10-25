@@ -25,7 +25,8 @@ const { logo, nav_links, cta_button } = siteConfig;
 
 <header class="z-[999] w-screen lg:absolute px-4 2xl:px-0">
 	<div
-		class="fixed top-0 left-0 z-50 mx-auto w-screen px-4 lg:static lg:w-auto lg:max-w-7xl lg:py-2 xl:px-0"
+		id="navbar"
+		class="fixed top-0 left-0 z-50 mx-auto w-screen px-4 transition-all duration-300 lg:static lg:w-auto lg:max-w-7xl lg:py-2 lg:bg-transparent xl:px-0"
 	>
 		<div class="flex h-16 items-center justify-between">
 			<div class="lg:flex lg:items-center lg:gap-12">
@@ -44,7 +45,7 @@ const { logo, nav_links, cta_button } = siteConfig;
 			>
 				<div
 					id="mobile-menu"
-					class="top-[64px] hidden h-[calc(100vh-64px)] w-screen translate-y-[5vh] transform overflow-visible rounded-xl bg-transparent opacity-0 transition-all transition-discrete duration-500 lg:mt-0 lg:block lg:h-auto lg:w-auto lg:translate-y-0 lg:opacity-100 lg:duration-0 open:block open:translate-y-0 open:opacity-100 open:starting:-translate-y-[5vh] open:starting:opacity-0"
+					class="top-[64px] hidden h-[calc(100vh-64px)] w-screen translate-y-[5vh] transform overflow-visible rounded-xl bg-black/80 backdrop-blur-md opacity-0 transition-all transition-discrete duration-500 lg:mt-0 lg:block lg:h-auto lg:w-auto lg:translate-y-0 lg:opacity-100 lg:duration-0 lg:bg-transparent lg:backdrop-blur-none open:block open:translate-y-0 open:opacity-100 open:starting:-translate-y-[5vh] open:starting:opacity-0"
 				>
 					<nav
 						class="relative grid h-[calc(100vh-180px)] place-items-center lg:block lg:h-auto"
@@ -111,8 +112,11 @@ const { logo, nav_links, cta_button } = siteConfig;
 		const mobileMenu = document.getElementById(
 			"mobile-menu",
 		) as HTMLElement;
+		const navbar = document.getElementById(
+			"navbar",
+		) as HTMLElement;
 
-		if (mobileMenuButton && mobileMenu) {
+		if (mobileMenuButton && mobileMenu && navbar) {
 			function handleMobileMenuState() {
 				if (window.innerWidth < 768) {
 					mobileMenu.setAttribute("popover", "auto");
@@ -177,11 +181,34 @@ const { logo, nav_links, cta_button } = siteConfig;
 					document.body.classList.remove("overflow-y-hidden");
 				}
 			}
-			window.addEventListener("resize", () => {
-				handleMobileMenuState();
-			});
+
+			// Add scroll-based navbar background for screens smaller than lg
+			function handleNavbarScroll() {
+				if (window.innerWidth < 1024) { // lg breakpoint
+					if (window.scrollY > 50) {
+						navbar.classList.add('bg-black/90', 'backdrop-blur-md');
+						navbar.classList.remove('bg-transparent');
+						} else {
+						navbar.classList.remove('bg-black/90', 'backdrop-blur-md');
+						navbar.classList.add('bg-transparent');
+					}
+				} else {
+					// Reset to transparent on larger screens
+					navbar.classList.remove('bg-black/90', 'backdrop-blur-md');
+					navbar.classList.add('bg-transparent');
+				}
+			}
+
+		window.addEventListener("resize", () => {
 			handleMobileMenuState();
-		}
+			handleNavbarScroll();
+		});
+
+		window.addEventListener("scroll", handleNavbarScroll);
+
+		handleMobileMenuState();
+		handleNavbarScroll();
 	}
-	initializeMobileMenu();
+}
+initializeMobileMenu();
 </script>

@@ -17,9 +17,9 @@ export type Props = {
 	class?: string;
 	arrow?: boolean;
 };
-const filledClasses = `bg-primary whitespace-nowrap active:focus:animate-click text-[#dedede] relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-primary-content
+const filledClasses = `bg-green whitespace-nowrap active:focus:animate-click text-[#dedede] relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-dark-green
 `;
-const filledDarkClasses = `bg-neutral whitespace-nowrap active:focus:animate-click text-base-100 relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-black
+const filledDarkClasses = `bg-gray whitespace-nowrap active:focus:animate-click text-white relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-black
 `;
 
 const typeClasses = type === "filled" ? filledClasses : filledDarkClasses;

@@ -3,28 +3,17 @@
 @theme {
     /* --font-sans: 'Roboto', sans-serif; */
     --font-sans: var(--font-poppins);
-    --color-text: oklch(10.98% 0.01 270.31);
+    --color-black: oklch(10.98% 0.01 270.31);
 
-    --color-base-100: oklch(0.9581 0 0);
-    --color-base-200: oklch(0.8545 0 0);
-    --color-base-300: oklch(0.6883 0.0198 250.67);
-    --color-base-content: oklch(42.06% 0.049 276.53);
-    --color-primary: oklch(0.5641 0.0315 146.75);
-    --color-primary-content: oklch(0.4182 0.0315 146.75);
-    --color-secondary: oklch(0.1867 0.0215 357.75);
-    --color-secondary-content: oklch(95.05% 0.003 308.43);
-    --color-accent: oklch(65.59% 0.212 354.31);
-    --color-accent-content: oklch(97.14% 0.014 343.2);
-    --color-neutral: oklch(0.2102 0.0016 17.28);
-    --color-neutral-content: oklch(82.15% 0.055 277.12);
-    --color-info: oklch(0.2402 0.0199 147.95);
-    --color-info-content: oklch(98.36% 0.014 180.72);
-    --color-success: oklch(76.81% 0.204 130.85);
-    --color-success-content: oklch(98.57% 0.031 120.76);
-    --color-warning: oklch(79.52% 0.162 86.05);
-    --color-warning-content: oklch(98.73% 0.026 102.21);
-    --color-error: oklch(64.5% 0.215 16.44);
-    --color-error-content: oklch(96.94% 0.015 12.42);
+    --color-white: oklch(0.9581 0 0);
+    --color-light-gray: oklch(0.8545 0 0);
+    --color-blue-gray: oklch(0.6883 0.0198 250.67);
+    --color-green: oklch(0.5641 0.0315 146.75);
+    --color-dark-green: oklch(0.4182 0.0315 146.75);
+    --color-red: oklch(0.1867 0.0215 357.75);
+    --color-gray: oklch(0.2102 0.0016 17.28);
+    --color-purple: oklch(82.15% 0.055 277.12);
+    --color-teal: oklch(0.2402 0.0199 147.95);
 
     --animate-click: button-pop 0.2s ease-out;
 
@@ -85,8 +74,15 @@
     }
 
     h1 {
-        font-size: 3.375rem;
-        line-height: 4rem;
+        font-size: 2.25rem;
+        line-height: 2.75rem;
+    }
+
+    @media (min-width: theme('screens.sm')) {
+        h1 {
+            font-size: 3.375rem;
+            line-height: 4rem;
+        }
     }
 
     @media (min-width: theme('screens.lg')) {
@@ -97,25 +93,18 @@
     }
 
     h2 {
-        font-size: 2.25rem;
-        line-height: 2.75rem;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
     }
 
-    @media (min-width: theme('screens.lg')) {
+    @media (min-width: theme('screens.sm')) {
         h2 {
-            font-size: 3.375rem;
-            line-height: 4rem;
+            font-size: 2.25rem;
+            line-height: 2.75rem;
         }
     }
 
     @media (min-width: theme('screens.lg')) {
-        h2 {
-            font-size: var(--text-5xl);
-            line-height: 3.5rem;
-        }
-    }
-
-    @media (min-width: theme('screens.2xl')) {
         h2 {
             font-size: 3.375rem;
             line-height: 4rem;
@@ -127,14 +116,12 @@
         margin: 0 auto;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
-        padding-top: 32px;
-        padding-bottom: 32px;
     }
 
-    @media (min-width: 840px) {
+    @media (min-width: 640px) {
         .site-container {
-            padding-top: 64px;
-            padding-bottom: 64px;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
     }
 
@@ -142,6 +129,25 @@
         .site-container {
             padding-left: 0;
             padding-right: 0;
+        }
+    }
+
+    .vertical-p {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    @media (min-width: theme('screens.md')) {
+        .vertical-p {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+    }
+
+    @media (min-width: theme('screens.lg')) {
+        .vertical-p {
+            padding-top: 7rem;
+            padding-bottom: 7rem;
         }
     }
 }

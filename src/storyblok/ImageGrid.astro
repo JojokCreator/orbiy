@@ -11,14 +11,14 @@ const allCars = await getCollection("cars");
 const featuredCars = allCars.filter((car) => car.data.featured);
 ---
 
-<section {...storyblokEditable(blok)} class="py-8 md:py-24 bg-secondary">
+<section {...storyblokEditable(blok)} class="vertical-p bg-red w-screen">
   <div class="site-container">
     <div>
-      <h2 class="text-base-100">
+      <h2 class="text-white">
         {title}
       </h2>
 
-      {text && <p class="text-base-300 mt-4">{text}</p>}
+      {text && <p class="text-blue-gray mt-4">{text}</p>}
       <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {
           featuredCars[0] && (
@@ -37,10 +37,10 @@ const featuredCars = allCars.filter((car) => car.data.featured);
 
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
               <div class="absolute bottom-0 left-0 right-0 p-6">
-                <h3 class="text-white font-bold text-lg mb-2 leading-tight">
+                <h3 class="text-white font-medium text-lg mb-2 leading-tight">
                   {featuredCars[0].data.title}
                 </h3>
-                <p class="text-white/90 text-sm line-clamp-2 leading-relaxed">
+                <p class="text-white text-base line-clamp-2 leading-relaxed hidden sm:block ">
                   {featuredCars[0].data.description}
                 </p>
                 {featuredCars[0].data.price && (
@@ -72,10 +72,10 @@ const featuredCars = allCars.filter((car) => car.data.featured);
 
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
               <div class="absolute bottom-0 left-0 right-0 p-6">
-                <h3 class="text-white font-bold text-xl mb-2 leading-tight">
+                <h3 class="text-white font-medium text-xl mb-2 leading-tight">
                   {featuredCars[0].data.title}
                 </h3>
-                <p class="text-white/90 text-sm line-clamp-3 leading-relaxed">
+                <p class="text-white text-base line-clamp-2 leading-relaxed hidden sm:block ">
                   {featuredCars[0].data.description}
                 </p>
                 {featuredCars[0].data.price && (
@@ -107,10 +107,10 @@ const featuredCars = allCars.filter((car) => car.data.featured);
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
                 <div class="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 class="text-white font-bold text-lg mb-2 leading-tight">
+                  <h3 class="text-white font-medium text-lg mb-2 leading-tight">
                     {card.data.title}
                   </h3>
-                  <p class="text-white/90 text-sm line-clamp-2 leading-relaxed">
+                  <p class="text-white text-base line-clamp-2 leading-relaxed hidden sm:block ">
                     {card.data.description}
                   </p>
                   {card.data.price && (

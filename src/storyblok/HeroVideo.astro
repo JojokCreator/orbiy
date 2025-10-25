@@ -4,13 +4,7 @@ import { getImage } from "astro:assets";
 import Button from "../components/reusable/Button.astro";
 
 const { blok } = Astro.props;
-const {
-  title,
-  description,
-  button,
-  video,
-  poster_image,
-} = blok;
+const { title, description, button, video, poster_image } = blok;
 
 // Get optimized poster image if provided
 let posterUrl = "";
@@ -29,7 +23,7 @@ const isDev = import.meta.env.DEV;
 ---
 
 <section
-  class="relative h-screen w-screen overflow-hidden bg-black py-8 md:py-24"
+  class="relative h-screen w-screen overflow-hidden bg-black vertical-p"
   {...storyblokEditable(blok)}
 >
   {
@@ -59,11 +53,11 @@ const isDev = import.meta.env.DEV;
   <div
     class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
-    <h1 class="mb-6 text-base-100">
+    <h1 class="mb-6 text-white">
       {title}
     </h1>
 
-    <p class="mb-8 text-base-200">
+    <p class="mb-8 text-light-gray">
       {description}
     </p>
     {
