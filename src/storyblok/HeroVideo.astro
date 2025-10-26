@@ -40,7 +40,7 @@ const getBackgroundColorClass = (color: string) => {
 };
 
 const backgroundColorClass = getBackgroundColorClass(
-  background_color[0] || "black",
+  background_color || "black",
 );
 
 // Determine heading tag
@@ -51,7 +51,7 @@ const HeadingTag = heading_type || "h1";
   class={`relative min-h-screen w-screen overflow-hidden ${backgroundColorClass} vertical-p`}
   {...storyblokEditable(blok)}
 >
-  <div class="absolute inset-0">
+  <div class="absolute inset-0 hidden sm:block">
     <video
       class="h-full w-full object-cover"
       poster={posterUrl || undefined}

@@ -2,7 +2,19 @@
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import Layout from "../layouts/Layout.astro";
-import { siteConfig } from "../config/site.ts";
+import type { Page } from "../../.storyblok/types/288025125330867/storyblok-components.d.ts";
+
+interface StoryblokStory {
+	name: string;
+	slug: string;
+	content: Page & Record<string, unknown>;
+	created_at: string;
+	published_at: string;
+	id: number;
+	uuid: string;
+	full_slug: string;
+	[k: string]: unknown;
+}
 
 export async function getStaticPaths() {
 	const sbApi = useStoryblokApi();
@@ -12,23 +24,22 @@ export async function getStaticPaths() {
 		version: import.meta.env.DEV ? "draft" : "published",
 	});
 
-	const stories = Object.values(data.stories);
-	return stories
-		.map((story: any) => {
-			return {
-				params: { slug: story.slug === "home" ? "" : story.slug },
-				props: { story: story }
-			};
-		});
+	const stories: StoryblokStory[] = Object.values(data.stories);
+	return stories.map((story) => {
+		return {
+			params: { slug: story.slug === "home" ? "" : story.slug },
+			props: { story: story },
+		};
+	});
 }
 
 const { slug } = Astro.params;
 
 // Handle root path and home slug - serve home content
-const storySlug = (!slug || slug === '' || slug === 'home') ? 'home' : slug;
+const storySlug = !slug || slug === "" || slug === "home" ? "home" : slug;
 
 // Use story from props if available (build time), otherwise fetch (dev time)
-let story = Astro.props.story;
+let story: StoryblokStory = Astro.props.story;
 if (!story) {
 	const sbApi = useStoryblokApi();
 	const { data } = await sbApi.get(`cdn/stories/${storySlug}`, {
@@ -37,19 +48,39 @@ if (!story) {
 	story = data.story;
 }
 
-// Set SEO title/description for home
-const isHome = (!slug || slug === '' || slug === 'home');
+let siteConfig;
+
+const sbApi = useStoryblokApi();
+try {
+	const { data: siteConfigData } = await sbApi.get(
+		"cdn/stories/site-config",
+		{
+			version: import.meta.env.DEV ? "draft" : "published",
+		},
+	);
+	siteConfig = siteConfigData.story?.content;
+} catch (error) {
+	console.error("Error fetching site-config:", error);
+}
+// Set SEO metadata from page content or fallback to site config
+const isHome = !slug || slug === "" || slug === "home";
 const pageTitle = isHome
-  ? siteConfig.title
-  : story.content?.title || story.name || 'Page';
+	? `Home | ${siteConfig.site_name}`
+	: story.content?.title || story.name;
 const fullPageTitle = isHome
-  ? siteConfig.title
-  : `${pageTitle} | ${siteConfig.title}`;
-const pageDescription = story.content?.description || siteConfig.description;
-const pageOgImage = story.content?.og_image?.filename || siteConfig.ogImage;
+	? `Home | ${siteConfig.site_name}`
+	: `${pageTitle} | ${siteConfig.site_name}`;
+const pageDescription =
+	story.content?.description || siteConfig.site_description;
+const pageOgImage = story.content?.og_image?.filename || siteConfig.og_image;
 const invertMenu = story.content?.invert_menu || false;
 ---
 
-<Layout title={fullPageTitle} description={pageDescription} ogImage={pageOgImage} invertMenu={invertMenu}>
-		<StoryblokComponent blok={story.content} />
+<Layout
+	title={fullPageTitle}
+	description={pageDescription}
+	ogImage={pageOgImage}
+	invertMenu={invertMenu}
+>
+	<StoryblokComponent blok={story.content as any} />
 </Layout>
