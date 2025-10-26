@@ -33,9 +33,9 @@ const { header, title, image, faqs, button } = blok;
                 formats={["avif", "webp"]}
                 alt={image.alt || title}
                 widths={[400, 600, 800]}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                sizes="(max-width: 640px) 100vw, (max-width: 1023px) 384px, 576px"
                 inferSize={true}
-                class="w-full h-auto object-cover rounded-lg max-w-xl"
+                class="w-full h-auto object-cover rounded-lg max-w-sm lg:max-w-xl"
               />
             </div>
           )

@@ -82,6 +82,23 @@
         "pos": 5,
         "id": "featured_only_toggle"
       },
+      "heading_type": {
+        "type": "select",
+        "display_name": "Heading Tag",
+        "options": [
+          {
+            "name": "H1",
+            "value": "h1"
+          },
+          {
+            "name": "H2",
+            "value": "h2"
+          }
+        ],
+        "default_value": "h2",
+        "pos": 6,
+        "id": "heading_type_select"
+      },
       "featured_cars_button": {
         "type": "bloks",
         "display_name": "Footer CTA Button",
@@ -526,9 +543,46 @@
         "pos": 1,
         "id": "oypI6nhpSAOGD5_3NNklEg"
       },
+      "heading_type": {
+        "type": "options",
+        "display_name": "Heading Type",
+        "pos": 2,
+        "id": "hero_heading_type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          }
+        ]
+      },
+      "background_color": {
+        "type": "options",
+        "display_name": "Background Color",
+        "pos": 3,
+        "id": "hero_bg_color",
+        "options": [
+          {
+            "name": "Black",
+            "value": "black"
+          },
+          {
+            "name": "Green",
+            "value": "green"
+          },
+          {
+            "name": "Red",
+            "value": "red"
+          }
+        ]
+      },
       "image": {
         "type": "asset",
-        "pos": 2,
+        "display_name": "Background Image (Optional)",
+        "pos": 4,
         "id": "8KaUhjwFSMmimaJp1Fqsag",
         "filetypes": [
           "images"
@@ -536,7 +590,7 @@
       },
       "button": {
         "type": "bloks",
-        "pos": 3,
+        "pos": 5,
         "id": "FQ0wrcd3RKGz32qNePCPbg"
       }
     },
@@ -1070,13 +1124,49 @@
         "pos": 1,
         "id": "hero_video_description"
       },
+      "heading_type": {
+        "type": "options",
+        "display_name": "Heading Type",
+        "pos": 2,
+        "id": "hero_video_heading_type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          }
+        ]
+      },
+      "background_color": {
+        "type": "options",
+        "display_name": "Background Color",
+        "pos": 3,
+        "id": "hero_video_bg_color",
+        "options": [
+          {
+            "name": "Black",
+            "value": "black"
+          },
+          {
+            "name": "Green",
+            "value": "green"
+          },
+          {
+            "name": "Red",
+            "value": "red"
+          }
+        ]
+      },
       "video": {
         "type": "asset",
-        "display_name": "Background Video",
+        "display_name": "Background Video (Optional)",
         "filetypes": [
           "videos"
         ],
-        "pos": 2,
+        "pos": 4,
         "id": "hero_video_background"
       },
       "button": {
@@ -1086,18 +1176,18 @@
         "component_whitelist": [
           "button"
         ],
-        "pos": 3,
+        "pos": 5,
         "id": "hero_video_button",
         "restrict_type": "",
         "restrict_components": true
       },
       "poster_image": {
         "type": "asset",
-        "display_name": "Poster Image (fallback)",
+        "display_name": "Poster Image (Optional)",
         "filetypes": [
           "images"
         ],
-        "pos": 4,
+        "pos": 6,
         "id": "hero_video_poster"
       }
     },

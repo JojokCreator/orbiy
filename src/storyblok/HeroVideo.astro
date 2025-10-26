@@ -4,7 +4,15 @@ import { getImage } from "astro:assets";
 import Button from "../components/reusable/Button.astro";
 
 const { blok } = Astro.props;
-const { title, description, button, video, poster_image } = blok;
+const {
+  title,
+  description,
+  heading_type,
+  background_color,
+  button,
+  video,
+  poster_image,
+} = blok;
 
 // Get optimized poster image if provided
 let posterUrl = "";
@@ -20,14 +28,33 @@ if (poster_image?.filename) {
 }
 
 const isDev = import.meta.env.DEV;
+
+// Determine background color class
+const getBackgroundColorClass = (color: string) => {
+  switch (color) {
+    case "green":
+      return "bg-green";
+    case "red":
+      return "bg-red";
+    default:
+      return "bg-black";
+  }
+};
+
+const backgroundColorClass = getBackgroundColorClass(
+  background_color || "black",
+);
+
+// Determine heading tag
+const HeadingTag = heading_type || "h1";
 ---
 
 <section
-  class="relative h-screen w-screen overflow-hidden bg-black vertical-p"
+  class={`relative   overflow-hidden ${backgroundColorClass} vertical-p`}
   {...storyblokEditable(blok)}
 >
   {
-    !isDev && (
+    !isDev && video?.filename && (
       <div class="absolute inset-0">
         <video
           class="h-full w-full object-cover"
@@ -37,26 +64,21 @@ const isDev = import.meta.env.DEV;
           loop
           playsinline
         >
-          {video?.filename ? (
-            <source src={video.filename} type="video/mp4" />
-          ) : (
-            <source src="/video.mp4" type="video/mp4" />
-          )}
+          <source src={video.filename} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
     )
   }
 
-  <div class="absolute inset-0 bg-black/40"></div>
+  <div class="absolute inset-0 bg-black/60"></div>
 
   <div
     class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
-    <h1 class="mb-6 text-white">
-      {title}
-    </h1>
-
+    <Fragment
+      set:html={`<${HeadingTag} class="mb-6 text-white">${title}</${HeadingTag}>`}
+    />
     <p class="mb-8 text-light-gray">
       {description}
     </p>

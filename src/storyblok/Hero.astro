@@ -4,7 +4,8 @@ import { getImage } from "astro:assets";
 import Button from "../components/reusable/Button.astro";
 
 const { blok } = Astro.props;
-const { title, description, button, image } = blok;
+const { title, description, heading_type, background_color, button, image } =
+  blok;
 
 // Get optimized background image
 let backgroundImageUrl = "";
@@ -18,21 +19,42 @@ if (image?.filename) {
   });
   backgroundImageUrl = src;
 }
+
+// Determine background color class
+const getBackgroundColorClass = (color: string) => {
+  switch (color) {
+    case "green":
+      return "bg-green";
+    case "red":
+      return "bg-red";
+    default:
+      return "bg-black";
+  }
+};
+
+const backgroundColorClass = getBackgroundColorClass(
+  background_color[0] || "black",
+);
+
+console.log("Background Color Class:", backgroundColorClass);
+
+// Determine heading tag
+const HeadingTag = heading_type || "h2";
 ---
 
 <section
-  class="relative h-screen w-screen overflow-hidden bg-black vertical-p"
-  style={`background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+  class={`relative min-h-screen w-screen overflow-hidden ${backgroundColorClass} vertical-p`}
+  style={backgroundImageUrl &&
+    `background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
   {...storyblokEditable(blok)}
 >
-  <div class="absolute inset-0 bg-black/40"></div>
+  {backgroundImageUrl && <div class="absolute inset-0 bg-black/60" />}
   <div
-    class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
+    class="relative z-10 flex h-screen w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
-    <h2 class="mb-6 text-white">
-      {title}
-    </h2>
-
+    <Fragment
+      set:html={`<${HeadingTag} class="mb-6 text-white text-pretty">${title}</${HeadingTag}>`}
+    />
     <p class="mb-8 text-light-gray">
       {description}
     </p>

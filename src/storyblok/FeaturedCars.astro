@@ -5,10 +5,10 @@ import Button from "../components/reusable/Button.astro";
 import FeaturedCarCard from "../components/FeaturedCarCard.astro";
 
 const { blok } = Astro.props;
-const { title, header, description, center_content, featured_only, featured_cars_button } = blok;
+const { title, header, description, center_content, featured_only, featured_cars_button, heading_type } = blok;
 
 // Determine content alignment classes
-const headerClasses = header
+const descriptionClasses = header
   ? "text-start"
   : (center_content ? "text-center" : "text-start");
 
@@ -36,13 +36,16 @@ if (featured_only) {
 }
 
 const hasMoreCars = displayCars.length > initialLimit;
+
+// Determine heading tag
+const HeadingTag = heading_type || "h1";
 ---
 
 <section {...storyblokEditable(blok)} class="site-container vertical-p">
     <div>
         {/* Header */}
         {header && (
-            <p class="text-blue-gray font-semibold pb-2 md:pb-4 {headerClasses}">{header}</p>
+            <p class="text-blue-gray font-semibold pb-2 md:pb-4">{header}</p>
         )}
 
         {/* Conditional HR - only show if header exists */}
@@ -52,13 +55,11 @@ const hasMoreCars = displayCars.length > initialLimit;
 
         <div>
             {/* Title */}
-            <h2 class="text-gray {titleClasses}">
-                {title}
-            </h2>
+            <Fragment set:html={`<${HeadingTag} class="text-gray ${titleClasses}">${title}</${HeadingTag}>`} />
 
             {/* Description */}
             {description && (
-                <p class="text-gray mt-4 max-w-3xl {titleClasses}">
+                <p class={`text-gray mt-4 ${titleClasses}`}>
                     {description}
                 </p>
             )}

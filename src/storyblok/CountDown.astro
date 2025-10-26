@@ -33,27 +33,15 @@ const formattedDate = targetDate.toLocaleDateString("en-US", {
   style={`background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
   class="relative min-h-screen w-full overflow-hidden bg-black vertical-p"
 >
-  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="absolute inset-0 bg-black/80"></div>
   <div
     class="relative z-10 site-container text-center text-white px-4 sm:px-6 lg:px-8"
   >
     <!-- Title and Description -->
     <div class="max-w-4xl mx-auto mb-8 sm:mb-10 md:mb-12">
-      {
-        title && (
-          <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-            {title}
-          </h1>
-        )
-      }
+      {title && <h1 class="mb-4 sm:mb-6">{title}</h1>}
 
-      {
-        description && (
-          <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed px-2 sm:px-0">
-            {description}
-          </p>
-        )
-      }
+      {description && <p class="text-white">{description}</p>}
     </div>
 
     <!-- Countdown Timer -->
@@ -71,7 +59,7 @@ const formattedDate = targetDate.toLocaleDateString("en-US", {
       features && features.length > 0 && (
         <div class="bg-teal w-full">
           <div class="site-container px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col py-6 sm:py-8 md:flex-row divide-y md:divide-y-0 md:divide-x divide-light-gray w-full">
+            <div class="flex flex-col sm:py-8 md:flex-row divide-y md:divide-y-0 md:divide-x divide-light-gray w-full">
               {features.map(
                 (
                   feature: { title: string; description: string },
