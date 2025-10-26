@@ -11,13 +11,15 @@
         "type": "text",
         "display_name": "Button Text",
         "pos": 0,
-        "id": "LNTFRHhgQNmNhnLfwBVE2Q"
+        "id": "LNTFRHhgQNmNhnLfwBVE2Q",
+        "required": true
       },
       "link": {
         "type": "multilink",
         "display_name": "Button Link",
         "pos": 1,
-        "id": "rwBbuHQkQ4CAL1-NsAZ8gw"
+        "id": "rwBbuHQkQ4CAL1-NsAZ8gw",
+        "required": true
       },
       "style": {
         "type": "option",
@@ -67,31 +69,36 @@
         "type": "text",
         "display_name": "Section Title",
         "pos": 0,
-        "id": "contact_title"
+        "id": "contact_title",
+        "required": true
       },
       "subtitle": {
         "type": "text",
         "display_name": "Section Subtitle",
         "pos": 1,
-        "id": "contact_subtitle"
+        "id": "contact_subtitle",
+        "required": true
       },
       "address": {
         "type": "textarea",
         "display_name": "Address",
         "pos": 4,
-        "id": "company_address"
+        "id": "company_address",
+        "required": true
       },
       "phone": {
         "type": "text",
         "display_name": "Phone Number",
         "pos": 5,
-        "id": "company_phone"
+        "id": "company_phone",
+        "required": true
       },
       "email": {
         "type": "text",
         "display_name": "Email Address",
         "pos": 6,
-        "id": "company_email"
+        "id": "company_email",
+        "required": true
       }
     },
     "image": null,
@@ -131,19 +138,22 @@
         "type": "text",
         "display_name": "Section Title",
         "pos": 1,
-        "id": "countdown_title"
+        "id": "countdown_title",
+        "required": true
       },
       "description": {
         "type": "textarea",
         "display_name": "Section Description",
         "pos": 2,
-        "id": "countdown_description"
+        "id": "countdown_description",
+        "required": true
       },
       "date": {
         "type": "text",
         "display_name": "Target Date",
         "pos": 3,
-        "id": "countdown_date"
+        "id": "countdown_date",
+        "required": true
       },
       "features": {
         "type": "bloks",
@@ -152,7 +162,8 @@
           "countdown_feature"
         ],
         "pos": 4,
-        "id": "countdown_features"
+        "id": "countdown_features",
+        "required": true
       }
     },
     "image": null,
@@ -183,13 +194,15 @@
         "type": "text",
         "display_name": "Feature Title",
         "pos": 0,
-        "id": "countdown_feature_title"
+        "id": "countdown_feature_title",
+        "required": true
       },
       "description": {
         "type": "textarea",
         "display_name": "Feature Description",
         "pos": 1,
-        "id": "countdown_feature_description"
+        "id": "countdown_feature_description",
+        "required": true
       }
     },
     "image": null,
@@ -220,13 +233,15 @@
         "type": "text",
         "display_name": "Question",
         "pos": 0,
-        "id": "faq_question"
+        "id": "faq_question",
+        "required": true
       },
       "answer": {
         "type": "textarea",
         "display_name": "Answer",
         "pos": 1,
-        "id": "faq_answer"
+        "id": "faq_answer",
+        "required": true
       }
     },
     "image": null,
@@ -263,7 +278,8 @@
         "type": "text",
         "display_name": "Section Title",
         "pos": 1,
-        "id": "faq_section_title"
+        "id": "faq_section_title",
+        "required": true
       },
       "image": {
         "type": "asset",
@@ -283,7 +299,8 @@
         "pos": 3,
         "id": "faq_items_list",
         "restrict_type": "",
-        "restrict_components": true
+        "restrict_components": true,
+        "required": true
       },
       "button": {
         "type": "bloks",
@@ -326,7 +343,8 @@
         "type": "text",
         "display_name": "Section Title",
         "pos": 1,
-        "id": "title_section"
+        "id": "title_section",
+        "required": true
       },
       "header": {
         "type": "textarea",
@@ -338,14 +356,16 @@
         "type": "textarea",
         "display_name": "Section Description",
         "pos": 3,
-        "id": "description_section"
+        "id": "description_section",
+        "required": true
       },
       "center_content": {
         "type": "boolean",
         "display_name": "Center Title and Description",
         "default": false,
         "pos": 4,
-        "id": "center_content_toggle"
+        "id": "center_content_toggle",
+        "required": true
       },
       "featured_only": {
         "type": "boolean",
@@ -393,13 +413,15 @@
         "type": "text",
         "display_name": "Feature Title",
         "pos": 1,
-        "id": "feature_title"
+        "id": "feature_title",
+        "required": true
       },
       "description": {
         "type": "textarea",
         "display_name": "Feature Description",
         "pos": 2,
-        "id": "feature_description"
+        "id": "feature_description",
+        "required": true
       }
     },
     "image": null,
@@ -439,7 +461,8 @@
         "type": "text",
         "display_name": "Section Title",
         "pos": 1,
-        "id": "title_section"
+        "id": "title_section",
+        "required": true
       },
       "features": {
         "type": "bloks",
@@ -450,7 +473,8 @@
         "pos": 3,
         "id": "features_list",
         "restrict_type": "",
-        "restrict_components": true
+        "restrict_components": true,
+        "required": true
       },
       "features_button": {
         "type": "bloks",
@@ -794,19 +818,22 @@
           "images"
         ],
         "pos": 0,
-        "id": "grid_card_image"
+        "id": "grid_card_image",
+        "required": true
       },
       "title": {
         "type": "text",
         "display_name": "Card Title",
         "pos": 1,
-        "id": "grid_card_title"
+        "id": "grid_card_title",
+        "required": true
       },
       "description": {
         "type": "textarea",
         "display_name": "Card Description",
         "pos": 2,
-        "id": "grid_card_description"
+        "id": "grid_card_description",
+        "required": true
       }
     },
     "image": null,
@@ -837,12 +864,14 @@
         "type": "text",
         "pos": 0,
         "display_name": "title",
-        "id": "HlkmtXIHSw2HRBLylaIP_w"
+        "id": "HlkmtXIHSw2HRBLylaIP_w",
+        "required": true
       },
       "description": {
         "type": "text",
         "pos": 1,
-        "id": "oypI6nhpSAOGD5_3NNklEg"
+        "id": "oypI6nhpSAOGD5_3NNklEg",
+        "required": true
       },
       "heading_type": {
         "type": "option",
@@ -924,16 +953,18 @@
         "type": "text",
         "display_name": "Hero Title",
         "pos": 0,
-        "id": "hero_video_title"
+        "id": "hero_video_title",
+        "required": true
       },
       "description": {
         "type": "textarea",
         "display_name": "Hero Description",
         "pos": 1,
-        "id": "hero_video_description"
+        "id": "hero_video_description",
+        "required": true
       },
       "heading_type": {
-        "type": "options",
+        "type": "option",
         "display_name": "Heading Type",
         "pos": 2,
         "id": "hero_video_heading_type",
@@ -949,7 +980,7 @@
         ]
       },
       "background_color": {
-        "type": "options",
+        "type": "option",
         "display_name": "Background Color",
         "pos": 3,
         "id": "hero_video_bg_color",
@@ -1027,13 +1058,15 @@
         "type": "text",
         "display_name": "Section Title",
         "pos": 1,
-        "id": "image_grid_title"
+        "id": "image_grid_title",
+        "required": true
       },
       "text": {
         "type": "textarea",
         "display_name": "Section Text",
         "pos": 2,
-        "id": "image_grid_text"
+        "id": "image_grid_text",
+        "required": true
       }
     },
     "image": null,
@@ -1070,13 +1103,15 @@
         "type": "text",
         "display_name": "Title",
         "pos": 1,
-        "id": "image_text_title"
+        "id": "image_text_title",
+        "required": true
       },
       "text": {
         "type": "textarea",
         "display_name": "Text Content",
         "pos": 2,
-        "id": "image_text_text"
+        "id": "image_text_text",
+        "required": true
       },
       "button": {
         "type": "bloks",
@@ -1091,24 +1126,26 @@
         "id": "image_text_image",
         "filetypes": [
           "images"
-        ]
+        ],
+        "required": true
       },
       "image_side": {
-        "type": "options",
+        "type": "option",
         "display_name": "Image Position",
         "pos": 5,
         "id": "image_text_side",
         "options": [
           {
             "name": "left",
-            "display_name": "Left"
+            "value": "left"
           },
           {
             "name": "right",
-            "display_name": "Right"
+            "value": "right"
           }
         ],
-        "default_value": "left"
+        "default_value": "left",
+        "required": true
       }
     },
     "image": null,
@@ -1202,13 +1239,15 @@
         "type": "multilink",
         "display_name": "Link Target",
         "pos": 0,
-        "id": "bPmDSYtzSAuMI75iNe2JLw"
+        "id": "bPmDSYtzSAuMI75iNe2JLw",
+        "required": true
       },
       "label": {
         "type": "text",
         "display_name": "Display Text",
         "pos": 1,
-        "id": "NNdzGrnrTyebqC9t01Y4Ig"
+        "id": "NNdzGrnrTyebqC9t01Y4Ig",
+        "required": true
       }
     },
     "image": null,
@@ -1239,7 +1278,8 @@
         "type": "text",
         "display_name": "Page Title",
         "pos": 0,
-        "id": "page_title"
+        "id": "page_title",
+        "required": true
       },
       "description": {
         "type": "textarea",
@@ -1303,7 +1343,8 @@
         "type": "text",
         "display_name": "Title",
         "pos": 1,
-        "id": "process_title"
+        "id": "process_title",
+        "required": true
       },
       "features": {
         "type": "bloks",
@@ -1312,7 +1353,8 @@
           "process_item"
         ],
         "pos": 2,
-        "id": "process_features"
+        "id": "process_features",
+        "required": true
       }
     },
     "image": null,
@@ -1343,13 +1385,15 @@
         "type": "text",
         "display_name": "Process Title",
         "pos": 0,
-        "id": "process_item_title"
+        "id": "process_item_title",
+        "required": true
       },
       "text": {
         "type": "textarea",
         "display_name": "Process Text",
         "pos": 1,
-        "id": "process_item_text"
+        "id": "process_item_text",
+        "required": true
       }
     },
     "image": null,
@@ -1566,12 +1610,14 @@
       "link_text": {
         "type": "text",
         "display_name": "Display Text",
-        "id": "y3qQCkyGTRC3PG2sYjPAEw"
+        "id": "y3qQCkyGTRC3PG2sYjPAEw",
+        "required": true
       },
       "link_target": {
         "type": "text",
         "display_name": "Link Target",
-        "id": "6ivl9BSZSCGXmtC8rLfoJg"
+        "id": "6ivl9BSZSCGXmtC8rLfoJg",
+        "required": true
       },
       "icon": {
         "type": "asset",
@@ -1579,7 +1625,8 @@
         "filetypes": [
           "images"
         ],
-        "id": "C6fLcfh1SP22YdUzY5gexw"
+        "id": "C6fLcfh1SP22YdUzY5gexw",
+        "required": true
       }
     },
     "image": null,

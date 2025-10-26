@@ -33,7 +33,7 @@ const getBackgroundColorClass = (color: string) => {
 };
 
 const backgroundColorClass = getBackgroundColorClass(
-  background_color[0] || "black",
+  background_color || "black",
 );
 
 // Determine heading tag
@@ -41,7 +41,7 @@ const HeadingTag = heading_type || "h2";
 ---
 
 <section
-  class={`relative min-h-screen w-screen overflow-hidden ${backgroundColorClass} vertical-p`}
+  class={`relative ${backgroundImageUrl ? "min-h-screen" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass} vertical-p`}
   style={backgroundImageUrl &&
     `background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
   {...storyblokEditable(blok)}
