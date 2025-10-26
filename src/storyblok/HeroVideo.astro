@@ -27,8 +27,6 @@ if (poster_image?.filename) {
   posterUrl = src;
 }
 
-const isDev = import.meta.env.DEV;
-
 // Determine background color class
 const getBackgroundColorClass = (color: string) => {
   switch (color) {
@@ -42,7 +40,7 @@ const getBackgroundColorClass = (color: string) => {
 };
 
 const backgroundColorClass = getBackgroundColorClass(
-  background_color || "black",
+  background_color[0] || "black",
 );
 
 // Determine heading tag
@@ -50,28 +48,24 @@ const HeadingTag = heading_type || "h1";
 ---
 
 <section
-  class={`relative   overflow-hidden ${backgroundColorClass} vertical-p`}
+  class={`relative min-h-screen w-screen overflow-hidden ${backgroundColorClass} vertical-p`}
   {...storyblokEditable(blok)}
 >
-  {
-    !isDev && video?.filename && (
-      <div class="absolute inset-0">
-        <video
-          class="h-full w-full object-cover"
-          poster={posterUrl || undefined}
-          muted
-          autoplay
-          loop
-          playsinline
-        >
-          <source src={video.filename} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    )
-  }
+  <div class="absolute inset-0">
+    <video
+      class="h-full w-full object-cover"
+      poster={posterUrl || undefined}
+      muted
+      autoplay
+      loop
+      playsinline
+    >
+      <source src={"/video.mp4"} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
-  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="absolute inset-0 bg-black/80 z-10"></div>
 
   <div
     class="relative z-10 flex h-full w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
