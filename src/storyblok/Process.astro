@@ -5,47 +5,37 @@ const { blok } = Astro.props;
 const { header, title, features } = blok;
 ---
 
-<section
-  {...storyblokEditable(blok)}
-  class="vertical-p bg-red"
->
+<section {...storyblokEditable(blok)} class="vertical-p bg-red">
   <div class="site-container">
-    <div class="text-center mb-12">
       {header && (
-        <p class="text-blue-gray font-semibold text-lg md:text-xl mb-4">
-          {header}
-        </p>
+        <p class="text-blue-gray font-semibold pb-2 md:pb-4">{header}</p>
+        <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
       )}
 
-      {title && (
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-          {title}
-        </h2>
-      )}
-    </div>
-
-    {features && features.length > 0 && (
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        {features.map((feature: { title: string; text: string }, index: number) => (
-          <div
-            class="bg-red-light rounded-lg p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-          >
-            <div class="space-y-4">
-              {feature.title && (
-                <h3 class="text-xl md:text-2xl font-semibold text-white leading-tight">
-                  {feature.title}
-                </h3>
-              )}
-
-              {feature.text && (
-                <p class="text-white/90 text-base md:text-lg leading-relaxed">
-                  {feature.text}
-                </p>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    )}
+      {
+        title && (
+          <h2 class="text-white mb-12 md:mb-24 max-w-3/4">
+            {title}
+          </h2>
+        )
+      }
+    {
+      features && features.length > 0 && (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {features.map(
+            (feature: { title: string; text: string }, index: number) => (
+              <div class="bg-red-light rounded-lg p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <div class="space-y-4">
+                  {feature.title && <h3 class="text-lg sm:text-xl font-semibold text-white leading-tight">{feature.title}</h3>}
+                  {feature.text && (
+                    <p class="text-light-gray text-sm sm:text-base">{feature.text}</p>
+                  )}
+                </div>
+              </div>
+            ),
+          )}
+        </div>
+      )
+    }
   </div>
 </section>

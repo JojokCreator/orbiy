@@ -63,6 +63,14 @@
 @custom-variant dialog-open (&[open]);
 
 @layer base {
+    button:hover {
+        cursor: pointer;
+    }
+
+    a:hover {
+        cursor: pointer;
+    }
+
     p {
         font-size: var(--text-lg);
         line-height: 2rem;

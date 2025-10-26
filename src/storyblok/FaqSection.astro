@@ -14,10 +14,11 @@ const { header, title, image, faqs, button } = blok;
   {...storyblokEditable(blok)}
 >
   <div class="site-container">
-    <p class="text-blue-gray font-semibold pb-2 md:pb-4">{header}</p>
-    <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
+    {header && (
+      <p class="text-blue-gray font-semibold pb-2 md:pb-4">{header}</p>
+      <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
+    )}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
-      <!-- Left side: Header, Title, and Image -->
       <div class="space-y-6">
         <div>
           <h2 class="text-white max-w-lg">
@@ -41,8 +42,6 @@ const { header, title, image, faqs, button } = blok;
           )
         }
       </div>
-
-      <!-- Right side: FAQ items -->
       <div class="order-1 lg:order-2 sm:p-8 md:p-12 rounded-sm">
         <div class="space-y-4">
           {
@@ -83,7 +82,7 @@ const { header, title, image, faqs, button } = blok;
           button && (
             <div class="mt-8">
               <Button
-                type="filled"
+                type={button[0].style}
                 buttonText={button[0].text}
                 link={button[0].url}
               />

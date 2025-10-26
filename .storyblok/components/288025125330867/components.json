@@ -4,7 +4,7 @@
     "display_name": "Button",
     "description": null,
     "created_at": "2025-10-24T06:48:56.402Z",
-    "updated_at": "2025-10-24T06:48:56.402Z",
+    "updated_at": "2025-10-26T06:20:09.534Z",
     "id": 104853243508310,
     "schema": {
       "text": {
@@ -20,10 +20,23 @@
         "id": "rwBbuHQkQ4CAL1-NsAZ8gw"
       },
       "style": {
-        "type": "text",
-        "display_name": "Button Style",
+        "type": "option",
         "pos": 2,
-        "id": "UpoLIQoeSluumB69x2FqeQ"
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "8ac1a394-0175-4051-9433-9a46b7550b12",
+            "name": "Gray",
+            "value": "gray"
+          },
+          {
+            "_uid": "dd2fb9a8-cea6-46b4-a03a-6307ea13aa12",
+            "value": "black",
+            "name": "Black"
+          }
+        ],
+        "default_value": "gray",
+        "id": "7Nu0UQ9uQ7KpZMO1_yAnaQ"
       }
     },
     "image": null,
@@ -43,11 +56,270 @@
     "metadata": {}
   },
   {
+    "name": "Contact",
+    "display_name": "Contact",
+    "description": "Contact section with company info and contact form",
+    "created_at": "2025-10-25T11:37:51.014Z",
+    "updated_at": "2025-10-25T11:56:42.438Z",
+    "id": 105278140479701,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 0,
+        "id": "contact_title"
+      },
+      "subtitle": {
+        "type": "text",
+        "display_name": "Section Subtitle",
+        "pos": 1,
+        "id": "contact_subtitle"
+      },
+      "address": {
+        "type": "textarea",
+        "display_name": "Address",
+        "pos": 4,
+        "id": "company_address"
+      },
+      "phone": {
+        "type": "text",
+        "display_name": "Phone Number",
+        "pos": 5,
+        "id": "company_phone"
+      },
+      "email": {
+        "type": "text",
+        "display_name": "Email Address",
+        "pos": 6,
+        "id": "company_email"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Contact",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "CountDown",
+    "display_name": "Countdown Timer",
+    "description": "Countdown section with background image, title, description, date and feature items",
+    "created_at": "2025-10-26T02:30:59.737Z",
+    "updated_at": "2025-10-26T04:25:58.321Z",
+    "id": 105497639890850,
+    "schema": {
+      "background_image": {
+        "type": "asset",
+        "display_name": "Background Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 0,
+        "id": "countdown_bg_image"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "countdown_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Section Description",
+        "pos": 2,
+        "id": "countdown_description"
+      },
+      "date": {
+        "type": "text",
+        "display_name": "Target Date",
+        "pos": 3,
+        "id": "countdown_date"
+      },
+      "features": {
+        "type": "bloks",
+        "display_name": "Feature Items",
+        "component_whitelist": [
+          "countdown_feature"
+        ],
+        "pos": 4,
+        "id": "countdown_features"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Countdown Timer",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "countdown_feature",
+    "display_name": "Countdown Feature",
+    "description": "Individual countdown feature item with title and description",
+    "created_at": "2025-10-26T02:30:57.641Z",
+    "updated_at": "2025-10-26T02:36:15.887Z",
+    "id": 105497631305633,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Feature Title",
+        "pos": 0,
+        "id": "countdown_feature_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Feature Description",
+        "pos": 1,
+        "id": "countdown_feature_description"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Countdown Feature",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "faq_item",
+    "display_name": "FAQ Item",
+    "description": "Individual FAQ item with question and answer",
+    "created_at": "2025-10-25T02:29:39.543Z",
+    "updated_at": "2025-10-25T02:29:39.543Z",
+    "id": 105143417013918,
+    "schema": {
+      "question": {
+        "type": "text",
+        "display_name": "Question",
+        "pos": 0,
+        "id": "faq_question"
+      },
+      "answer": {
+        "type": "textarea",
+        "display_name": "Answer",
+        "pos": 1,
+        "id": "faq_answer"
+      }
+    },
+    "image": null,
+    "preview_field": "question",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "FAQ Item",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "FaqSection",
+    "display_name": "FAQ Section",
+    "description": "FAQ section with header, title, image on left and FAQ items on right with optional button",
+    "created_at": "2025-10-25T02:29:40.983Z",
+    "updated_at": "2025-10-25T02:29:40.983Z",
+    "id": 105143422912159,
+    "schema": {
+      "header": {
+        "type": "text",
+        "display_name": "Section Header",
+        "pos": 0,
+        "id": "faq_section_header"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "faq_section_title"
+      },
+      "image": {
+        "type": "asset",
+        "display_name": "Section Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 2,
+        "id": "faq_section_image"
+      },
+      "faqs": {
+        "type": "bloks",
+        "display_name": "FAQ Items",
+        "component_whitelist": [
+          "faq_item"
+        ],
+        "pos": 3,
+        "id": "faq_items_list",
+        "restrict_type": "",
+        "restrict_components": true
+      },
+      "button": {
+        "type": "bloks",
+        "display_name": "Section Button",
+        "maximum": 1,
+        "component_whitelist": [
+          "button"
+        ],
+        "pos": 4,
+        "id": "faq_section_button",
+        "restrict_type": "",
+        "restrict_components": true
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "FAQ Section",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "Featured Cars",
     "display_name": "Featured Cars",
     "description": "A featured cars section",
     "created_at": "2025-10-24T12:43:41.373Z",
-    "updated_at": "2025-10-24T12:43:41.373Z",
+    "updated_at": "2025-10-26T01:16:12.418Z",
     "id": 104940426751555,
     "schema": {
       "title": {
@@ -81,23 +353,6 @@
         "default": false,
         "pos": 5,
         "id": "featured_only_toggle"
-      },
-      "heading_type": {
-        "type": "select",
-        "display_name": "Heading Tag",
-        "options": [
-          {
-            "name": "H1",
-            "value": "h1"
-          },
-          {
-            "name": "H2",
-            "value": "h2"
-          }
-        ],
-        "default_value": "h2",
-        "pos": 6,
-        "id": "heading_type_select"
       },
       "featured_cars_button": {
         "type": "bloks",
@@ -168,7 +423,7 @@
     "display_name": "Features",
     "description": "A features section with background image and grid of feature cards",
     "created_at": "2025-10-24T09:01:39.887Z",
-    "updated_at": "2025-10-25T02:02:12.390Z",
+    "updated_at": "2025-10-25T02:29:40.295Z",
     "id": 104885861943810,
     "schema": {
       "background_image": {
@@ -525,11 +780,57 @@
     "metadata": {}
   },
   {
+    "name": "grid_card",
+    "display_name": "Grid Card",
+    "description": "Grid card with full image and text overlay at the bottom",
+    "created_at": "2025-10-25T03:42:54.882Z",
+    "updated_at": "2025-10-25T03:42:54.882Z",
+    "id": 105161420322498,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "display_name": "Card Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 0,
+        "id": "grid_card_image"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Card Title",
+        "pos": 1,
+        "id": "grid_card_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Card Description",
+        "pos": 2,
+        "id": "grid_card_description"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Grid Card",
+    "component_group_uuid": null,
+    "color": "#F59E0B",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "Hero",
     "display_name": null,
     "description": null,
     "created_at": "2025-10-24T03:40:11.255Z",
-    "updated_at": "2025-10-24T08:32:50.623Z",
+    "updated_at": "2025-10-26T04:46:14.954Z",
     "id": 104806855705934,
     "schema": {
       "title": {
@@ -544,7 +845,7 @@
         "id": "oypI6nhpSAOGD5_3NNklEg"
       },
       "heading_type": {
-        "type": "options",
+        "type": "option",
         "display_name": "Heading Type",
         "pos": 2,
         "id": "hero_heading_type",
@@ -557,10 +858,11 @@
             "name": "h2",
             "value": "h2"
           }
-        ]
+        ],
+        "default_value": "h2"
       },
       "background_color": {
-        "type": "options",
+        "type": "option",
         "display_name": "Background Color",
         "pos": 3,
         "id": "hero_bg_color",
@@ -604,6 +906,221 @@
     "real_name": "Hero",
     "component_group_uuid": null,
     "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "HeroVideo",
+    "display_name": "Hero Video",
+    "description": "Hero section with background video instead of image",
+    "created_at": "2025-10-25T07:01:58.190Z",
+    "updated_at": "2025-10-26T04:46:18.189Z",
+    "id": 105210340112126,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Hero Title",
+        "pos": 0,
+        "id": "hero_video_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Hero Description",
+        "pos": 1,
+        "id": "hero_video_description"
+      },
+      "heading_type": {
+        "type": "options",
+        "display_name": "Heading Type",
+        "pos": 2,
+        "id": "hero_video_heading_type",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          }
+        ]
+      },
+      "background_color": {
+        "type": "options",
+        "display_name": "Background Color",
+        "pos": 3,
+        "id": "hero_video_bg_color",
+        "options": [
+          {
+            "name": "Black",
+            "value": "black"
+          },
+          {
+            "name": "Green",
+            "value": "green"
+          },
+          {
+            "name": "Red",
+            "value": "red"
+          }
+        ]
+      },
+      "video": {
+        "type": "asset",
+        "display_name": "Background Video (Optional)",
+        "filetypes": [
+          "videos"
+        ],
+        "pos": 4,
+        "id": "hero_video_background"
+      },
+      "button": {
+        "type": "bloks",
+        "display_name": "Hero Button",
+        "maximum": 1,
+        "component_whitelist": [
+          "button"
+        ],
+        "pos": 5,
+        "id": "hero_video_button",
+        "restrict_type": "",
+        "restrict_components": true
+      },
+      "poster_image": {
+        "type": "asset",
+        "display_name": "Poster Image (Optional)",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 6,
+        "id": "hero_video_poster"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Hero Video",
+    "component_group_uuid": null,
+    "color": "#8B5CF6",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "ImageGrid",
+    "display_name": "Image Grid",
+    "description": "Image grid section with title, text and three grid cards",
+    "created_at": "2025-10-25T03:42:55.049Z",
+    "updated_at": "2025-10-25T03:42:55.049Z",
+    "id": 105161421006531,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "image_grid_title"
+      },
+      "text": {
+        "type": "textarea",
+        "display_name": "Section Text",
+        "pos": 2,
+        "id": "image_grid_text"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Image Grid",
+    "component_group_uuid": null,
+    "color": "#F59E0B",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "ImageText",
+    "display_name": "Image with Text",
+    "description": "Image and text content with configurable layout",
+    "created_at": "2025-10-25T11:13:47.064Z",
+    "updated_at": "2025-10-25T11:13:47.064Z",
+    "id": 105272226064589,
+    "schema": {
+      "header": {
+        "type": "text",
+        "display_name": "Header",
+        "pos": 0,
+        "id": "image_text_header"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Title",
+        "pos": 1,
+        "id": "image_text_title"
+      },
+      "text": {
+        "type": "textarea",
+        "display_name": "Text Content",
+        "pos": 2,
+        "id": "image_text_text"
+      },
+      "button": {
+        "type": "bloks",
+        "display_name": "Button",
+        "pos": 3,
+        "id": "image_text_button"
+      },
+      "image": {
+        "type": "asset",
+        "display_name": "Image",
+        "pos": 4,
+        "id": "image_text_image",
+        "filetypes": [
+          "images"
+        ]
+      },
+      "image_side": {
+        "type": "options",
+        "display_name": "Image Position",
+        "pos": 5,
+        "id": "image_text_side",
+        "options": [
+          {
+            "name": "left",
+            "display_name": "Left"
+          },
+          {
+            "name": "right",
+            "display_name": "Right"
+          }
+        ],
+        "default_value": "left"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Image with Text",
+    "component_group_uuid": null,
+    "color": "#3B82F6",
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],
@@ -715,7 +1232,7 @@
     "display_name": null,
     "description": null,
     "created_at": "2025-10-24T03:21:58.103Z",
-    "updated_at": "2025-10-24T03:50:00.738Z",
+    "updated_at": "2025-10-26T01:53:01.983Z",
     "id": 104802378155332,
     "schema": {
       "title": {
@@ -769,11 +1286,94 @@
     "metadata": {}
   },
   {
+    "name": "Process",
+    "display_name": "Process",
+    "description": "Process section with header, title and feature cards",
+    "created_at": "2025-10-25T11:30:21.978Z",
+    "updated_at": "2025-10-25T11:30:21.978Z",
+    "id": 105276301228241,
+    "schema": {
+      "header": {
+        "type": "text",
+        "display_name": "Header",
+        "pos": 0,
+        "id": "process_header"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Title",
+        "pos": 1,
+        "id": "process_title"
+      },
+      "features": {
+        "type": "bloks",
+        "display_name": "Process Features",
+        "component_whitelist": [
+          "process_item"
+        ],
+        "pos": 2,
+        "id": "process_features"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Process",
+    "component_group_uuid": null,
+    "color": "#EF4444",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "process_item",
+    "display_name": "Process Item",
+    "description": "Individual process feature card with title and text",
+    "created_at": "2025-10-25T11:30:20.459Z",
+    "updated_at": "2025-10-25T11:30:20.459Z",
+    "id": 105276295006416,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Process Title",
+        "pos": 0,
+        "id": "process_item_title"
+      },
+      "text": {
+        "type": "textarea",
+        "display_name": "Process Text",
+        "pos": 1,
+        "id": "process_item_text"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Process Item",
+    "component_group_uuid": null,
+    "color": "#F87171",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "site-config",
     "display_name": "Site Config",
     "description": "",
     "created_at": "2025-10-24T05:05:24.398Z",
-    "updated_at": "2025-10-24T08:06:00.935Z",
+    "updated_at": "2025-10-25T11:13:48.063Z",
     "id": 104827799139717,
     "schema": {
       "site_name": {
@@ -992,591 +1592,6 @@
     "real_name": "Social Link Item",
     "component_group_uuid": null,
     "color": null,
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "faq_item",
-    "display_name": "FAQ Item",
-    "description": "Individual FAQ item with question and answer",
-    "created_at": "2025-10-25T02:15:00.000Z",
-    "updated_at": "2025-10-25T02:15:00.000Z",
-    "id": 104950000000001,
-    "schema": {
-      "question": {
-        "type": "text",
-        "display_name": "Question",
-        "pos": 0,
-        "id": "faq_question"
-      },
-      "answer": {
-        "type": "textarea",
-        "display_name": "Answer",
-        "pos": 1,
-        "id": "faq_answer"
-      }
-    },
-    "image": null,
-    "preview_field": "question",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "FAQ Item",
-    "component_group_uuid": null,
-    "color": "#10B981",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "FaqSection",
-    "display_name": "FAQ Section",
-    "description": "FAQ section with header, title, image on left and FAQ items on right with optional button",
-    "created_at": "2025-10-25T02:20:00.000Z",
-    "updated_at": "2025-10-25T02:20:00.000Z",
-    "id": 104950000000002,
-    "schema": {
-      "header": {
-        "type": "text",
-        "display_name": "Section Header",
-        "pos": 0,
-        "id": "faq_section_header"
-      },
-      "title": {
-        "type": "text",
-        "display_name": "Section Title",
-        "pos": 1,
-        "id": "faq_section_title"
-      },
-      "image": {
-        "type": "asset",
-        "display_name": "Section Image",
-        "filetypes": [
-          "images"
-        ],
-        "pos": 2,
-        "id": "faq_section_image"
-      },
-      "faqs": {
-        "type": "bloks",
-        "display_name": "FAQ Items",
-        "component_whitelist": [
-          "faq_item"
-        ],
-        "pos": 3,
-        "id": "faq_items_list",
-        "restrict_type": "",
-        "restrict_components": true
-      },
-      "button": {
-        "type": "bloks",
-        "display_name": "Section Button",
-        "maximum": 1,
-        "component_whitelist": [
-          "button"
-        ],
-        "pos": 4,
-        "id": "faq_section_button",
-        "restrict_type": "",
-        "restrict_components": true
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "FAQ Section",
-    "component_group_uuid": null,
-    "color": "#10B981",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "HeroVideo",
-    "display_name": "Hero Video",
-    "description": "Hero section with background video instead of image",
-    "created_at": "2025-10-25T03:15:00.000Z",
-    "updated_at": "2025-10-25T03:15:00.000Z",
-    "id": 104960000000001,
-    "schema": {
-      "title": {
-        "type": "text",
-        "display_name": "Hero Title",
-        "pos": 0,
-        "id": "hero_video_title"
-      },
-      "description": {
-        "type": "textarea",
-        "display_name": "Hero Description",
-        "pos": 1,
-        "id": "hero_video_description"
-      },
-      "heading_type": {
-        "type": "options",
-        "display_name": "Heading Type",
-        "pos": 2,
-        "id": "hero_video_heading_type",
-        "options": [
-          {
-            "name": "h1",
-            "value": "h1"
-          },
-          {
-            "name": "h2",
-            "value": "h2"
-          }
-        ]
-      },
-      "background_color": {
-        "type": "options",
-        "display_name": "Background Color",
-        "pos": 3,
-        "id": "hero_video_bg_color",
-        "options": [
-          {
-            "name": "Black",
-            "value": "black"
-          },
-          {
-            "name": "Green",
-            "value": "green"
-          },
-          {
-            "name": "Red",
-            "value": "red"
-          }
-        ]
-      },
-      "video": {
-        "type": "asset",
-        "display_name": "Background Video (Optional)",
-        "filetypes": [
-          "videos"
-        ],
-        "pos": 4,
-        "id": "hero_video_background"
-      },
-      "button": {
-        "type": "bloks",
-        "display_name": "Hero Button",
-        "maximum": 1,
-        "component_whitelist": [
-          "button"
-        ],
-        "pos": 5,
-        "id": "hero_video_button",
-        "restrict_type": "",
-        "restrict_components": true
-      },
-      "poster_image": {
-        "type": "asset",
-        "display_name": "Poster Image (Optional)",
-        "filetypes": [
-          "images"
-        ],
-        "pos": 6,
-        "id": "hero_video_poster"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Hero Video",
-    "component_group_uuid": null,
-    "color": "#8B5CF6",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "grid_card",
-    "display_name": "Grid Card",
-    "description": "Grid card with full image and text overlay at the bottom",
-    "created_at": "2025-10-25T02:45:00.000Z",
-    "updated_at": "2025-10-25T02:45:00.000Z",
-    "id": 104950000000003,
-    "schema": {
-      "image": {
-        "type": "asset",
-        "display_name": "Card Image",
-        "filetypes": [
-          "images"
-        ],
-        "pos": 0,
-        "id": "grid_card_image"
-      },
-      "title": {
-        "type": "text",
-        "display_name": "Card Title",
-        "pos": 1,
-        "id": "grid_card_title"
-      },
-      "description": {
-        "type": "textarea",
-        "display_name": "Card Description",
-        "pos": 2,
-        "id": "grid_card_description"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Grid Card",
-    "component_group_uuid": null,
-    "color": "#F59E0B",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "ImageGrid",
-    "display_name": "Image Grid",
-    "description": "Image grid section with title, text and three grid cards",
-    "created_at": "2025-10-25T02:50:00.000Z",
-    "updated_at": "2025-10-25T02:50:00.000Z",
-    "id": 104950000000004,
-    "schema": {
-      "title": {
-        "type": "text",
-        "display_name": "Section Title",
-        "pos": 1,
-        "id": "image_grid_title"
-      },
-      "text": {
-        "type": "textarea",
-        "display_name": "Section Text",
-        "pos": 2,
-        "id": "image_grid_text"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Image Grid",
-    "component_group_uuid": null,
-    "color": "#F59E0B",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "ImageText",
-    "display_name": "Image with Text",
-    "description": "Image and text content with configurable layout",
-    "schema": {
-      "header": {
-        "type": "text",
-        "display_name": "Header",
-        "pos": 0,
-        "id": "image_text_header"
-      },
-      "title": {
-        "type": "text",
-        "display_name": "Title",
-        "pos": 1,
-        "id": "image_text_title"
-      },
-      "text": {
-        "type": "textarea",
-        "display_name": "Text Content",
-        "pos": 2,
-        "id": "image_text_text"
-      },
-      "button": {
-        "type": "bloks",
-        "display_name": "Button",
-        "pos": 3,
-        "id": "image_text_button"
-      },
-      "image": {
-        "type": "asset",
-        "display_name": "Image",
-        "pos": 4,
-        "id": "image_text_image",
-        "filetypes": [
-          "images"
-        ]
-      },
-      "image_side": {
-        "type": "options",
-        "display_name": "Image Position",
-        "pos": 5,
-        "id": "image_text_side",
-        "options": [
-          {
-            "name": "left",
-            "display_name": "Left"
-          },
-          {
-            "name": "right",
-            "display_name": "Right"
-          }
-        ],
-        "default_value": "left"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "ImageText",
-    "component_group_uuid": null,
-    "color": "#3B82F6",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "Process",
-    "display_name": "Process",
-    "description": "Process section with header, title and feature cards",
-    "schema": {
-      "header": {
-        "type": "text",
-        "display_name": "Header",
-        "pos": 0,
-        "id": "process_header"
-      },
-      "title": {
-        "type": "text",
-        "display_name": "Title",
-        "pos": 1,
-        "id": "process_title"
-      },
-      "features": {
-        "type": "bloks",
-        "display_name": "Process Features",
-        "component_whitelist": [
-          "process_item"
-        ],
-        "pos": 2,
-        "id": "process_features"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Process",
-    "component_group_uuid": null,
-    "color": "#EF4444",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "CountDown",
-    "display_name": "Countdown Timer",
-    "description": "Countdown section with background image, title, description, date and feature items",
-    "schema": {
-      "background_image": {
-        "type": "asset",
-        "display_name": "Background Image",
-        "filetypes": [
-          "images"
-        ],
-        "pos": 0,
-        "id": "countdown_bg_image"
-      },
-      "title": {
-        "type": "text",
-        "display_name": "Section Title",
-        "pos": 1,
-        "id": "countdown_title"
-      },
-      "description": {
-        "type": "textarea",
-        "display_name": "Section Description",
-        "pos": 2,
-        "id": "countdown_description"
-      },
-      "date": {
-        "type": "text",
-        "display_name": "Target Date",
-        "pos": 3,
-        "id": "countdown_date"
-      },
-      "features": {
-        "type": "bloks",
-        "display_name": "Feature Items",
-        "component_whitelist": [
-          "countdown_feature"
-        ],
-        "pos": 4,
-        "id": "countdown_features"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "CountDown",
-    "component_group_uuid": null,
-    "color": "#10B981",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "countdown_feature",
-    "display_name": "Countdown Feature",
-    "description": "Individual countdown feature item with title and description",
-    "schema": {
-      "title": {
-        "type": "text",
-        "display_name": "Feature Title",
-        "pos": 0,
-        "id": "countdown_feature_title"
-      },
-      "description": {
-        "type": "textarea",
-        "display_name": "Feature Description",
-        "pos": 1,
-        "id": "countdown_feature_description"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "countdown_feature",
-    "component_group_uuid": null,
-    "color": "#10B981",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "process_item",
-    "display_name": "Process Item",
-    "description": "Individual process feature card with title and text",
-    "schema": {
-      "title": {
-        "type": "text",
-        "display_name": "Process Title",
-        "pos": 0,
-        "id": "process_item_title"
-      },
-      "text": {
-        "type": "textarea",
-        "display_name": "Process Text",
-        "pos": 1,
-        "id": "process_item_text"
-      }
-    },
-    "image": null,
-    "preview_field": null,
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "process_item",
-    "component_group_uuid": null,
-    "color": "#F87171",
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "Contact",
-    "display_name": "Contact",
-    "description": "Contact section with company info and contact form",
-    "schema": {
-      "title": {
-        "type": "text",
-        "display_name": "Section Title",
-        "pos": 0,
-        "id": "contact_title"
-      },
-      "subtitle": {
-        "type": "text",
-        "display_name": "Section Subtitle",
-        "pos": 1,
-        "id": "contact_subtitle"
-      },
-      "address": {
-        "type": "textarea",
-        "display_name": "Address",
-        "pos": 4,
-        "id": "company_address"
-      },
-      "phone": {
-        "type": "text",
-        "display_name": "Phone Number",
-        "pos": 5,
-        "id": "company_phone"
-      },
-      "email": {
-        "type": "text",
-        "display_name": "Email Address",
-        "pos": 6,
-        "id": "company_email"
-      }
-    },
-    "image": null,
-    "preview_field": "title",
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Contact",
-    "component_group_uuid": null,
-    "color": "#10B981",
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],

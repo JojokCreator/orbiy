@@ -54,7 +54,7 @@ if (background_image?.filename) {
         features_button && features_button.length > 0 && (
           <div class="mt-12">
             <Button
-              type="filled"
+              type={features_button[0].style}
               buttonText={features_button[0].text}
               link={features_button.url}
             />

@@ -7,11 +7,6 @@ import FeaturedCarCard from "../components/FeaturedCarCard.astro";
 const { blok } = Astro.props;
 const { title, header, description, center_content, featured_only, featured_cars_button, heading_type } = blok;
 
-// Determine content alignment classes
-const descriptionClasses = header
-  ? "text-start"
-  : (center_content ? "text-center" : "text-start");
-
 const titleClasses = center_content && !header
   ? "text-center"
   : "text-start";
@@ -110,23 +105,11 @@ const HeadingTag = heading_type || "h1";
                 featured_cars_button && featured_cars_button.length > 0 && (
                     <div class="mt-6 md:mt-12">
                         {
-                            featured_cars_button[0].link?.url ? (
                                 <Button
-                                    type="filledDark"
+                                    type={featured_cars_button[0].style}
                                     buttonText={featured_cars_button[0].text}
                                     link={featured_cars_button[0].link.url}
                                 />
-                            ) : (
-                                <button
-                                    class="bg-gray whitespace-nowrap active:focus:animate-click relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-black"
-                                    type="button"
-                                    id="featured-cars-cta-btn"
-                                >
-                                    <span class="active:focus:animate-click relative z-10 inline-flex items-center text-center">
-                                        {featured_cars_button[0].text}
-                                    </span>
-                                </button>
-                            )
                         }
                     </div>
                 )
