@@ -62,6 +62,26 @@
         "pos": 2,
         "id": "header_section"
       },
+      "description": {
+        "type": "textarea",
+        "display_name": "Section Description",
+        "pos": 3,
+        "id": "description_section"
+      },
+      "center_content": {
+        "type": "boolean",
+        "display_name": "Center Title and Description",
+        "default": false,
+        "pos": 4,
+        "id": "center_content_toggle"
+      },
+      "featured_only": {
+        "type": "boolean",
+        "display_name": "Show Featured Only",
+        "default": false,
+        "pos": 5,
+        "id": "featured_only_toggle"
+      },
       "featured_cars_button": {
         "type": "bloks",
         "display_name": "Footer CTA Button",
@@ -665,10 +685,17 @@
         "pos": 2,
         "id": "page_og_image"
       },
+      "invert_menu": {
+        "type": "boolean",
+        "display_name": "Invert Menu (White Background)",
+        "default": false,
+        "pos": 3,
+        "id": "invert_menu_toggle"
+      },
       "body": {
         "type": "bloks",
         "id": "i_aJYJ2gTz2kbSsfVr1dUA",
-        "pos": 3
+        "pos": 4
       }
     },
     "image": null,
@@ -1282,6 +1309,98 @@
     "real_name": "Process",
     "component_group_uuid": null,
     "color": "#EF4444",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "CountDown",
+    "display_name": "Countdown Timer",
+    "description": "Countdown section with background image, title, description, date and feature items",
+    "schema": {
+      "background_image": {
+        "type": "asset",
+        "display_name": "Background Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 0,
+        "id": "countdown_bg_image"
+      },
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 1,
+        "id": "countdown_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Section Description",
+        "pos": 2,
+        "id": "countdown_description"
+      },
+      "date": {
+        "type": "text",
+        "display_name": "Target Date",
+        "pos": 3,
+        "id": "countdown_date"
+      },
+      "features": {
+        "type": "bloks",
+        "display_name": "Feature Items",
+        "component_whitelist": [
+          "countdown_feature"
+        ],
+        "pos": 4,
+        "id": "countdown_features"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "CountDown",
+    "component_group_uuid": null,
+    "color": "#10B981",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "countdown_feature",
+    "display_name": "Countdown Feature",
+    "description": "Individual countdown feature item with title and description",
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Feature Title",
+        "pos": 0,
+        "id": "countdown_feature_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Feature Description",
+        "pos": 1,
+        "id": "countdown_feature_description"
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "countdown_feature",
+    "component_group_uuid": null,
+    "color": "#10B981",
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],

@@ -29,6 +29,8 @@ export default defineConfig({
             block: "storyblok/ImageText",
             block: "storyblok/Process",
             block: "storyblok/Contact",
+            block: "storyblok/CountDown",
+            countdown_feature: "storyblok/CountDownFeature",
         },
         enableFallbackComponent: isDev ? true : false,
         customFallbackComponent: 'storyblok/FallbackComponent',

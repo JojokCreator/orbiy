@@ -1,0 +1,164 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { getImage, Image } from "astro:assets";
+import CountDownFeature from "./CountDownFeature.astro";
+
+const { blok } = Astro.props;
+const { background_image, title, description, date, features } = blok;
+
+// Get optimized background image
+let backgroundImageUrl = "";
+if (background_image?.filename) {
+  const { src } = await getImage({
+    src: background_image.filename,
+    format: "webp",
+    quality: 80,
+    width: 1920,
+    height: 1080,
+  });
+  backgroundImageUrl = src;
+}
+
+// Format the date for display and countdown
+const targetDate = new Date(date);
+const formattedDate = targetDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<section
+  {...storyblokEditable(blok)}
+  style={`background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+  class="relative min-h-screen w-full overflow-hidden bg-black vertical-p"
+>
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div
+    class="relative z-10 site-container text-center text-white px-4 sm:px-6 lg:px-8"
+  >
+    <!-- Title and Description -->
+    <div class="max-w-4xl mx-auto mb-8 sm:mb-10 md:mb-12">
+      {
+        title && (
+          <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
+            {title}
+          </h1>
+        )
+      }
+
+      {
+        description && (
+          <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed px-2 sm:px-0">
+            {description}
+          </p>
+        )
+      }
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="w-full max-w-4xl mx-auto mb-12 md:mb-16 px-4 sm:px-6 lg:px-8">
+      <div
+        id="countdown-timer"
+        data-target-date={date}
+        class="min-h-[120px] sm:min-h-[140px] md:min-h-[160px] lg:min-h-[180px]"
+      >
+      </div>
+    </div>
+
+    <!-- Feature Items -->
+    {
+      features && features.length > 0 && (
+        <div class="bg-teal w-full">
+          <div class="site-container px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col py-6 sm:py-8 md:flex-row divide-y md:divide-y-0 md:divide-x divide-light-gray w-full">
+              {features.map(
+                (
+                  feature: { title: string; description: string },
+                  index: number,
+                ) => (
+                  <>
+                    <CountDownFeature blok={feature} key={index} />
+                  </>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<script>
+  // Countdown timer functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const countdownElement = document.getElementById(
+      "countdown-timer",
+    ) as HTMLElement;
+
+    if (!countdownElement) return;
+
+    const dateAttribute =
+      countdownElement.getAttribute("data-target-date") || "";
+    const targetDate = new Date(dateAttribute).getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownElement.innerHTML = "EXPIRED";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6">
+          <div class="text-center flex-1 min-w-[40px] sm:min-w-[80px] md:min-w-[100px] lg:min-w-[120px]">
+            <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tabular-nums leading-tight">
+              ${String(days).padStart(2, "0")}
+            </div>
+            <div class="text-xs sm:text-sm md:text-base text-white/60 mt-1 sm:mt-2 font-medium tracking-wider">
+              DAYS
+            </div>
+          </div>
+          <div class="text-center flex-1 min-w-[40px] sm:min-w-[80px] md:min-w-[100px] lg:min-w-[120px]">
+            <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tabular-nums leading-tight">
+              ${String(hours).padStart(2, "0")}
+            </div>
+            <div class="text-xs sm:text-sm md:text-base text-white/60 mt-1 sm:mt-2 font-medium tracking-wider">
+              HOURS
+            </div>
+          </div>
+          <div class="text-center flex-1 min-w-[40px] sm:min-w-[80px] md:min-w-[100px] lg:min-w-[120px]">
+            <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tabular-nums leading-tight">
+              ${String(minutes).padStart(2, "0")}
+            </div>
+            <div class="text-xs sm:text-sm md:text-base text-white/60 mt-1 sm:mt-2 font-medium tracking-wider">
+              MINS
+            </div>
+          </div>
+          <div class="text-center flex-1 min-w-[40px] sm:min-w-[80px] md:min-w-[100px] lg:min-w-[120px]">
+            <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tabular-nums leading-tight">
+              ${String(seconds).padStart(2, "0")}
+            </div>
+            <div class="text-xs sm:text-sm md:text-base text-white/60 mt-1 sm:mt-2 font-medium tracking-wider">
+              SECS
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Update countdown immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+</script>

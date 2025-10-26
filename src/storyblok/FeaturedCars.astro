@@ -5,44 +5,156 @@ import Button from "../components/reusable/Button.astro";
 import FeaturedCarCard from "../components/FeaturedCarCard.astro";
 
 const { blok } = Astro.props;
-const { title, header, featured_cars_button } = blok;
+const { title, header, description, center_content, featured_only, featured_cars_button } = blok;
 
-// Get featured cars from the content collection
+// Determine content alignment classes
+const headerClasses = header
+  ? "text-start"
+  : (center_content ? "text-center" : "text-start");
+
+const titleClasses = center_content && !header
+  ? "text-center"
+  : "text-start";
+
+const showHr = !!header;
+
+// Get all cars from the content collection
 const allCars = await getCollection("cars");
-const featuredCars = allCars.filter((car) => car.data.featured);
+
+// Determine which cars to show initially
+let displayCars;
+let initialLimit = 3;
+
+if (featured_only) {
+  // Featured mode: show only featured cars, initial limit 3
+  const featuredCars = allCars.filter((car) => car.data.featured);
+  displayCars = featuredCars;
+} else {
+  // Show all cars, initial limit 6
+  displayCars = allCars;
+  initialLimit = 6;
+}
+
+const hasMoreCars = displayCars.length > initialLimit;
 ---
 
 <section {...storyblokEditable(blok)} class="site-container vertical-p">
     <div>
-        <p class="text-blue-gray font-semibold pb-2 md:pb-4">{header}</p>
-        <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
+        {/* Header */}
+        {header && (
+            <p class="text-blue-gray font-semibold pb-2 md:pb-4 {headerClasses}">{header}</p>
+        )}
+
+        {/* Conditional HR - only show if header exists */}
+        {showHr && (
+            <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
+        )}
+
         <div>
-            <h2 class="text-gray">
+            {/* Title */}
+            <h2 class="text-gray {titleClasses}">
                 {title}
             </h2>
 
-            <!-- Featured Cars Grid -->
+            {/* Description */}
+            {description && (
+                <p class="text-gray mt-4 max-w-3xl {titleClasses}">
+                    {description}
+                </p>
+            )}
+
+            <!-- Cars Grid -->
             {
-                featuredCars.length > 0 && (
-                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {featuredCars.map((car) => (
-                            <FeaturedCarCard car={car} />
-                        ))}
+                displayCars.length > 0 && (
+                    <div id="cars-container" class="mt-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {displayCars.slice(0, initialLimit).map((car) => (
+                                <div class="car-item">
+                                    <FeaturedCarCard car={car} />
+                                </div>
+                            ))}
+                        </div>
+
+                        <!-- Hidden cars for load more -->
+                        {hasMoreCars && (
+                            <div id="hidden-cars" class="hidden">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                                    {displayCars.slice(initialLimit).map((car) => (
+                                        <div class="car-item">
+                                            <FeaturedCarCard car={car} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )
             }
 
+            <!-- Load More Button -->
+            {!featured_only && hasMoreCars && (
+                <div class="mt-8 text-center">
+                    <button
+                        id="load-more-cars"
+                        class="bg-green whitespace-nowrap active:focus:animate-click relative inline-flex items-center justify-center p-4 px-6 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-dark-green"
+                        type="button"
+                    >
+                        Load More Cars
+                    </button>
+                </div>
+            )}
+
+            <!-- Footer CTA Button -->
             {
                 featured_cars_button && featured_cars_button.length > 0 && (
                     <div class="mt-6 md:mt-12">
-                        <Button
-                            type="filledDark"
-                            buttonText={featured_cars_button[0].text}
-                            link={featured_cars_button[0].link?.url}
-                        />
+                        {
+                            featured_cars_button[0].link?.url ? (
+                                <Button
+                                    type="filledDark"
+                                    buttonText={featured_cars_button[0].text}
+                                    link={featured_cars_button[0].link.url}
+                                />
+                            ) : (
+                                <button
+                                    class="bg-gray whitespace-nowrap active:focus:animate-click relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-black"
+                                    type="button"
+                                    id="featured-cars-cta-btn"
+                                >
+                                    <span class="active:focus:animate-click relative z-10 inline-flex items-center text-center">
+                                        {featured_cars_button[0].text}
+                                    </span>
+                                </button>
+                            )
+                        }
                     </div>
                 )
             }
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadMoreBtn = document.getElementById('load-more-cars');
+
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', toggleCars);
+        }
+    });
+
+    function toggleCars() {
+        const hiddenCars = document.getElementById('hidden-cars');
+        const loadMoreBtn = document.getElementById('load-more-cars');
+
+        if (hiddenCars && loadMoreBtn) {
+            hiddenCars.classList.toggle('hidden');
+
+            if (hiddenCars.classList.contains('hidden')) {
+                loadMoreBtn.textContent = 'Load More Cars';
+            } else {
+                loadMoreBtn.textContent = 'Show Less Cars';
+            }
+        }
+    }
+</script>

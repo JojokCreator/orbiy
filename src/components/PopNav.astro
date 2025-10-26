@@ -2,10 +2,16 @@
 import { useStoryblokApi } from "@storyblok/astro";
 import Button from "./reusable/Button.astro";
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	invertMenu?: boolean;
+}
+
+const { invertMenu = false } = Astro.props;
 
 let siteConfig;
 
-// Fetch site-config from Storyblok
 const sbApi = useStoryblokApi();
 try {
 	const { data: siteConfigData } = await sbApi.get(
@@ -19,20 +25,47 @@ try {
 	console.error("Error fetching site-config:", error);
 }
 
-const { logo, nav_links, cta_button } = siteConfig;
+const { logo, footer_logo, nav_links, cta_button } = siteConfig;
+
+const selectedLogo = invertMenu && footer_logo ? footer_logo : logo;
+
+const navbarBaseClasses = invertMenu
+	? "fixed top-0 left-0 z-50 mx-auto w-screen px-4 transition-all duration-300 lg:static lg:w-auto lg:max-w-7xl lg:py-2 lg:bg-white xl:px-0"
+	: "fixed top-0 left-0 z-50 mx-auto w-screen px-4 transition-all duration-300 lg:static lg:w-auto lg:max-w-7xl lg:py-2 lg:bg-transparent xl:px-0";
+
+const linkClasses = invertMenu
+	? "text-2xl text-gray-900 hover:text-gray-600 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg"
+	: "text-2xl text-white hover:text-gray-400 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg";
+
+const hamburgerColors = invertMenu
+	? "text-gray-900 hover:text-gray-600"
+	: "text-white hover:text-gray-400";
+
+const closeColors = invertMenu
+	? "text-gray-900 hover:text-gray-600"
+	: "text-white hover:text-gray-400";
+
+// Mobile menu background colors based on invertMenu
+const mobileMenuBg = invertMenu ? "bg-white" : "bg-black/80";
+
+// Mobile menu link colors (different from desktop nav)
+const mobileLinkClasses = invertMenu
+	? "text-2xl text-gray-900 hover:text-gray-600 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg"
+	: "text-2xl text-white hover:text-gray-400 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg";
 ---
 
 <header class="z-[999] w-screen lg:absolute px-4 2xl:px-0">
 	<div
 		id="navbar"
-		class="fixed top-0 left-0 z-50 mx-auto w-screen px-4 transition-all duration-300 lg:static lg:w-auto lg:max-w-7xl lg:py-2 lg:bg-transparent xl:px-0"
+		class={navbarBaseClasses}
+		data-inverted={invertMenu ? "true" : "false"}
 	>
 		<div class="flex h-16 items-center justify-between">
 			<div class="lg:flex lg:items-center lg:gap-12">
 				<a class="flex w-52 items-center gap-2 text-lg" href="/">
 					<Image
-						src={logo.filename}
-						alt={logo.alt || "Logo"}
+						src={selectedLogo.filename}
+						alt={selectedLogo.alt || "Logo"}
 						width={150}
 						height={50}
 						class="h-auto w-28 flex-shrink-0 object-contain"
@@ -44,8 +77,18 @@ const { logo, nav_links, cta_button } = siteConfig;
 			>
 				<div
 					id="mobile-menu"
-					class="top-[64px] hidden h-[calc(100vh-64px)] w-screen translate-y-[5vh] transform overflow-visible rounded-xl bg-black/80 backdrop-blur-md opacity-0 transition-all transition-discrete duration-500 lg:mt-0 lg:block lg:h-auto lg:w-auto lg:translate-y-0 lg:opacity-100 lg:duration-0 lg:bg-transparent lg:backdrop-blur-none open:block open:translate-y-0 open:opacity-100 open:starting:-translate-y-[5vh] open:starting:opacity-0"
+					class={`top-0 hidden h-[100dvh] w-screen translate-y-[5vh] transform overflow-visible backdrop-blur-md opacity-0 transition-all transition-discrete duration-500 lg:mt-0 lg:block lg:h-auto lg:w-auto lg:translate-y-0 lg:opacity-100 lg:duration-0 lg:bg-transparent lg:backdrop-blur-none open:block open:translate-y-0 open:opacity-100 open:starting:-translate-y-[5vh] open:starting:opacity-0 ${mobileMenuBg}`}
 				>
+					{/* Close Button for Mobile Menu */}
+					<button
+						aria-label="Close Mobile Menu"
+						id="mobile-menu-close"
+						class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-200 ease-in-out lg:hidden"
+						popovertarget="mobile-menu"
+					>
+						<Icon class={`h-8 w-8 ${closeColors}`} name="close" />
+					</button>
+
 					<nav
 						class="relative grid h-[calc(100vh-180px)] place-items-center lg:block lg:h-auto"
 					>
@@ -63,7 +106,7 @@ const { logo, nav_links, cta_button } = siteConfig;
 												aria-current={Astro.url.pathname.includes(
 													item.link.cached_url,
 												)}
-												class={`text-2xl text-white hover:text-gray-400 aria-current:!underline aria-current:!underline-offset-8 lg:text-lg`}
+												class={mobileLinkClasses}
 												href={item.link.cached_url}
 											>
 												{item.label}
@@ -76,17 +119,15 @@ const { logo, nav_links, cta_button } = siteConfig;
 					</nav>
 				</div>
 				<button
-					aria-label="Hamburger Toggle"
+					aria-label="Open Mobile Menu"
 					id="mobile-menu-button"
 					popovertarget="mobile-menu"
-					group-aria-pressed="false"
-					group-aria-label="Toggle mobile menu"
-					class="active:!bg-green/20 group relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full transition-colors duration-200 ease-in-out lg:hidden"
+					class="relative flex h-12 w-12 cursor-pointer items-center justify-end rounded-full transition-colors duration-200 ease-in-out lg:hidden"
 				>
-					<span
-						class="z-50 h-[1px] w-7 rounded-full !bg-black transition-all duration-150 group-aria-pressed:h-0 group-aria-pressed:bg-white before:absolute before:h-[1px] before:w-7 before:-translate-x-3.5 before:-translate-y-3 before:rounded-full before:bg-black before:transition-all before:duration-150 before:content-[''] group-aria-pressed:before:translate-y-0 group-aria-pressed:before:rotate-45 after:absolute after:h-[1px] after:w-7 after:-translate-x-3.5 after:translate-y-3 after:rounded-full after:bg-black after:transition-all after:duration-150 after:content-[''] group-aria-pressed:after:translate-y-0 group-aria-pressed:after:-rotate-45 hover:cursor-pointer lg:hidden dark:!bg-white dark:before:bg-white dark:after:bg-white"
-					>
-					</span>
+					<Icon
+						class={`h-8 w-8 ${hamburgerColors}`}
+						name="hamburger"
+					/>
 				</button>
 			</div>
 			{
@@ -181,13 +222,28 @@ const { logo, nav_links, cta_button } = siteConfig;
 
 			// Add scroll-based navbar background for screens smaller than lg
 			function handleNavbarScroll() {
+				const isInverted =
+					navbar.getAttribute("data-inverted") === "true";
+
 				if (window.innerWidth < 1024) {
 					// lg breakpoint
 					if (window.scrollY > 50) {
-						navbar.classList.add("bg-black/90", "backdrop-blur-md");
-						navbar.classList.remove("bg-transparent");
+						if (isInverted) {
+							navbar.classList.add(
+								"bg-white/90",
+								"backdrop-blur-md",
+							);
+							navbar.classList.remove("bg-transparent");
+						} else {
+							navbar.classList.add(
+								"bg-black/90",
+								"backdrop-blur-md",
+							);
+							navbar.classList.remove("bg-transparent");
+						}
 					} else {
 						navbar.classList.remove(
+							"bg-white/90",
 							"bg-black/90",
 							"backdrop-blur-md",
 						);
@@ -195,7 +251,11 @@ const { logo, nav_links, cta_button } = siteConfig;
 					}
 				} else {
 					// Reset to transparent on larger screens
-					navbar.classList.remove("bg-black/90", "backdrop-blur-md");
+					navbar.classList.remove(
+						"bg-white/90",
+						"bg-black/90",
+						"backdrop-blur-md",
+					);
 					navbar.classList.add("bg-transparent");
 				}
 			}

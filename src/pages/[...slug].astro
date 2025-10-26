@@ -47,8 +47,9 @@ const fullPageTitle = isHome
   : `${pageTitle} | ${siteConfig.title}`;
 const pageDescription = story.content?.description || siteConfig.description;
 const pageOgImage = story.content?.og_image?.filename || siteConfig.ogImage;
+const invertMenu = story.content?.invert_menu || false;
 ---
 
-<Layout title={fullPageTitle} description={pageDescription} ogImage={pageOgImage}>
+<Layout title={fullPageTitle} description={pageDescription} ogImage={pageOgImage} invertMenu={invertMenu}>
 		<StoryblokComponent blok={story.content} />
 </Layout>

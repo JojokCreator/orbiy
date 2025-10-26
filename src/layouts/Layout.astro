@@ -4,7 +4,7 @@ import Footer from "../components/Footer.astro";
 import Navbar from "../components/PopNav.astro";
 import "../styles/global.css";
 import { siteConfig } from "../config/site.ts";
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, invertMenu } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +17,7 @@ const { title, description, ogImage } = Astro.props;
 		/>
 	</head>
 	<body class="overflow-x-hidden">
-		<Navbar />
+		<Navbar invertMenu={invertMenu} />
 		<slot />
 		<Footer />
 	</body>
