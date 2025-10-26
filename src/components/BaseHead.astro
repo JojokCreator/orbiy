@@ -1,9 +1,8 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-let path = Astro.url.pathname;
 import { Font } from "astro:assets";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts.ts";
+import { siteConfig } from "../config/site.ts";
 
 interface Props {
   metaTitle: string;
@@ -16,55 +15,40 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
   metaTitle,
   metaDescription,
-  metaImage = "/blog-placeholder-1.jpg",
+  metaImage = siteConfig.ogImage,
 } = Astro.props;
-
-let title = "";
-if (path === "/") {
-  title = `Placeholder | ${SITE_TITLE}`;
-} else {
-  title = metaTitle
-    ? `${metaTitle} | ${SITE_TITLE}`.trim()
-    : path
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ")
-        .split("/")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .filter((p) => p !== "")
-        .join(" | ")
-        .replaceAll("%20", " ") +
-      " | " +
-      SITE_TITLE.trim();
-}
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
 <meta name="generator" content={Astro.generator} />
 
-<Font cssVariable='--font-poppins' preload />
+<Font cssVariable="--font-poppins" preload />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
+<title>{metaTitle}</title>
+<meta name="title" content={metaTitle} />
 <meta name="description" content={metaDescription} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
+<meta property="og:title" content={metaTitle} />
 <meta property="og:description" content={metaDescription} />
 <meta property="og:image" content={new URL(metaImage, Astro.url)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
+<meta property="twitter:title" content={metaTitle} />
 <meta property="twitter:description" content={metaDescription} />
 <meta property="twitter:image" content={new URL(metaImage, Astro.url)} />

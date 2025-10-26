@@ -54,6 +54,13 @@ const { title, description } = Astro.props;
     --color-black: oklch(10.98% 0.01 270.31);
     --color-white: oklch(0.9581 0 0);
     --color-light-gray: oklch(0.8545 0 0);
+    --color-blue-gray: oklch(0.6883 0.0198 250.67);
+    --color-green: oklch(0.5641 0.0315 146.75);
+    --color-red: oklch(0.1867 0.0215 357.75);
+    --color-gray: oklch(0.2102 0.0016 17.28);
+    --color-purple: oklch(82.15% 0.055 277.12);
+    --color-teal: oklch(0.2402 0.0199 147.95);
+    --color-red-light: oklch(0.2347 0.0254 357.55);
   }
   ```
 - **Apply variables** using Tailwind:
@@ -99,13 +106,11 @@ All pages now include comprehensive structured data for Google rich snippets:
 
 2. **Shared Components Strategy**:
 
-   - **Atoms**: Basic building blocks (buttons, inputs, icons) in `/src/components/reusable/atoms/`
-   - **Molecules**: Combinations of atoms (cards, form groups) in `/src/components/reusable/molecules/`
-   - **Organisms**: Complex components (headers, sections) in `/src/components/reusable/organisms/`
+   - **Bloks**: Sections of pages (Hero, Features, Contact) in `/src/components/storyblok/`
+   - **Components**: Basic building blocks (buttons, inputs, icons) in `/src/components/reusable/`
    - Use TypeScript interfaces for consistent prop types across components
 
 3. **Style Sharing**:
-   - Define common Tailwind utilities in `tailwind.config.mjs`
    - Create CSS component classes for frequently used combinations
    - Use CSS custom properties for theme values that change across contexts
 
@@ -358,27 +363,84 @@ const { title, description, button } = blok;
    ```astro
    link={item.link?.cached_url}
    ```
+   - **Internal Storyblok links**: Use `cached_url` for the actual URL path
+   - **External or asset links**: Use `filename` for direct file paths
 
-4. **Image Handling**: Storyblok images are typically in the format:
+4. **Image Handling**: Use Astro's Picture component for optimized images:
    ```astro
-                     <Picture
-                  src={image.filename}
-                  formats={["avif", "webp"]}
-                  alt={image.alt}
-                  widths={[400, 600, 800]}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
-                  inferSize={true}
-                  class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
-                />
+   <Picture
+     src={image.filename}
+     formats={["avif", "webp"]}
+     alt={image.alt || "Image description"}
+     widths={[400, 600, 800, 1200]}
+     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+     class="w-full h-auto object-cover"
+     loading="lazy"
+   />
    ```
+   - Use `filename` for the image source
+   - **formats**: Specify modern formats (avif, webp) for better performance
+   - **widths**: Array of image widths for responsive serving
+   - **sizes**: Media queries for responsive image selection
+   - **loading="lazy"**: For below-the-fold images
+   - Always provide alt text for accessibility
+
+5. **Schema Best Practices**:
+   ```json
+   {
+     "name": "ComponentName",
+     "display_name": "Component Display Name",
+     "schema": {
+       "title": {
+         "type": "text",
+         "display_name": "Title"
+       },
+       "image": {
+         "type": "asset",
+         "display_name": "Image",
+         "filetypes": ["images"]
+       }
+     }
+   }
+   ```
+   - **Avoid nested sections**: Use flat schema structure
+   - **Use descriptive display names**: Clear field labels for content editors
+   - **Include proper field types**: text, textarea, asset, multilink, etc.
 
 ### Common Storyblok Components
 
 - **Hero**: Full-screen hero sections with background images
+- **HeroVideo**: Full-screen hero sections with video background
 - **Features**: Feature lists with icons and descriptions
+- **ImageText**: Image and text content with configurable image position
+- **Process**: Process features with grid layout and red color scheme
+- **ImageGrid**: Dynamic image grid showcasing featured content
+- **FaqSection**: FAQ section with collapsible items and teal background
+- **Contact**: Contact form with company information and submission handling
 - **Cards**: Reusable card components for showcasing items
 - **Buttons**: CTA buttons with various styles
 - **Navigation**: Header and navigation components
+
+### Component Creation Workflow
+
+1. **Define Schema** in `components.json`:
+   - Use flat schema structure (avoid nested sections)
+   - Include proper field types with descriptive names
+   - Add filetypes for asset fields when needed
+
+2. **Create Astro Component** in `src/storyblok/`:
+   - Import `storyblokEditable` from `@storyblok/astro`
+   - Destructure props from `blok` object
+   - Add `{...storyblokEditable(blok)}` to root element
+   - Handle missing data gracefully with optional chaining
+
+3. **Register Component** in `astro.config.mjs`:
+   - Add to components object as `storyblok/ComponentName`
+
+4. **Test Component**:
+   - Add to Storyblok content
+   - Verify all fields are editable
+   - Test responsive design
 
 ### Storyblok Best Practices
 

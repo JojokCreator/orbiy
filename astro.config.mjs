@@ -12,7 +12,10 @@ const isDev = import.meta.env.DEV;
 // https://astro.build/config
 export default defineConfig({
 	site: "https://example.com",
-	integrations: [icon(), sitemap(),     
+	image: {
+		domains: ['a.storyblok.com'],
+	},
+	integrations: [icon(), sitemap(),
         storyblok({
         accessToken: env.STORYBLOK_TOKEN,
         livePreview: isDev ? true : false,
@@ -30,7 +33,7 @@ export default defineConfig({
         enableFallbackComponent: isDev ? true : false,
         customFallbackComponent: 'storyblok/FallbackComponent',
         apiOptions: {
-          region: 'eu', 
+          region: 'eu',
         },
       })],
 	vite: {

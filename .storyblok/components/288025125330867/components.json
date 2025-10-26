@@ -644,10 +644,31 @@
     "updated_at": "2025-10-24T03:50:00.738Z",
     "id": 104802378155332,
     "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Page Title",
+        "pos": 0,
+        "id": "page_title"
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Page Description",
+        "pos": 1,
+        "id": "page_description"
+      },
+      "og_image": {
+        "type": "asset",
+        "display_name": "OG Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 2,
+        "id": "page_og_image"
+      },
       "body": {
         "type": "bloks",
         "id": "i_aJYJ2gTz2kbSsfVr1dUA",
-        "pos": 1
+        "pos": 3
       }
     },
     "image": null,

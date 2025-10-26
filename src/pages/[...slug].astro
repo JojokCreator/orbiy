@@ -2,6 +2,7 @@
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "../config/site.ts";
 
 export async function getStaticPaths() {
 	const sbApi = useStoryblokApi();
@@ -38,12 +39,16 @@ if (!story) {
 
 // Set SEO title/description for home
 const isHome = (!slug || slug === '' || slug === 'home');
-const pageTitle = isHome ? 'Home' : story.name || story.content?.title || 'Page';
-const pageDescription = isHome
-  ? story.content?.description || 'Welcome to our home page'
-  : story.content?.description || `Page: ${story.name}`;
+const pageTitle = isHome
+  ? siteConfig.title
+  : story.content?.title || story.name || 'Page';
+const fullPageTitle = isHome
+  ? siteConfig.title
+  : `${pageTitle} | ${siteConfig.title}`;
+const pageDescription = story.content?.description || siteConfig.description;
+const pageOgImage = story.content?.og_image?.filename || siteConfig.ogImage;
 ---
 
-<Layout>
+<Layout title={fullPageTitle} description={pageDescription} ogImage={pageOgImage}>
 		<StoryblokComponent blok={story.content} />
 </Layout>

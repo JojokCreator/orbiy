@@ -259,8 +259,80 @@ const { image, title, description } = blok;
 2. Ensure responsive breakpoints are correct
 3. Test on different screen sizes
 
+## Creating New Bloks (Components)
+
+Follow this workflow whenever creating a new Storyblok component:
+
+### **1. Use NEWBLOK.md as Your Guide**
+- This document contains complete step-by-step instructions
+- Follow the exact patterns shown in examples
+- Use the field type reference for proper schema design
+
+### **2. Quick Reference Steps:**
+1. **Add Schema** to `components.json`
+2. **Create Component** in `src/storyblok/`
+3. **Register** in `astro.config.mjs`
+4. **Test** in Storyblok editor
+
+### **3. Copy-Paste Patterns:**
+```bash
+# Component Schema (copy from NEWBLOK.md)
+# Add to .storyblok/components/288025125330867/components.json
+
+# Component Template (copy from NEWBLOK.md)
+# Create in src/storyblok/ComponentName.astro
+
+# Registration (copy from NEWBLOK.md)
+# Add to astro.config.mjs components list
+```
+
+### **4. Common Patterns to Use:**
+- **Text Component**: Basic text display
+- **Image with Text**: Image and content side-by-side
+- **Feature List**: Grid of feature items
+- **Contact Form**: Form with validation
+- **Hero Section**: Full-screen header
+- **Process Steps**: Sequential process display
+
+### **5. Best Practices Checklist:**
+- [ ] Use flat schema structure (no nested sections)
+- [ ] Always include `storyblokEditable(blok)`
+- [ ] Handle missing data with optional chaining
+- [ ] Use descriptive field names
+- [ ] Register component in astro.config.mjs
+- [ ] Test on different screen sizes
+
+### **6. Field Type Reference:**
+```json
+{
+  "text_field": {"type": "text"},
+  "textarea_field": {"type": "textarea"},
+  "image_field": {"type": "asset", "filetypes": ["images"]},
+  "video_field": {"type": "asset", "filetypes": ["video"]},
+  "link_field": {"type": "multilink"},
+  "boolean_field": {"type": "boolean"},
+  "number_field": {"type": "number"},
+  "options_field": {"type": "options"},
+  "bloks_field": {"type": "bloks"}
+}
+```
+
+### **7. Common Component Examples:**
+All examples are ready to copy-paste from NEWBLOK.md:
+- Simple Text Component
+- Image with Text Component
+- Component with Nested Items
+- Contact Form Component
+
+### **8. Troubleshooting Reference:**
+- Component not showing? → Check astro.config.mjs registration
+- Missing data? → Verify field names match schema
+- Styling issues? → Use Tailwind classes, check responsive design
+
 ## Resources
 
 - [Storyblok Astro Documentation](https://www.storyblok.com/docs/guide/integrations/astro)
 - [Astro Component Docs](https://docs.astro.build/en/core-concepts/astro-components/)
 - [Tailwind CSS](https://tailwindcss.com/docs)
+- [Component Creation Workflow](#component-creation-workflow)
+- [Schema Best Practices](#schema-best-practices)
