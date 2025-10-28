@@ -9,20 +9,19 @@ import mkcert from "vite-plugin-mkcert";
 import netlify from "@astrojs/netlify";
 
 const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), 'STORYBLOK');
-const isDev = import.meta.env.DEV;
+const isLocal = env.STORYBLOK_LOCAL === 'yes'
+const isPreview = env.STORYBLOK_PREVIEW === 'yes'
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://example.com",
-
   image: {
       domains: ['a.storyblok.com'],
 	},
-
   integrations: [icon(), sitemap(),
       storyblok({
       accessToken: env.STORYBLOK_TOKEN,
-      livePreview: isDev ? true : false,
+      livePreview: isPreview || isLocal ? true : false,
       components: {
           block: "storyblok/Hero",
           block: "storyblok/HeroVideo",
@@ -37,22 +36,20 @@ export default defineConfig({
           block: "storyblok/CountDown",
           countdown_feature: "storyblok/CountDownFeature",
       },
-      enableFallbackComponent: isDev ? true : false,
+      enableFallbackComponent: isPreview || isLocal ? true : false,
       customFallbackComponent: 'storyblok/FallbackComponent',
       apiOptions: {
         region: 'eu',
       },
     })],
-
+  adapter: !isLocal ? netlify() : undefined,
   vite: {
-  server: isDev ? {
+  server: isLocal ? {
     https: true,
   } : undefined,
       plugins: [tailwindcss(), mkcert()],
 	},
-
-  output: isDev ? 'server' : 'static',
-
+  output: isPreview || isLocal ? 'server' : 'static',
   experimental: {
       fonts: [
           {
@@ -85,7 +82,5 @@ export default defineConfig({
               ]
           }
       ]
-	},
-
-  adapter: netlify()
+	}
 });
