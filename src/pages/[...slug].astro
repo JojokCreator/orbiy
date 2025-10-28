@@ -5,6 +5,10 @@ import Layout from "../layouts/Layout.astro";
 import type { Page } from "../../.storyblok/types/288025125330867/storyblok-components.d.ts";
 import { loadEnv } from "vite";
 
+const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), "STORYBLOK");
+const isLocal = env.STORYBLOK_LOCAL === "yes";
+const isPreview = isLocal ? true : env.STORYBLOK_PREVIEW === "yes";
+
 interface StoryblokStory {
 	name: string;
 	slug: string;
