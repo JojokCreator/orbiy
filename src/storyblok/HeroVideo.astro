@@ -62,7 +62,7 @@ const HeadingTag = heading || "h1";
 ---
 
 <section
-  class={`relative min-h-screen w-screen overflow-hidden ${backgroundColorClass} vertical-p`}
+  class={`relative min-h-[100dvh] w-screen overflow-hidden ${backgroundColorClass}`}
   {...storyblokEditable(blok)}
 >
   {/* Background image fallback - responsive */}
@@ -165,7 +165,7 @@ const HeadingTag = heading || "h1";
   <div class="absolute inset-0 bg-black/80 z-20"></div>
 
   <div
-    class="relative z-30 flex pt-10 sm:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
+    class="relative z-30 flex h-[100dvh] md:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
     <HeadingTag class="mb-6 text-white">{title}</HeadingTag>
     <p class="mb-8 text-light-gray mx-auto max-w-4xl">
@@ -176,7 +176,7 @@ const HeadingTag = heading || "h1";
         <Button
           type={button[0].style}
           buttonText={button[0].text}
-          link={"/"+button[0].link?.cached_url}
+          link={"/" + button[0].link?.cached_url}
         />
       )
     }

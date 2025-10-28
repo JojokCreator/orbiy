@@ -24,18 +24,12 @@ const displayCars = featuredCars;
         {/* Header */}
         {
             header && (
-                <p class="text-blue-gray font-semibold pb-2 md:pb-4">
-                    {header}
-                </p>
+                <p class="text-black font-semibold pb-2 md:pb-4">{header}</p>
             )
         }
 
         {/* Conditional HR - only show if header exists */}
-        {
-            showHr && (
-                <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
-            )
-        }
+        {showHr && <hr class="border-t border-black h-1 w-full pb-6 md:pb-8" />}
 
         <div>
             {/* Title */}
@@ -66,7 +60,10 @@ const displayCars = featuredCars;
                             <Button
                                 type={featured_cars_button[0].style}
                                 buttonText={featured_cars_button[0].text}
-                                link={"/"+featured_cars_button[0].link.cached_url}
+                                link={
+                                    "/" +
+                                    featured_cars_button[0].link.cached_url
+                                }
                             />
                         }
                     </div>
