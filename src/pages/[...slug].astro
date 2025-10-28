@@ -15,6 +15,19 @@ interface StoryblokStory {
 	full_slug: string;
 	[k: string]: unknown;
 }
+import type { Page } from "../../.storyblok/types/288025125330867/storyblok-components.d.ts";
+
+interface StoryblokStory {
+	name: string;
+	slug: string;
+	content: Page & Record<string, unknown>;
+	created_at: string;
+	published_at: string;
+	id: number;
+	uuid: string;
+	full_slug: string;
+	[k: string]: unknown;
+}
 
 export async function getStaticPaths() {
 	const sbApi = useStoryblokApi();

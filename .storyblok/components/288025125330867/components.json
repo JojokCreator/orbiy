@@ -13,11 +13,15 @@
         "pos": 0,
         "id": "LNTFRHhgQNmNhnLfwBVE2Q",
         "required": true
+        "id": "LNTFRHhgQNmNhnLfwBVE2Q",
+        "required": true
       },
       "link": {
         "type": "multilink",
         "display_name": "Button Link",
         "pos": 1,
+        "id": "rwBbuHQkQ4CAL1-NsAZ8gw",
+        "required": true
         "id": "rwBbuHQkQ4CAL1-NsAZ8gw",
         "required": true
       },
@@ -356,7 +360,8 @@
         "type": "textarea",
         "display_name": "Section Description",
         "pos": 3,
-        "id": "description_section"
+        "id": "description_section",
+        "required": true
       },
       "featured_cars_button": {
         "type": "bloks",
@@ -944,6 +949,8 @@
         "type": "textarea",
         "display_name": "Hero Description",
         "pos": 1,
+        "id": "hero_video_description",
+        "required": true
         "id": "hero_video_description",
         "required": true
       },
