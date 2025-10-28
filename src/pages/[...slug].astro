@@ -5,10 +5,6 @@ import Layout from "../layouts/Layout.astro";
 import type { Page } from "../../.storyblok/types/288025125330867/storyblok-components.d.ts";
 import { loadEnv } from "vite";
 
-const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), "STORYBLOK");
-const isLocal = env.STORYBLOK_LOCAL === "yes";
-const isPreview = isLocal ? true : env.STORYBLOK_PREVIEW === "yes";
-
 interface StoryblokStory {
 	name: string;
 	slug: string;
@@ -23,8 +19,12 @@ interface StoryblokStory {
 
 export async function getStaticPaths() {
 	// Skip getStaticPaths for SSR mode (local + preview)
-	if (isPreview) {
-		// Return empty array for SSR - paths will be handled dynamically
+	const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
+	const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
+
+	console.log("isLocal:", isLocal, "isPreview:", isPreview);
+
+	if (isLocal && isPreview) {
 		return [];
 	}
 
@@ -60,9 +60,12 @@ const storySlug = !slug || slug === "" || slug === "home" ? "home" : slug;
 let story: StoryblokStory = Astro.props.story;
 if (!story) {
 	const sbApi = useStoryblokApi();
+	const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
+	const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
+
 	try {
 		const { data } = await sbApi.get(`cdn/stories/${storySlug}`, {
-			version: isPreview ? "draft" : "published",
+			version: isLocal && isPreview ? "draft" : "published",
 		});
 		story = data.story;
 	} catch (error) {
@@ -83,7 +86,7 @@ try {
 	const { data: siteConfigData } = await sbApi.get(
 		"cdn/stories/site-config",
 		{
-			version: isPreview ? "draft" : "published",
+			version: isLocal && isPreview ? "draft" : "published",
 		},
 	);
 	siteConfig = siteConfigData.story?.content;

@@ -42,7 +42,7 @@ export default defineConfig({
         region: 'eu',
       },
     })],
-  adapter: isPreview ? netlify() : undefined,
+  adapter: isPreview && !isLocal ? netlify() : undefined,
   vite: {
   server: isLocal ? {
     https: true,
