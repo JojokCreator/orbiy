@@ -14,7 +14,7 @@ const isPreview = isLocal ? true : env.STORYBLOK_PREVIEW === 'yes'
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://orbiy.netlify.app",
   image: {
       domains: ['a.storyblok.com'],
 	},

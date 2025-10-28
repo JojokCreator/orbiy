@@ -107,7 +107,9 @@ const mobileLinkClasses = invertMenu
 													item.link.cached_url,
 												)}
 												class={mobileLinkClasses}
-												href={"/"+item.link.cached_url}
+												href={
+													"/" + item.link.cached_url
+												}
 											>
 												{item.label}
 											</a>
@@ -134,9 +136,9 @@ const mobileLinkClasses = invertMenu
 				cta_button && (
 					<Button
 						class="hidden w-52 items-center text-center lg:flex"
-						link={cta_button[0].link.cached_url}
+						link={"/" + cta_button[0].link.cached_url}
 						type={cta_button[0].style || "gray"}
-						buttonText={"/"+cta_button[0].text}
+						buttonText={cta_button[0].text}
 					/>
 				)
 			}
