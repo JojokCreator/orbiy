@@ -11,7 +11,7 @@ const { title, description, ogImage, invertMenu } = Astro.props;
 	<head>
 		<BaseHead title={title} description={description} ogImage={ogImage} />
 	</head>
-	<body class="overflow-x-hidden">
+	<body class="overflow-x-hidden font-sans">
 		<Navbar invertMenu={invertMenu} />
 		<slot />
 		<Footer />

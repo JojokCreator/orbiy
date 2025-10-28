@@ -7,15 +7,19 @@ const { blok } = Astro.props;
 const {
   title,
   description,
-  heading_type,
+  heading,
   background_color,
   button,
-  video,
+  videoSrc,
+  videoMobileSrc,
   poster_image,
+  poster_image_mobile,
 } = blok;
 
-// Get optimized poster image if provided
+// Get optimized poster images if provided
 let posterUrl = "";
+let posterUrlMobile = "";
+
 if (poster_image?.filename) {
   const { src } = await getImage({
     src: poster_image.filename,
@@ -25,6 +29,17 @@ if (poster_image?.filename) {
     height: 1080,
   });
   posterUrl = src;
+}
+
+if (poster_image_mobile?.filename) {
+  const { src } = await getImage({
+    src: poster_image_mobile.filename,
+    format: "webp",
+    quality: 80,
+    width: 750,
+    height: 1334,
+  });
+  posterUrlMobile = src;
 }
 
 // Determine background color class
@@ -43,37 +58,117 @@ const backgroundColorClass = getBackgroundColorClass(
   background_color || "black",
 );
 
-// Determine heading tag
-const HeadingTag = heading_type || "h1";
+const HeadingTag = heading || "h1";
 ---
 
 <section
   class={`relative min-h-screen w-screen overflow-hidden ${backgroundColorClass} vertical-p`}
   {...storyblokEditable(blok)}
 >
-  <div class="absolute inset-0 hidden sm:block">
-    <video
-      class="h-full w-full object-cover"
-      poster={posterUrl || undefined}
-      muted
-      autoplay
-      loop
-      playsinline
-    >
-      <source src={"/video.mp4"} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </div>
+  {/* Background image fallback - responsive */}
+  {
+    posterUrl && (
+      <>
+        {/* Desktop poster image */}
+        <div
+          class="absolute inset-0 z-0 hidden sm:block"
+          style={`background-image: url('${posterUrl}'); background-size: cover; background-position: center;`}
+        />
+        {/* Mobile poster image - fallback to desktop if mobile not provided */}
+        <div
+          class="absolute inset-0 z-0 block sm:hidden"
+          style={`background-image: url('${posterUrlMobile || posterUrl}'); background-size: cover; background-position: center;`}
+        />
+      </>
+    )
+  }
 
-  <div class="absolute inset-0 bg-black/80 z-10"></div>
+  {
+    videoMobileSrc ? (
+      <>
+        {/* Desktop video - hidden on mobile when mobile video is provided */}
+        <div class="absolute inset-0 z-10 hidden sm:block">
+          <video
+            class="h-full w-full object-cover opacity-0 transition-opacity duration-1000"
+            poster={posterUrl || undefined}
+            muted
+            autoplay
+            loop
+            playsinline
+            oncanplay="this.classList.add('opacity-100'); this.classList.remove('opacity-0');"
+            onerror="this.parentElement.style.display='none';"
+          >
+            <source src={"/videos/" + videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        {/* Mobile video - shown only on mobile when provided */}
+        <div class="absolute inset-0 z-10 block sm:hidden">
+          <video
+            class="h-full w-full object-cover opacity-0 transition-opacity duration-1000"
+            poster={posterUrlMobile || posterUrl || undefined}
+            muted
+            autoplay
+            loop
+            playsinline
+            oncanplay="this.classList.add('opacity-100'); this.classList.remove('opacity-0');"
+            onerror="this.parentElement.style.display='none';"
+          >
+            <source src={"/videos/" + videoMobileSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </>
+    ) : (
+      /* Single video for all screens with responsive poster images */
+      <>
+        {/* Desktop video with desktop poster */}
+        <div class="absolute inset-0 z-10 hidden sm:block">
+          <video
+            class="h-full w-full object-cover opacity-0 transition-opacity duration-1000"
+            poster={posterUrl || undefined}
+            muted
+            autoplay
+            loop
+            playsinline
+            oncanplay="this.classList.add('opacity-100'); this.classList.remove('opacity-0');"
+            onerror="this.parentElement.style.display='none';"
+          >
+            <source src={"/videos/" + videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        {/* Same video with mobile poster on mobile */}
+        <div class="absolute inset-0 z-10 block sm:hidden">
+          <video
+            class="h-full w-full object-cover opacity-0 transition-opacity duration-1000"
+            poster={posterUrlMobile || posterUrl || undefined}
+            muted
+            autoplay
+            loop
+            playsinline
+            oncanplay="this.classList.add('opacity-100'); this.classList.remove('opacity-0');"
+            onerror="this.parentElement.style.display='none';"
+          >
+            <source
+              src={"/videos/" + videoSrc || "/video.mp4"}
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </>
+    )
+  }
+
+  <div class="absolute inset-0 bg-black/80 z-20"></div>
 
   <div
-    class="relative z-10 flex pt-10 sm:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
+    class="relative z-30 flex pt-10 sm:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
-    <Fragment
-      set:html={`<${HeadingTag} class="mb-6 text-white">${title}</${HeadingTag}>`}
-    />
-    <p class="mb-8 text-light-gray">
+    <HeadingTag class="mb-6 text-white">{title}</HeadingTag>
+    <p class="mb-8 text-light-gray mx-auto max-w-4xl">
       {description}
     </p>
     {
@@ -81,7 +176,7 @@ const HeadingTag = heading_type || "h1";
         <Button
           type={button[0].style}
           buttonText={button[0].text}
-          link={button[0].link?.url}
+          link={button[0].link?.cached_url}
         />
       )
     }

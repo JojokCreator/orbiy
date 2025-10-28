@@ -48,7 +48,7 @@ const HeadingTag = heading_type || "h2";
 >
   {backgroundImageUrl && <div class="absolute inset-0 bg-black/60" />}
   <div
-    class="relative z-10 flex h-full pt-10 sm:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
+    class="relative z-10 flex h-full pt-10 sm:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-4xl mx-auto"
   >
     <Fragment
       set:html={`<${HeadingTag} class="mb-6 text-white text-pretty">${title}</${HeadingTag}>`}
@@ -61,7 +61,7 @@ const HeadingTag = heading_type || "h2";
         <Button
           type={button[0].style}
           buttonText={button[0].text}
-          link={button[0].link?.url}
+          link={button[0].link?.cached_url}
         />
       )
     }

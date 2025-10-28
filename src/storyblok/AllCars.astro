@@ -1,0 +1,57 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { getCollection } from "astro:content";
+import Button from "../components/reusable/Button.astro";
+
+const { blok } = Astro.props;
+const { title, description, featured_cars_button } = blok;
+
+// Get all cars from the content collection
+const allCars = await getCollection("cars");
+
+// Display all cars
+const displayCars = allCars;
+const initialLimit = 6;
+const hasMoreCars = displayCars.length > initialLimit;
+---
+
+<section {...storyblokEditable(blok)} class="site-container vertical-p">
+    <div>
+        <div>
+            {/* Title - Always h1 and centered */}
+            <h1 class="text-gray text-center">
+                {title}
+            </h1>
+
+            {/* Description - Always centered */}
+            {
+                description && (
+                    <p class="text-gray mt-4 text-center">{description}</p>
+                )
+            }
+
+            <div class="h-350 py-4 sm:py-8">
+                <iframe
+                    src="https://orbiy.myloopit.com"
+                    width="100%"
+                    height="100%"
+                    allow="clipboard-read; clipboard-write"></iframe>
+            </div>
+
+            <!-- Footer CTA Button -->
+            {
+                featured_cars_button && featured_cars_button.length > 0 && (
+                    <div class="mt-6 md:mt-12">
+                        {
+                            <Button
+                                type={featured_cars_button[0].style}
+                                buttonText={featured_cars_button[0].text}
+                                link={featured_cars_button[0].link.cached_url}
+                            />
+                        }
+                    </div>
+                )
+            }
+        </div>
+    </div>
+</section>

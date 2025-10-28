@@ -42,9 +42,7 @@ if (background_image?.filename) {
                 <p class="text-white mb-2 text-xl md:text-2xl">
                   {feature.title}
                 </p>
-                <p class="text-white text-base md:text-sm">
-                  {feature.description}
-                </p>
+                <p class="text-white text-base">{feature.description}</p>
               </div>
             </div>
           ))
@@ -56,7 +54,7 @@ if (background_image?.filename) {
             <Button
               type={features_button[0].style}
               buttonText={features_button[0].text}
-              link={features_button.url}
+              link={features_button[0].link.cached_url}
             />
           </div>
         )

@@ -356,23 +356,7 @@
         "type": "textarea",
         "display_name": "Section Description",
         "pos": 3,
-        "id": "description_section",
-        "required": true
-      },
-      "center_content": {
-        "type": "boolean",
-        "display_name": "Center Title and Description",
-        "default": false,
-        "pos": 4,
-        "id": "center_content_toggle",
-        "required": true
-      },
-      "featured_only": {
-        "type": "boolean",
-        "display_name": "Show Featured Only",
-        "default": false,
-        "pos": 5,
-        "id": "featured_only_toggle"
+        "id": "description_section"
       },
       "featured_cars_button": {
         "type": "bloks",
@@ -963,11 +947,12 @@
         "id": "hero_video_description",
         "required": true
       },
-      "heading_type": {
+      "heading": {
         "type": "option",
         "display_name": "Heading Type",
         "pos": 2,
-        "id": "hero_video_heading_type",
+        "id": "hero_video_heading",
+        "required": true,
         "options": [
           {
             "name": "h1",
@@ -999,15 +984,6 @@
           }
         ]
       },
-      "video": {
-        "type": "asset",
-        "display_name": "Background Video (Optional)",
-        "filetypes": [
-          "videos"
-        ],
-        "pos": 4,
-        "id": "hero_video_background"
-      },
       "button": {
         "type": "bloks",
         "display_name": "Hero Button",
@@ -1020,14 +996,36 @@
         "restrict_type": "",
         "restrict_components": true
       },
+      "videoSrc": {
+        "type": "text",
+        "display_name": "Desktop Video URL",
+        "pos": 7,
+        "id": "hero_video_desktop_src",
+        "required": true
+      },
+      "videoMobileSrc": {
+        "type": "text",
+        "display_name": "Mobile Video URL",
+        "pos": 8,
+        "id": "hero_video_mobile_src"
+      },
       "poster_image": {
         "type": "asset",
-        "display_name": "Poster Image (Optional)",
+        "display_name": "Poster Image Desktop (Optional)",
         "filetypes": [
           "images"
         ],
-        "pos": 6,
-        "id": "hero_video_poster"
+        "pos": 9,
+        "id": "hero_video_poster_desktop"
+      },
+      "poster_image_mobile": {
+        "type": "asset",
+        "display_name": "Poster Image Mobile (Optional)",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 9,
+        "id": "mobile"
       }
     },
     "image": null,
@@ -1639,6 +1637,56 @@
     "real_name": "Social Link Item",
     "component_group_uuid": null,
     "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "AllCars",
+    "display_name": "All Cars",
+    "description": "All cars section with centered title and description",
+    "created_at": "2025-10-28T00:00:00.000Z",
+    "updated_at": "2025-10-28T00:00:00.000Z",
+    "id": 999999999999999,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Section Title",
+        "pos": 0,
+        "id": "all_cars_title",
+        "required": true
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Section Description",
+        "pos": 1,
+        "id": "all_cars_description"
+      },
+      "featured_cars_button": {
+        "type": "bloks",
+        "display_name": "Footer CTA Button",
+        "maximum": 1,
+        "component_whitelist": [
+          "button"
+        ],
+        "pos": 2,
+        "id": "all_cars_button",
+        "restrict_type": "",
+        "restrict_components": true
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "AllCars",
+    "component_group_uuid": null,
+    "color": "#8B5CF6",
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-    /* --font-sans: 'Roboto', sans-serif; */
-    --font-sans: var(--font-poppins);
+    --font-sans: var(--font-sans);
+    --font-heading: var(--font-heading);
     --color-black: oklch(10.98% 0.01 270.31);
 
     --color-white: oklch(0.9581 0 0);
@@ -74,6 +74,7 @@
     p {
         font-size: var(--text-lg);
         line-height: 2rem;
+        font-weight: 300;
     }
 
     @media (min-width: theme('screens.lg')) {
@@ -86,12 +87,14 @@
     h1 {
         font-size: 2.25rem;
         line-height: 2.75rem;
+        font-family: var(--font-heading);
     }
 
     @media (min-width: theme('screens.sm')) {
         h1 {
             font-size: 3.375rem;
             line-height: 4rem;
+            font-family: var(--font-heading);
         }
     }
 
