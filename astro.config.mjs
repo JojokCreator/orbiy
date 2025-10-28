@@ -21,7 +21,7 @@ export default defineConfig({
   integrations: [icon(), sitemap(),
       storyblok({
       accessToken: env.STORYBLOK_TOKEN,
-      livePreview: isPreview || isLocal ? true : false,
+      livePreview: (isPreview && isLocal) ? true : false,
       components: {
           block: "storyblok/Hero",
           block: "storyblok/HeroVideo",
@@ -36,14 +36,14 @@ export default defineConfig({
           block: "storyblok/CountDown",
           countdown_feature: "storyblok/CountDownFeature",
       },
-      enableFallbackComponent: isPreview || isLocal ? true : false,
+      enableFallbackComponent: (isPreview && isLocal) ? true : false,
       customFallbackComponent: 'storyblok/FallbackComponent',
       apiOptions: {
         region: 'eu',
       },
     })],
   adapter: !isLocal ? netlify({
-    mode: isPreview || isLocal ? 'server' : 'static',
+    mode: 'static',
   }) : undefined,
   vite: {
   server: isLocal ? {
@@ -51,8 +51,7 @@ export default defineConfig({
   } : undefined,
       plugins: [tailwindcss(), mkcert()],
 	},
-  output: isPreview || isLocal ? 'server' : 'static',
-  
+  output: (isPreview && isLocal) ? 'server' : 'static',
   experimental: {
       fonts: [
           {
