@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import { storyblok } from '@storyblok/astro';
 import { loadEnv } from 'vite';
 import icon from "astro-icon";
@@ -69,17 +69,24 @@ export default defineConfig({
                   },
               ]
           },
+        //   {
+        //       provider: "local",
+        //       name: "TT Interphases Pro",
+        //       cssVariable: "--font-sans",
+        //       variants: [
+        //           {
+        //               weight: "100 900",
+        //               style: "normal",
+        //               src: ["./src/assets/fonts/TT-Interphases-Pro-Trl-Variable.woff2"]
+        //           }
+        //       ]
+        //   }
           {
-              provider: "local",
-              name: "TT Interphases Pro",
+              provider: fontProviders.fontsource(),
+              name: "Open Sans",
               cssVariable: "--font-sans",
-              variants: [
-                  {
-                      weight: "100 900",
-                      style: "normal",
-                      src: ["./src/assets/fonts/TT-Interphases-Pro-Trl-Variable.woff2"]
-                  }
-              ]
+              weights: ["100 900"],
+              subsets: ["latin"]
           }
       ]
 	}

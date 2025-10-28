@@ -34,12 +34,12 @@ const {
 } = siteConfig || {};
 ---
 
-<footer class="bg-[#e8e6e3] px-6 py-12 md:px-12 lg:px-20">
-  <div class="max-w-7xl mx-auto">
+<footer class="bg-[#e8e6e3]">
+  <div class="max-w-6xl mx-auto px-4 2xl:px-0 py-12">
     <!-- Main Footer Content -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
       <!-- Brand Section -->
-      <div class="space-y-4">
+      <div class="space-y-4 lg:col-span-2">
         {
           footer_logo?.filename ? (
             <a href="/">
@@ -55,7 +55,7 @@ const {
             <h2 class="text-3xl font-bold tracking-tight">ORBiY</h2>
           )
         }
-        {tagline && <p class="text-sm leading-relaxed">{tagline}</p>}
+        {tagline && <p class="text-sm leading-relaxed lg:w-2/3">{tagline}</p>}
         {
           social_links && social_links.length > 0 && (
             <div class="flex gap-3 pt-2">
@@ -112,7 +112,7 @@ const {
             footer_nav_links?.map((item: any) => (
               <li>
                 <a
-                  href={"/"+item.link?.cached_url}
+                  href={"/" + item.link?.cached_url}
                   class="hover:opacity-70 transition-opacity"
                 >
                   {item.label}
@@ -161,7 +161,7 @@ const {
         <Button
           type={waitlist_button?.[0]?.style || "black"}
           buttonText={waitlist_button?.[0]?.text || "START YOUR INQUIRY"}
-          link={"/"+waitlist_button?.[0]?.link?.cached_url || "#"}
+          link={"/" + waitlist_button?.[0]?.link?.cached_url || "#"}
           class="w-full md:w-auto"
         />
       </div>

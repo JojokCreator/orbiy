@@ -74,7 +74,7 @@
     p {
         font-size: var(--text-lg);
         line-height: 2rem;
-        font-weight: 300;
+        font-weight: 350;
     }
 
     @media (min-width: theme('screens.lg')) {
