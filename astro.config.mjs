@@ -60,7 +60,7 @@ export default defineConfig({
 					},
 					{
 						weight: 500,
-						style: "semi-bold",
+						style: "normal",
 						src: ["./src/assets/fonts/SolomonSans-SemiBold.woff2"]
 					},
 				]
