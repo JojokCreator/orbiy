@@ -3,6 +3,11 @@ import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import Layout from "../layouts/Layout.astro";
 import type { Page } from "../../.storyblok/types/288025125330867/storyblok-components.d.ts";
+import { loadEnv } from "vite";
+
+const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), "STORYBLOK");
+const isLocal = env.STORYBLOK_LOCAL === "yes";
+const isPreview = isLocal ? true : env.STORYBLOK_PREVIEW === "yes";
 
 interface StoryblokStory {
 	name: string;
@@ -18,7 +23,7 @@ interface StoryblokStory {
 
 export async function getStaticPaths() {
 	// Skip getStaticPaths for SSR mode (local + preview)
-	if (import.meta.env.STORYBLOK_LOCAL && import.meta.env.STORYBLOK_PREVIEW) {
+	if (isPreview) {
 		// Return empty array for SSR - paths will be handled dynamically
 		return [];
 	}
@@ -57,11 +62,7 @@ if (!story) {
 	const sbApi = useStoryblokApi();
 	try {
 		const { data } = await sbApi.get(`cdn/stories/${storySlug}`, {
-			version:
-				import.meta.env.STORYBLOK_LOCAL &&
-				import.meta.env.STORYBLOK_PREVIEW
-					? "draft"
-					: "published",
+			version: isPreview ? "draft" : "published",
 		});
 		story = data.story;
 	} catch (error) {
@@ -82,11 +83,7 @@ try {
 	const { data: siteConfigData } = await sbApi.get(
 		"cdn/stories/site-config",
 		{
-			version:
-				import.meta.env.STORYBLOK_LOCAL &&
-				import.meta.env.STORYBLOK_PREVIEW
-					? "draft"
-					: "published",
+			version: isPreview ? "draft" : "published",
 		},
 	);
 	siteConfig = siteConfigData.story?.content;
