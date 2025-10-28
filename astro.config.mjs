@@ -42,7 +42,9 @@ export default defineConfig({
         region: 'eu',
       },
     })],
-  adapter: !isLocal ? netlify() : undefined,
+  adapter: !isLocal ? netlify({
+    mode: isPreview || isLocal ? 'server' : 'static',
+  }) : undefined,
   vite: {
   server: isLocal ? {
     https: true,
@@ -50,6 +52,7 @@ export default defineConfig({
       plugins: [tailwindcss(), mkcert()],
 	},
   output: isPreview || isLocal ? 'server' : 'static',
+  
   experimental: {
       fonts: [
           {
