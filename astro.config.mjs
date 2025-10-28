@@ -10,7 +10,7 @@ import netlify from "@astrojs/netlify";
 
 const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), 'STORYBLOK');
 const isLocal = env.STORYBLOK_LOCAL === 'yes'
-const isPreview = env.STORYBLOK_PREVIEW === 'yes'
+const isPreview = isLocal ? true : env.STORYBLOK_PREVIEW === 'yes'
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,7 +21,7 @@ export default defineConfig({
   integrations: [icon(), sitemap(),
       storyblok({
       accessToken: env.STORYBLOK_TOKEN,
-      livePreview: (isPreview && isLocal) ? true : false,
+      livePreview: isPreview ? true : false,
       components: {
           block: "storyblok/Hero",
           block: "storyblok/HeroVideo",
@@ -36,22 +36,20 @@ export default defineConfig({
           block: "storyblok/CountDown",
           countdown_feature: "storyblok/CountDownFeature",
       },
-      enableFallbackComponent: (isPreview && isLocal) ? true : false,
+      enableFallbackComponent: isPreview ? true : false,
       customFallbackComponent: 'storyblok/FallbackComponent',
       apiOptions: {
         region: 'eu',
       },
     })],
-  adapter: !isLocal ? netlify({
-    mode: 'static',
-  }) : undefined,
+  adapter: isPreview ? netlify() : undefined,
   vite: {
   server: isLocal ? {
     https: true,
   } : undefined,
       plugins: [tailwindcss(), mkcert()],
 	},
-  output: (isPreview && isLocal) ? 'server' : 'static',
+  output: isPreview ? 'server' : 'static',
   experimental: {
       fonts: [
           {
