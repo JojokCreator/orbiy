@@ -34,6 +34,8 @@ export default defineConfig({
           block: "storyblok/Process",
           block: "storyblok/Contact",
           block: "storyblok/CountDown",
+          featured_car_item: "storyblok/FeaturedCarItem",
+          grid_card_item: "storyblok/GridCardItem",
           countdown_feature: "storyblok/CountDownFeature",
       },
       enableFallbackComponent: isPreview ? true : false,

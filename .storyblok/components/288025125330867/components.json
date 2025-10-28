@@ -13,15 +13,11 @@
         "pos": 0,
         "id": "LNTFRHhgQNmNhnLfwBVE2Q",
         "required": true
-        "id": "LNTFRHhgQNmNhnLfwBVE2Q",
-        "required": true
       },
       "link": {
         "type": "multilink",
         "display_name": "Button Link",
         "pos": 1,
-        "id": "rwBbuHQkQ4CAL1-NsAZ8gw",
-        "required": true
         "id": "rwBbuHQkQ4CAL1-NsAZ8gw",
         "required": true
       },
@@ -356,11 +352,16 @@
         "pos": 2,
         "id": "header_section"
       },
-      "description": {
-        "type": "textarea",
-        "display_name": "Section Description",
-        "pos": 3,
-        "id": "description_section",
+      "featured_cars": {
+        "type": "bloks",
+        "display_name": "Featured Cars",
+        "component_whitelist": [
+          "featured_car_item"
+        ],
+        "pos": 4,
+        "id": "featured_cars_list",
+        "restrict_type": "",
+        "restrict_components": true,
         "required": true
       },
       "featured_cars_button": {
@@ -370,7 +371,7 @@
         "component_whitelist": [
           "button"
         ],
-        "pos": 18,
+        "pos": 5,
         "id": "Q9Bs4DkgSpKbgR2Dma7OJQ"
       }
     },
@@ -793,11 +794,11 @@
     "metadata": {}
   },
   {
-    "name": "grid_card",
-    "display_name": "Grid Card",
-    "description": "Grid card with full image and text overlay at the bottom",
+    "name": "grid_card_item",
+    "display_name": "Grid Card Item",
+    "description": "Grid card item with image, title, price and link",
     "created_at": "2025-10-25T03:42:54.882Z",
-    "updated_at": "2025-10-25T03:42:54.882Z",
+    "updated_at": "2025-10-28T00:00:00.000Z",
     "id": 105161420322498,
     "schema": {
       "image": {
@@ -817,11 +818,17 @@
         "id": "grid_card_title",
         "required": true
       },
-      "description": {
-        "type": "textarea",
-        "display_name": "Card Description",
+      "price": {
+        "type": "text",
+        "display_name": "Price",
         "pos": 2,
-        "id": "grid_card_description",
+        "id": "grid_card_price"
+      },
+      "link": {
+        "type": "multilink",
+        "display_name": "Card Link",
+        "pos": 4,
+        "id": "grid_card_link",
         "required": true
       }
     },
@@ -832,7 +839,7 @@
     "is_nestable": true,
     "all_presets": [],
     "preset_id": null,
-    "real_name": "Grid Card",
+    "real_name": "Grid Card Item",
     "component_group_uuid": null,
     "color": "#F59E0B",
     "icon": null,
@@ -949,8 +956,6 @@
         "type": "textarea",
         "display_name": "Hero Description",
         "pos": 1,
-        "id": "hero_video_description",
-        "required": true
         "id": "hero_video_description",
         "required": true
       },
@@ -1071,6 +1076,18 @@
         "display_name": "Section Text",
         "pos": 2,
         "id": "image_grid_text",
+        "required": true
+      },
+      "grid_cards": {
+        "type": "bloks",
+        "display_name": "Grid Cards",
+        "component_whitelist": [
+          "grid_card_item"
+        ],
+        "pos": 3,
+        "id": "grid_cards_list",
+        "restrict_type": "",
+        "restrict_components": true,
         "required": true
       }
     },
@@ -1694,6 +1711,81 @@
     "real_name": "AllCars",
     "component_group_uuid": null,
     "color": "#8B5CF6",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "featured_car_item",
+    "display_name": "Featured Car Item",
+    "description": "Individual featured car with images, details, and link",
+    "created_at": "2025-10-28T00:00:00.000Z",
+    "updated_at": "2025-10-28T00:00:00.000Z",
+    "id": 999999999999998,
+    "schema": {
+      "title": {
+        "type": "text",
+        "display_name": "Car Title",
+        "pos": 0,
+        "id": "car_title",
+        "required": true
+      },
+      "price": {
+        "type": "text",
+        "display_name": "Price",
+        "pos": 1,
+        "id": "car_price",
+        "required": true
+      },
+      "description": {
+        "type": "textarea",
+        "display_name": "Description",
+        "pos": 2,
+        "id": "car_description",
+        "required": true
+      },
+      "image": {
+        "type": "asset",
+        "display_name": "Image",
+        "filetypes": [
+          "images"
+        ],
+        "pos": 3,
+        "id": "car_image",
+        "required": true
+      },
+      "imageAlt": {
+        "type": "text",
+        "display_name": "Image Alt Text",
+        "pos": 5,
+        "id": "car_image_alt"
+      },
+      "features": {
+        "type": "textarea",
+        "display_name": "Features (one per line)",
+        "pos": 6,
+        "id": "car_features"
+      },
+      "link": {
+        "type": "multilink",
+        "display_name": "Car Details Link",
+        "pos": 7,
+        "id": "car_link",
+        "required": true
+      }
+    },
+    "image": null,
+    "preview_field": "title",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Featured Car Item",
+    "component_group_uuid": null,
+    "color": "#F59E0B",
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],

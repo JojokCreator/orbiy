@@ -1,57 +1,73 @@
 ---
-import { type CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
+import { storyblokEditable } from "@storyblok/astro";
 
 interface Props {
-  car: CollectionEntry<"cars">;
+  car: any; // Storyblok car item data
 }
 
 const { car } = Astro.props;
+const { title, price, description, image, imageAlt, features, link } = car;
+
+// Parse features from textarea (one per line)
+const featuresList = features
+  ? features.split("\n").filter((f) => f.trim())
+  : [];
+
+// Generate link URL
+const linkUrl = link?.cached_url || link?.url || "#";
 ---
 
-<div
-  class="bg-white/50 rounded-sm border-blue-gray hover:shadow-xs transition-all duration-600 hover:-translate-y-0.5"
->
-  <!-- Car Image -->
-  <div class="relative h-fit mb-6 rounded-t-lg overflow-hidden bg-gray-100">
-    {
-      car.data.horizontalImage ? (
-        <Image
-          src={car.data.horizontalImage}
-          alt={car.data.imageAlt || car.data.title}
-          class="w-full h-auto object-contain"
-        />
-      ) : (
-        <div class="w-full h-full bg-gray-200 flex items-center justify-center aspect-video min-h-52">
-          <span class="text-gray-500">Image Coming Soon</span>
-        </div>
-      )
-    }
-  </div>
-  <div class="space-y-3 p-6">
-    <h3 class="text-xl md:text-2xl font-semibold text-gray leading-tight">
-      {car.data.title}
-    </h3>
-    <p class="text-gray text-base line-clamp-4 my-4">
-      {car.data.description}
-    </p>
-    <ul class="space-y-2">
+<a href={linkUrl} class="block">
+  <div
+    {...storyblokEditable(car)}
+    class="bg-white/50 rounded-sm border-blue-gray hover:shadow-xs transition-all duration-600 hover:-translate-y-0.5"
+  >
+    <!-- Car Image -->
+    <div class="relative h-fit mb-6 rounded-t-lg overflow-hidden bg-gray-100">
       {
-        car.data.features.slice(0, 4).map((feature) => (
-          <li>
-            <Icon name="tick" class="inline mr-1.5" />
-            {feature}
-          </li>
-        ))
+        image?.filename ? (
+          <Picture
+            src={image.filename}
+            formats={["avif", "webp"]}
+            inferSize={true}
+            alt={imageAlt || title}
+            widths={[400, 600, 800]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+            class="w-full h-auto object-contain"
+          />
+        ) : (
+          <div class="w-full h-full bg-gray-200 flex items-center justify-center aspect-video min-h-52">
+            <span class="text-gray-500">Image Coming Soon</span>
+          </div>
+        )
       }
-    </ul>
-    <p class="text-2xl md:text-3xl font-medium text-gray py-4">
-      <span class="text-base text-white">From </span>{car.data.price}<span
-        class="text-base text-white"
-      >
-        /day</span
-      >
-    </p>
+    </div>
+    <div class="space-y-3 p-6">
+      <h3 class="text-xl md:text-2xl font-semibold text-gray leading-tight">
+        {title}
+      </h3>
+      <p class="text-gray text-base line-clamp-4 my-4">
+        {description}
+      </p>
+      <ul class="space-y-2">
+        {
+          featuresList.slice(0, 4).map((feature, index) => (
+            <li key={index}>
+              <Icon name="tick" class="inline mr-1.5" />
+              {feature}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-2xl md:text-3xl font-medium text-gray py-4">
+        <span class="text-base text-gray">From </span>£{price}<span
+          class="text-base text-gray"
+        >
+          /per day</span
+        >
+      </p>
+    </div>
   </div>
-</div>
+</a>

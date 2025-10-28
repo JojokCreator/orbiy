@@ -1,22 +1,16 @@
 ---
 import { storyblokEditable } from "@storyblok/astro";
-import { getCollection } from "astro:content";
 import Button from "../components/reusable/Button.astro";
 import FeaturedCarCard from "../components/FeaturedCarCard.astro";
 
 const { blok } = Astro.props;
-const { title, header, description, featured_cars_button } = blok;
+const { title, header, description, featured_cars_button, featured_cars } = blok;
 
 const showHr = !!header;
 
-// Get all cars from the content collection
-const allCars = await getCollection("cars");
-
-// Determine which cars to show initially
-let initialLimit = 3;
-
-const featuredCars = allCars.filter((car) => car.data.featured);
-const displayCars = featuredCars;
+// Get cars from Storyblok data
+const displayCars = featured_cars || [];
+const initialLimit = 3;
 ---
 
 <section {...storyblokEditable(blok)} class="site-container vertical-p">

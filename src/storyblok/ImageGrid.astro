@@ -1,14 +1,12 @@
 ---
 import { storyblokEditable } from "@storyblok/astro";
 import { Picture } from "astro:assets";
-import { getCollection } from "astro:content";
 
 const { blok } = Astro.props;
-const { title, text } = blok;
+const { title, text, grid_cards } = blok;
 
-// Get featured cars from the content collection
-const allCars = await getCollection("cars");
-const featuredCars = allCars.filter((car) => car.data.featured);
+// Get grid cards from Storyblok data
+const cards = grid_cards || [];
 ---
 
 <section {...storyblokEditable(blok)} class="vertical-p bg-red w-screen">
@@ -21,14 +19,12 @@ const featuredCars = allCars.filter((car) => car.data.featured);
       {text && <p class="text-white mt-4 lg:max-w-3/4">{text}</p>}
       <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {
-          featuredCars[0] && (
+          cards[0] && (
             <div class="md:hidden group relative overflow-hidden rounded-2xl shadow-lg">
               <Picture
-                src={featuredCars[0].data.horizontalImage}
+                src={cards[0].image.filename}
                 formats={["avif", "webp"]}
-                alt={
-                  featuredCars[0].data.imageAlt || featuredCars[0].data.title
-                }
+                alt={cards[0].imageAlt || cards[0].title}
                 widths={[400, 600, 800]}
                 sizes="(max-width: 768px) 100vw, 400px"
                 inferSize={true}
@@ -38,14 +34,11 @@ const featuredCars = allCars.filter((car) => car.data.featured);
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
               <div class="absolute bottom-0 left-0 right-0 p-6">
                 <h3 class="text-white font-medium text-lg mb-2 leading-tight">
-                  {featuredCars[0].data.title}
+                  {cards[0].title}
                 </h3>
-                <p class="text-white text-base line-clamp-2 leading-relaxed hidden sm:block ">
-                  {featuredCars[0].data.description}
-                </p>
-                {featuredCars[0].data.price && (
+                {cards[0].price && (
                   <p class="text-white font-semibold text-base mt-3">
-                    {featuredCars[0].data.price}
+                    £{cards[0].price} <span class="font-normal">/per day</span>
                   </p>
                 )}
               </div>
@@ -56,14 +49,12 @@ const featuredCars = allCars.filter((car) => car.data.featured);
         }
 
         {
-          featuredCars[0] && (
+          cards[0] && (
             <div class="hidden md:block group relative overflow-hidden rounded-2xl shadow-lg">
               <Picture
-                src={featuredCars[0].data.verticalImage}
+                src={cards[0].image.filename}
                 formats={["avif", "webp"]}
-                alt={
-                  featuredCars[0].data.imageAlt || featuredCars[0].data.title
-                }
+                alt={cards[0].imageAlt || cards[0].title}
                 widths={[400, 605, 800]}
                 sizes="(max-width: 1024px) 50vw, 400px"
                 inferSize={true}
@@ -73,14 +64,11 @@ const featuredCars = allCars.filter((car) => car.data.featured);
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
               <div class="absolute bottom-0 left-0 right-0 p-6">
                 <h3 class="text-white font-medium text-xl mb-2 leading-tight">
-                  {featuredCars[0].data.title}
+                  {cards[0].title}
                 </h3>
-                <p class="text-white text-base line-clamp-2 leading-relaxed hidden sm:block ">
-                  {featuredCars[0].data.description}
-                </p>
-                {featuredCars[0].data.price && (
+                {cards[0].price && (
                   <p class="text-white font-semibold text-lg mt-3">
-                    {featuredCars[0].data.price}
+                    £{cards[0].price} <span class="font-normal">/per day</span>
                   </p>
                 )}
               </div>
@@ -92,12 +80,12 @@ const featuredCars = allCars.filter((car) => car.data.featured);
 
         <div class="flex flex-col gap-8 lg:gap-8">
           {
-            featuredCars.slice(1, 3).map((card) => (
+            cards.slice(1, 3).map((card) => (
               <div class="group relative overflow-hidden rounded-2xl shadow-lg">
                 <Picture
-                  src={card.data.horizontalImage}
+                  src={card.image.filename}
                   formats={["avif", "webp"]}
-                  alt={card.data.imageAlt || card.data.title}
+                  alt={card.imageAlt || card.title}
                   widths={[400, 600, 800]}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                   inferSize={true}
@@ -108,14 +96,12 @@ const featuredCars = allCars.filter((car) => car.data.featured);
 
                 <div class="absolute bottom-0 left-0 right-0 p-6">
                   <h3 class="text-white font-medium text-lg mb-2 leading-tight">
-                    {card.data.title}
+                    {card.title}
                   </h3>
-                  <p class="text-white text-base line-clamp-2 leading-relaxed hidden sm:block ">
-                    {card.data.description}
-                  </p>
-                  {card.data.price && (
+                  {card.price && (
                     <p class="text-white font-semibold text-base mt-3">
-                      {card.data.price}
+                      £{cards[0].price}{" "}
+                      <span class="font-normal">/per day</span>
                     </p>
                   )}
                 </div>

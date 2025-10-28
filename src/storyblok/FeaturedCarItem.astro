@@ -1,0 +1,87 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { Picture } from "astro:assets";
+const { car } = Astro.props;
+const { title, price, description, image, imageAlt, features, link } = car;
+
+// Parse features from textarea (one per line)
+const featuresList = features
+  ? features.split("\n").filter((f) => f.trim())
+  : [];
+
+// Generate link URL
+const linkUrl = link?.cached_url || link?.url || "#";
+---
+
+<article class="group cursor-pointer">
+  <a href={linkUrl} class="block">
+    <div class="relative overflow-hidden rounded-lg shadow-lg">
+      {/* Car Image */}
+      <div class="aspect-[4/3]">
+        {
+          image?.filename && (
+            <Picture
+              src={image.filename}
+              inferSize={true}
+              formats={["avif", "webp"]}
+              alt={imageAlt || title}
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          )
+        }
+      </div>
+
+      {/* Overlay Content */}
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300"
+      >
+        <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+          <h3
+            class="text-white font-bold text-lg sm:text-xl mb-2 leading-tight"
+          >
+            {title}
+          </h3>
+
+          {
+            price && (
+              <p class="text-white font-semibold text-base sm:text-lg mb-3">
+                {price}
+              </p>
+            )
+          }
+
+          {
+            description && (
+              <p class="text-white text-sm sm:text-base line-clamp-2 leading-relaxed mb-3">
+                {description}
+              </p>
+            )
+          }
+
+          {
+            featuresList.length > 0 && (
+              <div class="flex flex-wrap gap-1 sm:gap-2">
+                {featuresList.slice(0, 3).map((feature, index) => (
+                  <span
+                    key={index}
+                    class="text-white/90 text-xs sm:text-sm bg-white/20 px-2 py-1 rounded"
+                  >
+                    {feature}
+                  </span>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      {/* Hover border effect */}
+      <div
+        class="absolute inset-0 border-2 border-white/0 group-hover:border-white/30 transition-all duration-300 rounded-lg pointer-events-none"
+      >
+      </div>
+    </div>
+  </a>
+</article>
