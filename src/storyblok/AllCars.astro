@@ -50,3 +50,62 @@ const allCars = await getCollection("cars");
         </div>
     </div>
 </section>
+
+<script>
+    // Update this variable with your website URL
+    const allowedOrigin = "https://orbiy.netlify.app";
+    // Define the ID of the iframe that you want to resize dynamically
+    const iframeId = "myIframe";
+    // Use to get iframe height
+    var iframeHeight = 0;
+    // Use to send current position of iframe
+    let debounceTimeout: number;
+
+    window.addEventListener("message", (event) => {
+        if (event.origin === allowedOrigin) {
+            if (event.data.type === "PAGE_HEIGHT_CHANGE") {
+                let newHeight = event.data.height;
+
+                const iframe = document.getElementById(iframeId);
+
+                if (iframe) {
+                    iframeHeight = newHeight;
+                    iframe.style.height = `${iframeHeight}px`;
+                } else {
+                    console.warn(
+                        `Iframe with ID '${iframeId}' not found. Please ensure the correct ID is set.`,
+                    );
+                }
+            }
+        } else {
+            console.warn(
+                "Received message from unexpected origin:",
+                event.origin,
+            );
+        }
+    });
+
+    window.addEventListener("scroll", () => {
+        const iframe = document.getElementById(iframeId);
+
+        if (iframe) {
+            const rect = iframe.getBoundingClientRect();
+            const visibleTop = window.scrollY + rect.top;
+            const currentPosition = window.scrollY - visibleTop;
+            const maximumAllowedHeight = iframeHeight * 0.8; // 80%
+
+            clearTimeout(debounceTimeout);
+
+            // Send the current scroll position to the iframe when scrolling stops
+            debounceTimeout = setTimeout(() => {
+                // Send the current scroll position to the iframe only while scrolling within it, not before or after
+                if (rect.top <= 0 && currentPosition <= maximumAllowedHeight) {
+                    (iframe as HTMLIFrameElement).contentWindow.postMessage(
+                        { type: "scrollPosition", currentPosition },
+                        "*",
+                    );
+                }
+            }, 200);
+        }
+    });
+</script>

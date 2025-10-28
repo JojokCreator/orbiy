@@ -5,7 +5,8 @@ import Layout from "../layouts/Layout.astro";
 import type { Page } from "../../.storyblok/types/288025125330867/storyblok-components.d.ts";
 
 const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
-const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
+
+const isPreview = isLocal ? true : import.meta.env.STORYBLOK_PREVIEW === 'yes'
 
 interface StoryblokStory {
 	name: string;
@@ -22,8 +23,8 @@ interface StoryblokStory {
 export async function getStaticPaths() {
 	// Skip getStaticPaths for SSR mode (local + preview)
 	const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
-	const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
-	if (isLocal && isPreview) {
+	const isPreview = isLocal ? true : import.meta.env.STORYBLOK_PREVIEW === 'yes'
+	if (isPreview) {
 		return [];
 	}
 
@@ -60,11 +61,11 @@ let story: StoryblokStory = Astro.props.story;
 if (!story) {
 	const sbApi = useStoryblokApi();
 	const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
-	const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
+	const isPreview = isLocal ? true : import.meta.env.STORYBLOK_PREVIEW === 'yes'
 
 	try {
 		const { data } = await sbApi.get(`cdn/stories/${storySlug}`, {
-			version: isLocal && isPreview ? "draft" : "published",
+			version: isPreview ? "draft" : "published",
 		});
 		story = data.story;
 	} catch (error) {
@@ -85,7 +86,7 @@ try {
 	const { data: siteConfigData } = await sbApi.get(
 		"cdn/stories/site-config",
 		{
-			version: isLocal && isPreview ? "draft" : "published",
+			version: isPreview ? "draft" : "published",
 		},
 	);
 	siteConfig = siteConfigData.story?.content;

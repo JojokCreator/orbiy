@@ -134,7 +134,7 @@ const mobileLinkClasses = invertMenu
 				cta_button && (
 					<Button
 						class="hidden w-52 items-center text-center lg:flex"
-						link={cta_button[0].link}
+						link={cta_button[0].link.cached_url}
 						type={cta_button[0].style || "gray"}
 						buttonText={cta_button[0].text}
 					/>
