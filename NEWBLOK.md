@@ -205,7 +205,7 @@ const { image, title, description } = blok;
 ```
 
 ```astro
-<a href={blok.button_link?.cached_url || "#"}>
+<a href={"/"+blok.button_link?.cached_url || "#"}>
   {blok.button_text}
 </a>
 ```

@@ -112,7 +112,7 @@ const {
             footer_nav_links?.map((item: any) => (
               <li>
                 <a
-                  href={item.link?.cached_url}
+                  href={"/"+item.link?.cached_url}
                   class="hover:opacity-70 transition-opacity"
                 >
                   {item.label}
@@ -161,7 +161,7 @@ const {
         <Button
           type={waitlist_button?.[0]?.style || "black"}
           buttonText={waitlist_button?.[0]?.text || "START YOUR INQUIRY"}
-          link={waitlist_button?.[0]?.link?.cached_url || "#"}
+          link={"/"+waitlist_button?.[0]?.link?.cached_url || "#"}
           class="w-full md:w-auto"
         />
       </div>
