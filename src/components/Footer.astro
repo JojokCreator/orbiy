@@ -9,7 +9,10 @@ let siteConfig;
 const sbApi = useStoryblokApi();
 try {
   const { data: siteConfigData } = await sbApi.get("cdn/stories/site-config", {
-    version: import.meta.env.DEV ? "draft" : "published",
+    version:
+      import.meta.env.STORYBLOK_LOCAL && import.meta.env.STORYBLOK_PREVIEW
+        ? "draft"
+        : "published",
     resolve_links: "url",
   });
   siteConfig = siteConfigData.story?.content;
@@ -61,21 +64,21 @@ const {
                 let href = url;
                 let target = undefined;
                 let rel = undefined;
-        
+
                 if (url.includes("@") && !url.startsWith("http")) {
                   href = `mailto:${url}`;
                 }
-        
+
                 if (url.startsWith("https://") || url.startsWith("http://")) {
                   target = "_blank";
                   rel = "noopener noreferrer";
                 }
-                
+
                 if (href === "#") {
-                    target = undefined;
-                    rel = undefined;
+                  target = undefined;
+                  rel = undefined;
                 }
-        
+
                 return (
                   <a
                     href={href}
@@ -85,7 +88,7 @@ const {
                     aria-label={link.link_text}
                   >
                     {link.icon?.filename && (
-                      <Image 
+                      <Image
                         src={link.icon.filename}
                         alt={link.link_text}
                         width={24}

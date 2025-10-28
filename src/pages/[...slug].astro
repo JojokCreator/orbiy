@@ -17,12 +17,18 @@ interface StoryblokStory {
 }
 
 export async function getStaticPaths() {
+	// Skip getStaticPaths for SSR mode (local + preview)
+	if (import.meta.env.STORYBLOK_LOCAL && import.meta.env.STORYBLOK_PREVIEW) {
+		// Return empty array for SSR - paths will be handled dynamically
+		return [];
+	}
+
 	const sbApi = useStoryblokApi();
 
 	try {
 		const { data } = await sbApi.get("cdn/stories", {
 			content_type: "page",
-			version: import.meta.env.DEV ? "draft" : "published",
+			version: "published",
 		});
 
 		const stories: StoryblokStory[] = Object.values(data.stories);
@@ -35,7 +41,7 @@ export async function getStaticPaths() {
 	} catch (error) {
 		console.error("❌ Storyblok API Error in getStaticPaths:", error);
 		throw new Error(
-			`Failed to fetch stories from Storyblok: ${error instanceof Error ? error.message : 'Unknown error'}`
+			`Failed to fetch stories from Storyblok: ${error instanceof Error ? error.message : "Unknown error"}`,
 		);
 	}
 }
@@ -51,13 +57,20 @@ if (!story) {
 	const sbApi = useStoryblokApi();
 	try {
 		const { data } = await sbApi.get(`cdn/stories/${storySlug}`, {
-			version: import.meta.env.DEV ? "draft" : "published",
+			version:
+				import.meta.env.STORYBLOK_LOCAL &&
+				import.meta.env.STORYBLOK_PREVIEW
+					? "draft"
+					: "published",
 		});
 		story = data.story;
 	} catch (error) {
-		console.error(`❌ Storyblok API Error fetching story "${storySlug}":`, error);
+		console.error(
+			`❌ Storyblok API Error fetching story "${storySlug}":`,
+			error,
+		);
 		throw new Error(
-			`Failed to fetch story "${storySlug}" from Storyblok: ${error instanceof Error ? error.message : 'Unknown error'}`
+			`Failed to fetch story "${storySlug}" from Storyblok: ${error instanceof Error ? error.message : "Unknown error"}`,
 		);
 	}
 }
@@ -69,7 +82,11 @@ try {
 	const { data: siteConfigData } = await sbApi.get(
 		"cdn/stories/site-config",
 		{
-			version: import.meta.env.DEV ? "draft" : "published",
+			version:
+				import.meta.env.STORYBLOK_LOCAL &&
+				import.meta.env.STORYBLOK_PREVIEW
+					? "draft"
+					: "published",
 		},
 	);
 	siteConfig = siteConfigData.story?.content;
@@ -79,7 +96,7 @@ try {
 	siteConfig = {
 		site_name: "ORBiY",
 		site_description: "Discover your next vehicle with ORBiY",
-		og_image: "/images/og-default.jpg"
+		og_image: "/images/og-default.jpg",
 	};
 }
 // Validate story data
