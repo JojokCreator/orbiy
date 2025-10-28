@@ -12,14 +12,11 @@
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.6",
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/node": "^9.5.0",
 		"@astrojs/sitemap": "^3.4.1",
-		"@glidejs/glide": "^3.7.1",
 		"@storyblok/astro": "^7.3.4",
 		"astro": "^5.15.1",
 		"astro-icon": "^1.1.5",
 		"sharp": "^0.34.3",
-		"swiper": "^11.2.10",
 		"tailwind-merge": "^3.3.1",
 		"typescript": "^5.8.3",
 		"vite": "^7.1.12",
@@ -27,7 +24,6 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/vite": "^4.1.11",
-		"@types/glidejs__glide": "^3.6.6",
 		"prettier": "^3.6.2",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.6.14",

@@ -8,11 +8,6 @@ const { title, description, featured_cars_button } = blok;
 
 // Get all cars from the content collection
 const allCars = await getCollection("cars");
-
-// Display all cars
-const displayCars = allCars;
-const initialLimit = 6;
-const hasMoreCars = displayCars.length > initialLimit;
 ---
 
 <section {...storyblokEditable(blok)} class="site-container vertical-p">

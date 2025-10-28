@@ -1,7 +1,6 @@
 ---
 import { useStoryblokApi } from "@storyblok/astro";
 import Button from "../components/reusable/Button.astro";
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
 let siteConfig;
@@ -57,16 +56,14 @@ const {
         {
           social_links && social_links.length > 0 && (
             <div class="flex gap-3 pt-2">
-              {social_links.map((link: any, index: number) => {
+              {social_links.map((link: any) => {
                 const url = link.link_target || "#";
                 let href = url;
                 let target = undefined;
                 let rel = undefined;
-                let isEmail = false;
         
                 if (url.includes("@") && !url.startsWith("http")) {
                   href = `mailto:${url}`;
-                  isEmail = true;
                 }
         
                 if (url.startsWith("https://") || url.startsWith("http://")) {
@@ -109,7 +106,7 @@ const {
         <h3 class="font-semibold mb-4">Quick Links</h3>
         <ul class="space-y-2 text-sm">
           {
-            footer_nav_links?.map((item: any, index: number) => (
+            footer_nav_links?.map((item: any) => (
               <li>
                 <a
                   href={item.link?.cached_url}

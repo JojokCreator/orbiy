@@ -23,7 +23,7 @@ const { header, title, features } = blok;
       features && features.length > 0 && (
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {features.map(
-            (feature: { title: string; text: string }, index: number) => (
+            (feature: { title: string; text: string }) => (
               <div class="bg-red-light rounded-lg p-6 md:p-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <div class="space-y-4">
                   {feature.title && <h3 class="text-lg sm:text-xl font-semibold text-white leading-tight">{feature.title}</h3>}
