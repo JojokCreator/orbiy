@@ -63,7 +63,6 @@ if (!story) {
 	const sbApi = useStoryblokApi();
 	const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
 	const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
-	console.log("isLocal:", isLocal, "isPreview:", isPreview);
 
 	try {
 		const { data } = await sbApi.get(`cdn/stories/${storySlug}`, {

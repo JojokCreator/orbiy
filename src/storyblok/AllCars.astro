@@ -7,10 +7,10 @@ const { blok } = Astro.props;
 const { title, description, featured_cars_button } = blok;
 
 // Get all cars from the content collection
-const allCars = await getCollection("cars");    
+const allCars = await getCollection("cars");
 ---
 
-<section {...storyblokEditable(blok)}>
+<section {...storyblokEditable(blok)} class="">
     <div class="site-container vertical-p">
         <div>
             {/* Title - Always h1 and centered */}
