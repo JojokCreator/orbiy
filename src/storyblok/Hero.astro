@@ -38,14 +38,14 @@ const HeadingTag = heading_type || "h2";
 ---
 
 <section
-  class={`relative ${backgroundImageUrl ? "min-h-[100dvh]" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass}`}
+  class={`relative ${backgroundImageUrl ? "min-h-[100vh]" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass}`}
   style={backgroundImageUrl &&
     `background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
   {...storyblokEditable(blok)}
 >
   {backgroundImageUrl && <div class="absolute inset-0 bg-black/60" />}
   <div
-    class="relative z-10 flex h-[100dvh] md:pb-20 w-full flex-col items-center justify-center px-4 text-center max-w-4xl mx-auto"
+    class="relative z-10 flex h-[100vh] md:pb-20 w-full flex-col items-center justify-center px-4 text-center max-w-4xl mx-auto"
   >
     <Fragment
       set:html={`<${HeadingTag} class="mb-6 text-white text-pretty">${title}</${HeadingTag}>`}
