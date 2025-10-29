@@ -26,5 +26,6 @@ pnpm-debug.log*
 
 .claude
 CLAUDE.MD
+NEWBLOK.md
 # Local Netlify folder
 .netlify
