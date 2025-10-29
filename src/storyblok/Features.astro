@@ -39,7 +39,7 @@ if (background_image?.filename) {
           features?.map((feature: { title: string; description: string }) => (
             <div class="flex items-start space-x-4">
               <div class="flex-1 border-b border-white py-6">
-                <p class="text-white mb-2 text-xl md:text-2xl">
+                <p class="text-white mb-2 text-lg sm:text-xl font-medium">
                   {feature.title}
                 </p>
                 <p class="text-white text-base">{feature.description}</p>
@@ -54,7 +54,7 @@ if (background_image?.filename) {
             <Button
               type={features_button[0].style}
               buttonText={features_button[0].text}
-              link={"/"+features_button[0].link.cached_url}
+              link={"/" + features_button[0].link.cached_url}
             />
           </div>
         )
