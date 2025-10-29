@@ -7,7 +7,6 @@ const { blok } = Astro.props;
 const { title, description, heading_type, background_color, button, image } =
   blok;
 
-// Get optimized background image
 let backgroundImageUrl = "";
 if (image?.filename) {
   const { src } = await getImage({
@@ -20,7 +19,6 @@ if (image?.filename) {
   backgroundImageUrl = src;
 }
 
-// Determine background color class
 const getBackgroundColorClass = (color: string) => {
   switch (color) {
     case "green":
@@ -36,7 +34,6 @@ const backgroundColorClass = getBackgroundColorClass(
   background_color || "black",
 );
 
-// Determine heading tag
 const HeadingTag = heading_type || "h2";
 ---
 

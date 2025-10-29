@@ -16,7 +16,6 @@ const {
   poster_image_mobile,
 } = blok;
 
-// Get optimized poster images if provided
 let posterUrl = "";
 let posterUrlMobile = "";
 
@@ -42,7 +41,6 @@ if (poster_image_mobile?.filename) {
   posterUrlMobile = src;
 }
 
-// Determine background color class
 const getBackgroundColorClass = (color: string) => {
   switch (color) {
     case "green":

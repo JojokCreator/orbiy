@@ -9,32 +9,25 @@ const { title, header, description, featured_cars_button, featured_cars } =
 
 const showHr = !!header;
 
-// Get cars from Storyblok data
 const displayCars = featured_cars || [];
 const initialLimit = 3;
 ---
 
 <section {...storyblokEditable(blok)} class="site-container vertical-p">
     <div>
-        {/* Header */}
         {
             header && (
                 <p class="text-black font-semibold pb-2 md:pb-4">{header}</p>
             )
         }
-
-        {/* Conditional HR - only show if header exists */}
         {showHr && <hr class="border-t border-black h-1 w-full pb-6 md:pb-8" />}
 
         <div>
-            {/* Title */}
-            <Fragment set:html={`<h2 class="text-gray">${title}</h2>`} />
+                        <Fragment set:html={`<h2 class="text-gray">${title}</h2>`} />
 
-            {/* Description */}
-            {description && <p class={`text-gray mt-4`}>{description}</p>}
+                        {description && <p class={`text-gray mt-4`}>{description}</p>}
 
-            <!-- Cars Grid -->
-            {
+                        {
                 displayCars.length > 0 && (
                     <div id="cars-container" class="mt-8">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -49,8 +42,7 @@ const initialLimit = 3;
                     </div>
                 )
             }
-            <!-- Footer CTA Button -->
-            {
+                        {
                 featured_cars_button && featured_cars_button.length > 0 && (
                     <div class="mt-6 md:mt-12">
                         {

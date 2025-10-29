@@ -4,18 +4,16 @@ import { Picture } from "astro:assets";
 import { storyblokEditable } from "@storyblok/astro";
 
 interface Props {
-  car: any; // Storyblok car item data
+  car: any;
 }
 
 const { car } = Astro.props;
 const { title, price, description, image, imageAlt, features, link } = car;
 
-// Parse features from textarea (one per line)
 const featuresList = features
   ? features.split("\n").filter((f: string) => f.trim())
   : [];
 
-// Generate link URL
 const linkUrl = link?.cached_url || link?.url || "#";
 ---
 
@@ -24,7 +22,6 @@ const linkUrl = link?.cached_url || link?.url || "#";
     {...storyblokEditable(car)}
     class="bg-white/50 border rounded-lg border-gray-200 hover:border-neutral-800 hover:shadow-xs transition-all duration-600 hover:-translate-y-0.5"
   >
-    <!-- Car Image -->
     <div class="relative h-fit mb-6 rounded-t-lg overflow-hidden bg-gray-100">
       {
         image?.filename ? (
