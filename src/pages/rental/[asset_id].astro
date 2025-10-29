@@ -1,7 +1,6 @@
 ---
 import { useStoryblokApi } from "@storyblok/astro";
 import Layout from "../../layouts/Layout.astro";
-import { Picture } from "astro:assets";
 import { Icon } from "astro-icon/components";
 
 interface CarData {
@@ -34,11 +33,7 @@ async function getAllUniqueCars(): Promise<{ [key: string]: CarData }> {
       if (blok.component === "Featured Cars" && blok.featured_cars) {
         for (const car of blok.featured_cars) {
           // Extract car ID from loopit URL
-          let carId =
-            car.uuid ||
-            car.id ||
-            car._uid ||
-            Math.random().toString(36).substr(2, 9);
+          let carId;
 
           if (car.link?.cached_url) {
             const url = car.link.cached_url;
