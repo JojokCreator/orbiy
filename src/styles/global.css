@@ -80,7 +80,7 @@
     @media (min-width: theme('screens.lg')) {
         p {
             font-size: 1.3125rem;
-            line-height: 2.2rem;
+            line-height: 2rem;
         }
     }
 
