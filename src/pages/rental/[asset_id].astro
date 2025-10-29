@@ -11,20 +11,24 @@ interface CarData {
   };
 }
 
-// Function to extract unique cars from all sources
-async function getAllUniqueCars(): Promise<{ [key: string]: CarData }> {
-  const sbApi = useStoryblokApi();
+
+export async function getStaticPaths() {
+  // Skip getStaticPaths for SSR mode (local + preview)
   const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
   const isPreview = isLocal
     ? true
     : import.meta.env.STORYBLOK_PREVIEW === "yes";
+  if (isPreview) {
+    return [];
+  }
 
+  const sbApi = useStoryblokApi();
   const uniqueCars: { [key: string]: CarData } = {};
 
   try {
-    // Fetch all pages to find cars
+    // Fetch home page to find cars
     const { data } = await sbApi.get("cdn/stories/home", {
-      version: isPreview ? "draft" : "published",
+      version: "published",
     });
     const bloks = data.story.content.body;
 
@@ -32,7 +36,6 @@ async function getAllUniqueCars(): Promise<{ [key: string]: CarData }> {
       // Extract cars from Featured Cars components
       if (blok.component === "Featured Cars" && blok.featured_cars) {
         for (const car of blok.featured_cars) {
-          // Extract car ID from loopit URL
           let carId;
 
           if (car.link?.cached_url) {
@@ -52,12 +55,7 @@ async function getAllUniqueCars(): Promise<{ [key: string]: CarData }> {
       // Extract cars from ImageGrid components
       if (blok.component === "ImageGrid" && blok.grid_cards) {
         for (const card of blok.grid_cards) {
-          // Extract car ID from loopit URL
-          let cardId =
-            card.uuid ||
-            card.id ||
-            card._uid ||
-            Math.random().toString(36).substr(2, 9);
+          let cardId = card.uuid || card.id || card._uid || Math.random().toString(36).substr(2, 9);
 
           if (card.link?.cached_url) {
             const url = card.link.cached_url;
@@ -77,21 +75,6 @@ async function getAllUniqueCars(): Promise<{ [key: string]: CarData }> {
     console.error("❌ Error fetching cars:", error);
   }
 
-  return uniqueCars;
-}
-
-export async function getStaticPaths() {
-  // Skip getStaticPaths for SSR mode (local + preview)
-  const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
-  const isPreview = isLocal
-    ? true
-    : import.meta.env.STORYBLOK_PREVIEW === "yes";
-  if (isPreview) {
-    return [];
-  }
-
-  const uniqueCars = await getAllUniqueCars();
-
   return Object.entries(uniqueCars).map(([carId, car]) => ({
     params: { asset_id: carId },
     props: { car },
@@ -103,7 +86,64 @@ const { asset_id } = Astro.params;
 // Get car data from props (build time) or fetch (dev time)
 let car: CarData = Astro.props.car;
 if (!car) {
-  const uniqueCars = await getAllUniqueCars();
+  const sbApi = useStoryblokApi();
+  const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
+  const isPreview = isLocal
+    ? true
+    : import.meta.env.STORYBLOK_PREVIEW === "yes";
+
+  const uniqueCars: { [key: string]: CarData } = {};
+
+  try {
+    // Fetch home page to find cars
+    const { data } = await sbApi.get("cdn/stories/home", {
+      version: isPreview ? "draft" : "published",
+    });
+    const bloks = data.story.content.body;
+
+    for (const blok of bloks) {
+      // Extract cars from Featured Cars components
+      if (blok.component === "Featured Cars" && blok.featured_cars) {
+        for (const carData of blok.featured_cars) {
+          let carId;
+
+          if (carData.link?.cached_url) {
+            const url = carData.link.cached_url;
+            const match = url.match(/\/book\/([^?]+)/);
+            if (match && match[1]) {
+              carId = match[1];
+            }
+          }
+          uniqueCars[carId] = {
+            title: carData.title,
+            link: carData.link,
+          };
+        }
+      }
+
+      // Extract cars from ImageGrid components
+      if (blok.component === "ImageGrid" && blok.grid_cards) {
+        for (const card of blok.grid_cards) {
+          let cardId = card.uuid || card.id || card._uid || Math.random().toString(36).substr(2, 9);
+
+          if (card.link?.cached_url) {
+            const url = card.link.cached_url;
+            const match = url.match(/\/book\/([^?]+)/);
+            if (match && match[1]) {
+              cardId = match[1];
+            }
+          }
+          uniqueCars[cardId] = {
+            title: card.title,
+            link: card.link,
+          };
+        }
+      }
+    }
+  } catch (error) {
+    console.error("❌ Error fetching cars:", error);
+  }
+
   car = uniqueCars[asset_id];
 }
 
