@@ -58,7 +58,7 @@ const cards = grid_cards || [];
                 widths={[400, 605, 800]}
                 sizes="(max-width: 1024px) 50vw, 400px"
                 inferSize={true}
-                class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]"
               />
 
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
@@ -78,7 +78,41 @@ const cards = grid_cards || [];
           )
         }
 
-        <div class="flex flex-col gap-8 lg:gap-8">
+        <div class="hidden md:flex flex-col gap-8 md:gap-12 h-full">
+          {
+            cards.slice(1, 3).map((card) => (
+              <div class="group relative overflow-hidden rounded-2xl shadow-lg flex-1">
+                <Picture
+                  src={card.image.filename}
+                  formats={["avif", "webp"]}
+                  alt={card.imageAlt || card.title}
+                  widths={[400, 600, 800]}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+                  inferSize={true}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                />
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+
+                <div class="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 class="text-white font-medium text-lg mb-2 leading-tight">
+                    {card.title}
+                  </h3>
+                  {card.price && (
+                    <p class="text-white font-semibold text-base mt-3">
+                      £{card.price} <span class="font-normal">/per day</span>
+                    </p>
+                  )}
+                </div>
+
+                <div class="absolute inset-0 border-2 border-white/0 group-hover:border-white/20 transition-all duration-300 rounded-2xl" />
+              </div>
+            ))
+          }
+        </div>
+
+        {/* Mobile layout for the right column cards */}
+        <div class="md:hidden flex flex-col gap-8 lg:gap-8.5">
           {
             cards.slice(1, 3).map((card) => (
               <div class="group relative overflow-hidden rounded-2xl shadow-lg">
@@ -100,8 +134,7 @@ const cards = grid_cards || [];
                   </h3>
                   {card.price && (
                     <p class="text-white font-semibold text-base mt-3">
-                      £{cards[0].price}{" "}
-                      <span class="font-normal">/per day</span>
+                      £{card.price} <span class="font-normal">/per day</span>
                     </p>
                   )}
                 </div>

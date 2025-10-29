@@ -4,7 +4,8 @@ import Button from "../components/reusable/Button.astro";
 import FeaturedCarCard from "../components/FeaturedCarCard.astro";
 
 const { blok } = Astro.props;
-const { title, header, description, featured_cars_button, featured_cars } = blok;
+const { title, header, description, featured_cars_button, featured_cars } =
+    blok;
 
 const showHr = !!header;
 
@@ -37,11 +38,13 @@ const initialLimit = 3;
                 displayCars.length > 0 && (
                     <div id="cars-container" class="mt-8">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {displayCars.slice(0, initialLimit).map((car) => (
-                                <div class="car-item">
-                                    <FeaturedCarCard car={car} />
-                                </div>
-                            ))}
+                            {displayCars
+                                .slice(0, initialLimit)
+                                .map((car: any) => (
+                                    <div class="car-item">
+                                        <FeaturedCarCard car={car} />
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 )
