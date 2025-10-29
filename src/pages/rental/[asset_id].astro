@@ -1,0 +1,211 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import Layout from "../../layouts/Layout.astro";
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface CarData {
+  title: string;
+  link?: {
+    cached_url?: string;
+    url?: string;
+  };
+}
+
+// Function to extract unique cars from all sources
+async function getAllUniqueCars(): Promise<{ [key: string]: CarData }> {
+  const sbApi = useStoryblokApi();
+  const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
+  const isPreview = isLocal
+    ? true
+    : import.meta.env.STORYBLOK_PREVIEW === "yes";
+
+  const uniqueCars: { [key: string]: CarData } = {};
+
+  try {
+    // Fetch all pages to find cars
+    const { data } = await sbApi.get("cdn/stories/home", {
+      version: isPreview ? "draft" : "published",
+    });
+    const bloks = data.story.content.body;
+
+    for (const blok of bloks) {
+      // Extract cars from Featured Cars components
+      if (blok.component === "Featured Cars" && blok.featured_cars) {
+        for (const car of blok.featured_cars) {
+          // Extract car ID from loopit URL
+          let carId =
+            car.uuid ||
+            car.id ||
+            car._uid ||
+            Math.random().toString(36).substr(2, 9);
+
+          if (car.link?.cached_url) {
+            const url = car.link.cached_url;
+            const match = url.match(/\/book\/([^?]+)/);
+            if (match && match[1]) {
+              carId = match[1];
+            }
+          }
+          uniqueCars[carId] = {
+            title: car.title,
+            link: car.link,
+          };
+        }
+      }
+
+      // Extract cars from ImageGrid components
+      if (blok.component === "ImageGrid" && blok.grid_cards) {
+        for (const card of blok.grid_cards) {
+          // Extract car ID from loopit URL
+          let cardId =
+            card.uuid ||
+            card.id ||
+            card._uid ||
+            Math.random().toString(36).substr(2, 9);
+
+          if (card.link?.cached_url) {
+            const url = card.link.cached_url;
+            const match = url.match(/\/book\/([^?]+)/);
+            if (match && match[1]) {
+              cardId = match[1];
+            }
+          }
+          uniqueCars[cardId] = {
+            title: card.title,
+            link: card.link,
+          };
+        }
+      }
+    }
+  } catch (error) {
+    console.error("❌ Error fetching cars:", error);
+  }
+
+  return uniqueCars;
+}
+
+export async function getStaticPaths() {
+  // Skip getStaticPaths for SSR mode (local + preview)
+  const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
+  const isPreview = isLocal
+    ? true
+    : import.meta.env.STORYBLOK_PREVIEW === "yes";
+  if (isPreview) {
+    return [];
+  }
+
+  const uniqueCars = await getAllUniqueCars();
+
+  return Object.entries(uniqueCars).map(([carId, car]) => ({
+    params: { asset_id: carId },
+    props: { car },
+  }));
+}
+
+const { asset_id } = Astro.params;
+
+// Get car data from props (build time) or fetch (dev time)
+let car: CarData = Astro.props.car;
+if (!car) {
+  const uniqueCars = await getAllUniqueCars();
+  car = uniqueCars[asset_id];
+}
+
+if (!car) {
+  return Astro.redirect("/404");
+}
+
+// SEO metadata
+const pageTitle = `${car.title} - Car Rental | ORBiY`;
+const pageDescription = `Rent ${car.title} with ORBiY. Explore our selection of vehicles for your next adventure. Book now!`;
+---
+
+<Layout title={pageTitle} description={pageDescription} invertMenu={true}>
+  <section class="max-w-7xl mx-auto py-12 sm:py-24">
+    {
+      car.link && (
+        <div class="w-full h-[600px] md:h-[800px] lg:h-[1000px] rounded-lg overflow-hidden">
+          <iframe
+            id="myIframe"
+            src={car.link?.cached_url}
+            class="w-full h-full border-0"
+            title={`${car.title} - Car Details`}
+            loading="lazy"
+          />
+        </div>
+        <div class="mt-4 text-center">
+          <a
+            href={car.link?.cached_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-4 py-2 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            <Icon name="external-link" class="mr-2" />
+            Open Booking Form in New Tab
+          </a>
+        </div>
+      )
+    }
+  </section>
+  <script>
+    // Update this variable with your website URL
+    const allowedOrigin = "https://orbiy.netlify.app";
+    // Define the ID of the iframe that you want to resize dynamically
+    const iframeId = "myIframe";
+    // Use to get iframe height
+    var iframeHeight = 0;
+    // Use to send current position of iframe
+    let debounceTimeout: number | null = null;
+
+    window.addEventListener("message", (event) => {
+      if (event.origin === allowedOrigin) {
+        if (event.data.type === "PAGE_HEIGHT_CHANGE") {
+          let newHeight = event.data.height;
+
+          const iframe = document.getElementById(iframeId);
+
+          if (iframe) {
+            iframeHeight = newHeight;
+            iframe.style.height = `${iframeHeight}px`;
+          } else {
+            console.warn(
+              `Iframe with ID '${iframeId}' not found. Please ensure the correct ID is set.`,
+            );
+          }
+        }
+      } else {
+        console.warn("Received message from unexpected origin:", event.origin);
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      const iframe = document.getElementById(iframeId);
+
+      if (iframe) {
+        const rect = iframe.getBoundingClientRect();
+        const visibleTop = window.scrollY + rect.top;
+        const currentPosition = window.scrollY - visibleTop;
+        const maximumAllowedHeight = iframeHeight * 0.8; // 80%
+
+        if (debounceTimeout !== null) {
+          clearTimeout(debounceTimeout);
+        }
+
+        // Send the current scroll position to the iframe when scrolling stops
+        debounceTimeout = window.setTimeout(() => {
+          // Send the current scroll position to the iframe only while scrolling within it, not before or after
+          if (rect.top <= 0 && currentPosition <= maximumAllowedHeight) {
+            const iframeElement = iframe as HTMLIFrameElement;
+            if (iframeElement.contentWindow) {
+              iframeElement.contentWindow.postMessage(
+                { type: "scrollPosition", currentPosition },
+                "*",
+              );
+            }
+          }
+        }, 200);
+      }
+    });
+  </script>
+</Layout>

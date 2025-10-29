@@ -23,7 +23,23 @@ interface Props {
 }
 
 const { card, link, isFirst = false, isMobile = false } = Astro.props;
-const { title, price, image, imageAlt } = card;
+const { title, price, image, imageAlt, uuid, id } = card;
+
+// Extract car ID from loopit URL or generate fallback
+let assetId = uuid || id || Math.random().toString(36).substr(2, 9);
+
+if (link?.cached_url) {
+  const url = link.cached_url;
+  const match = url.match(/\/book\/([^?]+)/);
+  if (match && match[1]) {
+    assetId = match[1];
+  }
+}
+
+const rentalUrl = `/rental/${assetId}`;
+
+// Always link to our rental page
+const linkUrl = rentalUrl;
 
 const getImageSrc = () => {
   const baseUrl = image.filename;
@@ -42,12 +58,7 @@ const getImageSrc = () => {
 };
 ---
 
-<a
-  href={link?.cached_url}
-  class="block"
-  target="_blank"
-  rel="noopener noreferrer"
->
+<a href={linkUrl} class="block">
   <div
     class={`group relative overflow-hidden rounded-2xl shadow-lg h-full ${isFirst && !isMobile ? "" : isMobile ? "aspect-square" : "aspect-[16/9]"}`}
   >
