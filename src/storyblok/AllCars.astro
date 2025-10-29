@@ -5,12 +5,6 @@ import Button from "../components/reusable/Button.astro";
 
 const { blok } = Astro.props;
 const { title, description, featured_cars_button } = blok;
-
-// Get all cars from the content collection
-const allCars = await getCollection("cars");
-
-// Use allCars for potential future features or logging
-console.log(`Loaded ${allCars.length} cars`);
 ---
 
 <section {...storyblokEditable(blok)} class="">
@@ -45,7 +39,10 @@ console.log(`Loaded ${allCars.length} cars`);
                             <Button
                                 type={featured_cars_button[0].style}
                                 buttonText={featured_cars_button[0].text}
-                                link={"/"+featured_cars_button[0].link.cached_url}
+                                link={
+                                    "/" +
+                                    featured_cars_button[0].link.cached_url
+                                }
                             />
                         }
                     </div>
