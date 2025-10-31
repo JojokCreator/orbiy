@@ -1,5 +1,5 @@
 ---
-import { storyblokEditable } from "@storyblok/astro";
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
 
 const { blok } = Astro.props;
 const { content } = blok;
@@ -7,8 +7,8 @@ const { content } = blok;
 
 <section {...storyblokEditable(blok)} class="vertical-p">
   <div class="site-container">
-    <div class="prose prose-lg prose-invert max-w-none">
-      <div set:html={content} />
+    <div class="prose prose-lg lg:prose-xl prose-slate max-w-none">
+      <div set:html={renderRichText(content)} />
     </div>
   </div>
 </section>
