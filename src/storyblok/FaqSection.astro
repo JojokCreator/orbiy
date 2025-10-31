@@ -18,7 +18,7 @@ const { header, title, image, faqs, button } = blok;
       <p class="text-white font-semibold pb-2 md:pb-4">{header}</p>
       <hr class="border-t border-blue-gray h-1 w-full pb-6 md:pb-8" />
     )}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
       <div class="space-y-6 h-full">
         <div  class="text-white max-w-lg" set:html={renderRichText(title)} >
         </div>
@@ -39,7 +39,7 @@ const { header, title, image, faqs, button } = blok;
           )
         }
       </div>
-      <div class="order-1 lg:order-2 sm:p-8 md:p-12 rounded-sm">
+      <div class="order-1 lg:order-2 lg:p-12 rounded-sm">
         <div class="space-y-4">
           {
             faqs?.map(
