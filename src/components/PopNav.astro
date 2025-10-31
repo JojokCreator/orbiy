@@ -62,13 +62,15 @@ const mobileLinkClasses = invertMenu
 	>
 		<div class="flex h-16 items-center justify-between">
 			<div class="lg:flex lg:items-center lg:gap-12">
-				<a class="flex w-52 items-center gap-2 text-lg" href="/">
+				<a
+					class="flex w-52 items-center gap-2 text-lg lg:-translate-x-4 hover:opacity-80 transition-opacity duration-200"
+					href="/"
+				>
 					<Image
 						src={selectedLogo.filename}
 						alt={selectedLogo.alt || "Logo"}
-						width={150}
-						height={50}
-						class="h-auto w-28 flex-shrink-0 object-contain"
+						inferSize
+						class="h-auto w-28 lg:w-36 flex-shrink-0 object-contain"
 					/>
 				</a>
 			</div>

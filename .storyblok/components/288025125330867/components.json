@@ -275,7 +275,7 @@
         "id": "faq_section_header"
       },
       "title": {
-        "type": "text",
+        "type": "richtext",
         "display_name": "Section Title",
         "pos": 1,
         "id": "faq_section_title",
@@ -448,7 +448,7 @@
         "id": "bg_image"
       },
       "title": {
-        "type": "text",
+        "type": "richtext",
         "display_name": "Section Title",
         "pos": 1,
         "id": "title_section",
@@ -1065,7 +1065,7 @@
     "id": 105161421006531,
     "schema": {
       "title": {
-        "type": "text",
+        "type": "richtext",
         "display_name": "Section Title",
         "pos": 1,
         "id": "image_grid_title",
@@ -1491,13 +1491,22 @@
         "pos": 12,
         "id": "cZLZxrhBT2-pJXGTAwbd6A"
       },
-      "footer_nav_links": {
+      "footer_nav_links_company": {
         "type": "bloks",
-        "display_name": "Navigation Links",
+        "display_name": "Company Navigation Links",
         "component_whitelist": [
           "nav_item"
         ],
         "pos": 4,
+        "id": "ff0ycLUMTQixcOhSeHPhFA"
+      },
+      "footer_nav_links_explore": {
+        "type": "bloks",
+        "display_name": "Explore Navigation Links",
+        "component_whitelist": [
+          "nav_item"
+        ],
+        "pos": 5,
         "id": "ff0ycLUMTQixcOhSeHPhFA"
       },
       "footer_logo": {
@@ -1506,7 +1515,7 @@
         "filetypes": [
           "images"
         ],
-        "pos": 5,
+        "pos": 7,
         "id": "V3blqEZDQPCzwI5bp65SMg"
       },
       "tagline": {
@@ -1521,31 +1530,13 @@
         "component_whitelist": [
           "social_link_item"
         ],
-        "pos": 7,
-        "id": "T-H60ypxTMioF7S8y8JYlw"
-      },
-      "headquarters_address": {
-        "type": "textarea",
-        "display_name": "Headquarters Address",
         "pos": 8,
-        "id": "X__VvdvWTTCi37WhhnJh-Q"
-      },
-      "contact_email": {
-        "type": "text",
-        "display_name": "Contact Email",
-        "pos": 9,
-        "id": "TeFZ2sfMRRyP-_lQBa6FLw"
-      },
-      "contact_phone": {
-        "type": "text",
-        "display_name": "Contact Phone",
-        "pos": 10,
-        "id": "SS8bLnxXQ_qnqu-T1hIH0g"
+        "id": "T-H60ypxTMioF7S8y8JYlw"
       },
       "waitlist_text": {
         "type": "textarea",
         "display_name": "Waitlist Text",
-        "pos": 11,
+        "pos": 9,
         "id": "SL9xS1qGQSO9EwDd1AW0sA"
       },
       "waitlist_button": {
@@ -1555,13 +1546,13 @@
         "component_whitelist": [
           "button"
         ],
-        "pos": 12,
+        "pos": 10,
         "id": "viYUEfKoQOuIJFGgNUw-5w"
       },
       "copyright": {
         "type": "text",
         "display_name": "Copyright Text",
-        "pos": 13,
+        "pos": 11,
         "id": "Xk9JgsoqQKeHvWI1drDuWQ"
       },
       "tab-general": {
@@ -1591,11 +1582,9 @@
         "keys": [
           "footer_logo",
           "tagline",
-          "footer_nav_links",
+          "footer_nav_links_company",
+          "footer_nav_links_explore",
           "social_links",
-          "headquarters_address",
-          "contact_email",
-          "contact_phone",
           "waitlist_text",
           "waitlist_button",
           "copyright"
@@ -1786,6 +1775,38 @@
     "real_name": "Featured Car Item",
     "component_group_uuid": null,
     "color": "#F59E0B",
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "TextContent",
+    "display_name": "Text Content",
+    "description": "Rich text content section with Tailwind prose styling",
+    "created_at": "2025-10-31T00:00:00.000Z",
+    "updated_at": "2025-10-31T00:00:00.000Z",
+    "id": 888888888888888,
+    "schema": {
+      "content": {
+        "type": "richtext",
+        "display_name": "Content",
+        "pos": 0,
+        "id": "text_content",
+        "required": true
+      }
+    },
+    "image": null,
+    "preview_field": "content",
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "TextContent",
+    "component_group_uuid": null,
+    "color": "#10B981",
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],

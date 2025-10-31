@@ -1,5 +1,5 @@
 ---
-import { storyblokEditable } from "@storyblok/astro";
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
 import { getImage } from "astro:assets";
 import Button from "../components/reusable/Button.astro";
 
@@ -27,14 +27,13 @@ if (background_image?.filename) {
 >
   <div class="site-container">
     <div
-      class="flex-0 w-full lg:w-1/2 lg:ml-auto bg-red p-6 sm:p-8 md:p-12 rounded-sm"
+      class="flex-0 w-full lg:w-1/2 lg:ml-auto bg-teal/80 p-6 sm:p-8 rounded-sm"
     >
-      <div class="pb-6 border-b border-white">
-        <h2 class="text-white">
-          {title}
-        </h2>
-      </div>
-      <div class="space-y-8">
+      <div
+        class="pb-6 border-b border-white text-white"
+        set:html={renderRichText(title)}
+      />
+      <div>
         {
           features?.map((feature: { title: string; description: string }) => (
             <div class="flex items-start space-x-4">
@@ -42,7 +41,9 @@ if (background_image?.filename) {
                 <p class="text-white mb-2 text-lg sm:text-xl font-medium">
                   {feature.title}
                 </p>
-                <p class="text-white text-base">{feature.description}</p>
+                <p class="text-white text-sm sm:text-base">
+                  {feature.description}
+                </p>
               </div>
             </div>
           ))
@@ -50,7 +51,7 @@ if (background_image?.filename) {
       </div>
       {
         features_button && features_button.length > 0 && (
-          <div class="mt-12">
+          <div class="mt-8">
             <Button
               type={features_button[0].style}
               buttonText={features_button[0].text}

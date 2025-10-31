@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
     --font-sans: var(--font-sans);
@@ -16,7 +17,7 @@
     --color-gray: oklch(0.2102 0.0016 17.28);
     --color-purple: oklch(82.15% 0.055 277.12);
     --color-teal: oklch(0.2402 0.0199 147.95);
-
+    --color-brown: oklch(0.2001 0.0358 89.09);
     --animate-click: button-pop 0.2s ease-out;
 
     --breakpoint-md: 53.75rem;
@@ -72,55 +73,61 @@
     }
 
     p {
-        font-size: var(--text-lg);
-        line-height: 2rem;
+        font-size: var(--text-base);
+        line-height: 1.75rem;
         font-weight: 350;
     }
 
     @media (min-width: theme('screens.lg')) {
         p {
-            font-size: 1.3125rem;
-            line-height: 2rem;
+            font-size: var(--text-lg);
+            line-height: 1.6;
         }
     }
 
     h1 {
         font-size: 2.25rem;
-        line-height: 2.75rem;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
         font-family: var(--font-heading);
     }
 
     @media (min-width: theme('screens.sm')) {
         h1 {
             font-size: 3.375rem;
-            line-height: 4rem;
-            font-family: var(--font-heading);
+            line-height: 1.15;
+            letter-spacing: -0.025em;
         }
     }
 
     @media (min-width: theme('screens.lg')) {
         h1 {
             font-size: 4.5rem;
-            line-height: 5.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
         }
     }
 
+
     h2 {
         font-size: 1.875rem;
-        line-height: 2.25rem;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
     }
 
     @media (min-width: theme('screens.sm')) {
         h2 {
             font-size: 2.25rem;
-            line-height: 2.75rem;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
         }
     }
 
     @media (min-width: theme('screens.lg')) {
         h2 {
             font-size: 3.375rem;
-            line-height: 4rem;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
         }
     }
 
