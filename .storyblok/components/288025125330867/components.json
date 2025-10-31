@@ -1038,6 +1038,13 @@
         ],
         "pos": 9,
         "id": "mobile"
+      },
+      "show_form": {
+        "type": "boolean",
+        "display_name": "Show Sign-up Form Instead of Button",
+        "pos": 10,
+        "id": "hero_video_show_form",
+        "default_value": false
       }
     },
     "image": null,

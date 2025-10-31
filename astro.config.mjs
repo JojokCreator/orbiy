@@ -58,18 +58,25 @@ export default defineConfig({
                   weight: 400,
                   style: "normal",
                   src: [
-                    "./src/assets/fonts/AmbiguityNormate-Regular.woff2",
-                    "./src/assets/fonts/AmbiguityNormate-Regular.woff"
+                    "./src/assets/fonts/ambiguity-normate-rounded.woff2",
+                    "./src/assets/fonts/ambiguity-normate-rounded.woff"
                   ]
                 },
+              ]
+          },
+          {
+              provider: "local",
+              name: "Soloman Sans",
+              cssVariable: "--font-subheading",
+              variants: [
                 {
-                  weight: 500,
+                  weight: 400,
                   style: "normal",
                   src: [
-                    "./src/assets/fonts/AmbiguityNormate-SemiBold.woff2",
-                    "./src/assets/fonts/AmbiguityNormate-SemiBold.woff"
+                    "./src/assets/fonts/SolomonSans-Regular.woff2",
+                    "./src/assets/fonts/SolomonSans-Regular.woff"
                   ]
-                }
+                },
               ]
           },
           {

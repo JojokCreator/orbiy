@@ -11,11 +11,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const {
-  title,
-  description,
-  ogImage = "/images/og-default.jpg",
-} = Astro.props;
+const { title, description, ogImage = "/images/og-default.jpg" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -30,6 +26,7 @@ const {
 
 <Font cssVariable="--font-sans" preload />
 <Font cssVariable="--font-heading" preload />
+<Font cssVariable="--font-subheading" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

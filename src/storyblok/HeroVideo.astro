@@ -14,6 +14,7 @@ const {
   videoMobileSrc,
   poster_image,
   poster_image_mobile,
+  show_form,
 } = blok;
 
 let posterUrl = "";
@@ -170,12 +171,55 @@ const HeadingTag = heading || "h1";
       {description}
     </p>
     {
-      button && button.length > 0 && (
-        <Button
-          type={button[0].style}
-          buttonText={button[0].text}
-          link={"/" + button[0].link?.cached_url}
-        />
+      show_form ? (
+        <form
+          class="w-fit flex flex-col items-start space-y-4 bg-[#4f5450] p-4 rounded-lg"
+          method="POST"
+          action="/api/signup"
+        >
+          <div>
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Full Name"
+              required
+              class="w-full p-2 text-white placeholder-gray-200 border-b border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200"
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+              class="w-full p-2 text-white placeholder-gray-200 border-b border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200"
+            />
+          </div>
+          <div>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              required
+              class="w-full p-2 text-white placeholder-gray-200 border-b border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-200"
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-green whitespace-nowrap active:focus:animate-click text-[#dedede] relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden rounded-sm transition-all duration-500 ease-in-out hover:bg-dark-green"
+          >
+            Join The Circle
+          </button>
+        </form>
+      ) : (
+        button &&
+        button.length > 0 && (
+          <Button
+            type={button[0].style}
+            buttonText={button[0].text}
+            link={"/" + button[0].link?.cached_url}
+          />
+        )
       )
     }
   </div>
