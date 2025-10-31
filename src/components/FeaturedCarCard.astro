@@ -16,7 +16,7 @@ const featuresList = features
   : [];
 
 // Extract car ID from loopit URL or generate fallback
-let assetId = uuid || id || Math.random().toString(36).substr(2, 9);
+let assetId;
 
 if (link?.cached_url) {
   const url = link.cached_url;

@@ -16,8 +16,10 @@ interface GridCard {
   };
 }
 
+import type { StoryblokRichTextNode } from '@storyblok/astro';
+
 interface ImageGridProps {
-  title: string;
+  title: StoryblokRichTextNode;
   text?: string;
   grid_cards?: GridCard[];
   [k: string]: any;
