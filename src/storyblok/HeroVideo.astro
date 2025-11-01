@@ -1,5 +1,5 @@
 ---
-import { storyblokEditable } from "@storyblok/astro";
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
 import { getImage } from "astro:assets";
 import Button from "../components/reusable/Button.astro";
 
@@ -166,10 +166,10 @@ const HeadingTag = heading || "h1";
   <div
     class="relative z-30 flex h-screen md:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
-    <HeadingTag class="mb-6 text-white">{title}</HeadingTag>
-    <p class="mb-8 text-light-gray max-w-2xl text-balance mx-auto">
-      {description}
-    </p>
+    <HeadingTag class="mb-6 text-white text-balance">{title}</HeadingTag>
+    <div class="mb-8 text-light-gray max-w-3xl text-balance mx-auto prose prose-invert">
+      {renderRichText(description)}
+    </div>
     {
       show_form ? (
         <form

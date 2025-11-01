@@ -864,7 +864,7 @@
         "required": true
       },
       "description": {
-        "type": "text",
+        "type": "richtext",
         "pos": 1,
         "id": "oypI6nhpSAOGD5_3NNklEg",
         "required": true
@@ -953,7 +953,7 @@
         "required": true
       },
       "description": {
-        "type": "textarea",
+        "type": "richtext",
         "display_name": "Hero Description",
         "pos": 1,
         "id": "hero_video_description",
