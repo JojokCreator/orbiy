@@ -35,6 +35,11 @@
             "_uid": "dd2fb9a8-cea6-46b4-a03a-6307ea13aa12",
             "value": "black",
             "name": "Black"
+          },
+          {
+            "_uid": "outline-btn-uuid",
+            "value": "outline",
+            "name": "Outline"
           }
         ],
         "default_value": "gray",

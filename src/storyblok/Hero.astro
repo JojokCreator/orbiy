@@ -51,10 +51,9 @@ const HeadingTag = heading_type || "h2";
       set:html={`<${HeadingTag} class="mb-6 text-white text-pretty">${title}</${HeadingTag}>`}
     />
     <div
+      set:html={renderRichText(description)}
       class="mb-8 text-light-gray max-w-3xl text-balance mx-auto prose prose-invert"
-    >
-      {renderRichText(description)}
-    </div>
+    />
     {
       button && button.length > 0 && (
         <Button

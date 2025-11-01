@@ -21,8 +21,10 @@ const grayClasses = `bg-green whitespace-nowrap active:focus:animate-click text-
 `;
 const blackClasses = `bg-gray whitespace-nowrap active:focus:animate-click text-white relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden text-white rounded-sm transition-all duration-500 ease-in-out hover:bg-neutral-700
 `;
+const outlineClasses = `border-2 border-white whitespace-nowrap active:focus:animate-click text-white relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden rounded-sm transition-all duration-500 ease-in-out hover:bg-white hover:text-black
+`;
 
-const typeClasses = type === "gray" ? grayClasses : blackClasses;
+const typeClasses = type === "gray" ? grayClasses : type === "black" ? blackClasses : outlineClasses;
 
 const combinedClasses = twMerge(typeClasses, className);
 ---

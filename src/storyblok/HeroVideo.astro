@@ -167,9 +167,10 @@ const HeadingTag = heading || "h1";
     class="relative z-30 flex h-screen md:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
     <HeadingTag class="mb-6 text-white text-balance">{title}</HeadingTag>
-    <div class="mb-8 text-light-gray max-w-3xl text-balance mx-auto prose prose-invert">
-      {renderRichText(description)}
-    </div>
+    <div
+      set:html={renderRichText(description)}
+      class="mb-8 text-light-gray max-w-xl text-pretty mx-auto prose prose-invert"
+    />
     {
       show_form ? (
         <form
