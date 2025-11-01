@@ -24,7 +24,12 @@ const blackClasses = `bg-gray whitespace-nowrap active:focus:animate-click text-
 const outlineClasses = `border-2 border-white whitespace-nowrap active:focus:animate-click text-white relative inline-flex items-center justify-center p-4 px-5 py-3 text-base max-h-12 overflow-hidden rounded-sm transition-all duration-500 ease-in-out hover:bg-white hover:text-black
 `;
 
-const typeClasses = type === "gray" ? grayClasses : type === "black" ? blackClasses : outlineClasses;
+const typeClasses =
+	type === "gray"
+		? grayClasses
+		: type === "black"
+			? blackClasses
+			: outlineClasses;
 
 const combinedClasses = twMerge(typeClasses, className);
 ---
