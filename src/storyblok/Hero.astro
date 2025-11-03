@@ -4,7 +4,7 @@ import { getImage } from "astro:assets";
 import Button from "../components/reusable/Button.astro";
 
 const { blok } = Astro.props;
-const { title, description, heading_type, background_color, button, image } =
+const { title, description, heading_type, background_color, button, image, sticky_background } =
   blok;
 
 let backgroundImageUrl = "";
@@ -40,7 +40,7 @@ const HeadingTag = heading_type || "h2";
 <section
   class={`relative ${backgroundImageUrl ? "min-h-[100vh]" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass}`}
   style={backgroundImageUrl &&
-    `background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+    `background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat; ${sticky_background ? 'background-attachment: fixed;' : ''}`}
   {...storyblokEditable(blok)}
 >
   {backgroundImageUrl && <div class="absolute inset-0 bg-black/60" />}

@@ -924,6 +924,13 @@
         "type": "bloks",
         "pos": 5,
         "id": "FQ0wrcd3RKGz32qNePCPbg"
+      },
+      "sticky_background": {
+        "type": "boolean",
+        "display_name": "Sticky Background (Parallax Effect)",
+        "pos": 6,
+        "id": "hero_sticky_background",
+        "default_value": false
       }
     },
     "image": null,

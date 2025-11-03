@@ -4,7 +4,6 @@ import { loadEnv } from 'vite';
 import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import mkcert from "vite-plugin-mkcert";
 
 import netlify from "@astrojs/netlify";
 
@@ -44,7 +43,7 @@ export default defineConfig({
     })],
   adapter: isPreview && !isLocal ? netlify() : undefined,
   vite: {
-      plugins: [tailwindcss(), mkcert()],
+      plugins: [tailwindcss()],
 	},
   output: isPreview ? 'server' : 'static',
   experimental: {
