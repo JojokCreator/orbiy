@@ -171,10 +171,14 @@ const HeadingTag = heading || "h1";
       class={`${bigger_heading ? "h1" : ""} mb-6 text-white text-balance`}
       >{title}</HeadingTag
     >
-    <div
-      set:html={renderRichText(description)}
-      class="mb-8 text-light-gray max-w-xl text-pretty mx-auto prose prose-invert"
-    />
+    {
+      description && (
+        <div
+          set:html={renderRichText(description)}
+          class="mb-8 text-light-gray max-w-3xl text-balance mx-auto prose prose-invert"
+        />
+      )
+    }
     {
       show_form ? (
         <form

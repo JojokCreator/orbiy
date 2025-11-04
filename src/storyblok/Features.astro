@@ -29,15 +29,16 @@ if (background_image?.filename) {
     <div
       class="flex-0 w-full lg:w-1/2 max-w-xl lg:ml-auto bg-teal/90 backdrop-blur-xl p-6 sm:p-9 rounded-sm"
     >
-      <div
-        class="pb-4 border-b border-white text-white"
-        set:html={renderRichText(title)}
-      />
+      {
+        title && (
+          <div class="pb-4 text-white" set:html={renderRichText(title)} />
+        )
+      }
       <div>
         {
           features?.map((feature: { title: string; description: string }) => (
             <div class="flex items-start space-x-4">
-              <div class="flex-1 border-b border-white py-5">
+              <div class="flex-1 border-b border-white/20 py-5">
                 <p class="text-white mb-2 text-lg sm:text-xl font-medium">
                   {feature.title}
                 </p>

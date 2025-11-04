@@ -8,7 +8,7 @@ const { content } = blok;
 <section {...storyblokEditable(blok)} class="vertical-p">
   <div class="site-container">
     <div class="prose prose-lg lg:prose-xl prose-slate max-w-none">
-      <div set:html={renderRichText(content)} />
+      {content && <div set:html={renderRichText(content)} />}
     </div>
   </div>
 </section>

@@ -57,10 +57,14 @@ const HeadingTag = heading_type || "h2";
     <Fragment
       set:html={`<${HeadingTag} class="${bigger_heading ? "h1" : ""} mb-6 text-white text-pretty">${title}</${HeadingTag}>`}
     />
-    <div
-      set:html={renderRichText(description)}
-      class="mb-8 text-light-gray max-w-3xl text-balance mx-auto prose prose-invert"
-    />
+    {
+      description && (
+        <div
+          set:html={renderRichText(description)}
+          class="mb-8 text-light-gray max-w-3xl text-balance mx-auto prose prose-invert"
+        />
+      )
+    }
     {
       button && button.length > 0 && (
         <Button

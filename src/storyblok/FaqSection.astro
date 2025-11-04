@@ -20,9 +20,10 @@ const { header, title, image, faqs, button } = blok;
     )}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
       <div class="space-y-6 h-full">
-        <div  class="text-white max-w-lg" set:html={renderRichText(title)} >
+        {title && (
+          <div class="text-white max-w-lg" set:html={renderRichText(title)} >
         </div>
-
+        )}
         {
           image?.filename && (
             <div class="mt-8 rounded-lg overflow-hidden">
@@ -45,7 +46,7 @@ const { header, title, image, faqs, button } = blok;
             faqs?.map(
               (faq: { question: string; answer: string }, index: number) => (
                 <details
-                  class="group w-full overflow-hidden border-b border-white transition-all duration-300 ease-in-out hover:cursor-pointer"
+                  class="group w-full overflow-hidden border-b border-white/20 transition-all duration-300 ease-in-out hover:cursor-pointer"
                   open={index === 0}
                 >
                   <summary class="relative flex justify-between items-center py-4 rounded-lg mb-4 text-left cursor-pointer hover:bg-gray-900/30 transition-colors px-2 md:px-4 -mx-2">
