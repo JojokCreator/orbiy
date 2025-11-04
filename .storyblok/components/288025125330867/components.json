@@ -931,6 +931,13 @@
         "pos": 6,
         "id": "hero_sticky_background",
         "default_value": false
+      },
+      "bigger_heading": {
+        "type": "boolean",
+        "display_name": "Bigger Heading (H1 Size)",
+        "pos": 7,
+        "id": "hero_bigger_heading",
+        "default_value": false
       }
     },
     "image": null,
@@ -1056,6 +1063,13 @@
         "display_name": "Show Sign-up Form Instead of Button",
         "pos": 10,
         "id": "hero_video_show_form",
+        "default_value": false
+      },
+      "bigger_heading": {
+        "type": "boolean",
+        "display_name": "Bigger Heading (H1 Size)",
+        "pos": 11,
+        "id": "hero_video_bigger_heading",
         "default_value": false
       }
     },

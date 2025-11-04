@@ -15,6 +15,7 @@ const {
   poster_image,
   poster_image_mobile,
   show_form,
+  bigger_heading,
 } = blok;
 
 let posterUrl = "";
@@ -166,7 +167,7 @@ const HeadingTag = heading || "h1";
   <div
     class="relative z-30 flex h-screen md:pt-20 w-full flex-col items-center justify-center px-4 text-center max-w-5xl mx-auto"
   >
-    <HeadingTag class="mb-6 text-white text-balance">{title}</HeadingTag>
+    <HeadingTag class={`${bigger_heading ? "h1" : ""} mb-6 text-white text-balance`}>{title}</HeadingTag>
     <div
       set:html={renderRichText(description)}
       class="mb-8 text-light-gray max-w-xl text-pretty mx-auto prose prose-invert"

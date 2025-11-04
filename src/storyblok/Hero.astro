@@ -4,8 +4,16 @@ import { getImage } from "astro:assets";
 import Button from "../components/reusable/Button.astro";
 
 const { blok } = Astro.props;
-const { title, description, heading_type, background_color, button, image, sticky_background } =
-  blok;
+const {
+  title,
+  description,
+  heading_type,
+  background_color,
+  button,
+  image,
+  sticky_background,
+  bigger_heading,
+} = blok;
 
 let backgroundImageUrl = "";
 if (image?.filename) {
@@ -38,17 +46,16 @@ const HeadingTag = heading_type || "h2";
 ---
 
 <section
-  class={`relative ${backgroundImageUrl ? "min-h-[100vh]" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass}`}
-  style={backgroundImageUrl &&
-    `background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat; ${sticky_background ? 'background-attachment: fixed;' : ''}`}
+  class={`relative ${backgroundImageUrl ? "min-h-screen" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass} bg-cover bg-no-repeat bg-center ${sticky_background ? "bg-fixed" : ""}`}
+  style={backgroundImageUrl && `background-image: url('${backgroundImageUrl}')`}
   {...storyblokEditable(blok)}
 >
   {backgroundImageUrl && <div class="absolute inset-0 bg-black/60" />}
   <div
-    class="relative z-10 flex h-[100vh] md:pb-20 w-full flex-col items-center justify-center px-4 text-center max-w-4xl mx-auto"
+    class="relative z-10 flex h-screen md:py-20 w-full flex-col items-center justify-center px-4 text-center max-w-4xl mx-auto"
   >
     <Fragment
-      set:html={`<${HeadingTag} class="mb-6 text-white text-pretty">${title}</${HeadingTag}>`}
+      set:html={`<${HeadingTag} class="${bigger_heading ? "h1" : ""} mb-6 text-white text-pretty">${title}</${HeadingTag}>`}
     />
     <div
       set:html={renderRichText(description)}
