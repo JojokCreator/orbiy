@@ -46,7 +46,7 @@ const HeadingTag = heading_type || "h2";
 ---
 
 <section
-  class={`relative ${backgroundImageUrl ? "min-h-screen" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass} bg-cover bg-no-repeat bg-center ${sticky_background ? "bg-fixed" : ""}`}
+  class={`relative ${backgroundImageUrl ? "min-h-screen" : "min-h-[50vh]"} w-screen overflow-hidden ${backgroundColorClass} bg-cover bg-no-repeat bg-center ${sticky_background ? "lg:bg-fixed" : ""}`}
   style={backgroundImageUrl && `background-image: url('${backgroundImageUrl}')`}
   {...storyblokEditable(blok)}
 >

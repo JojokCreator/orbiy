@@ -21,13 +21,13 @@ if (background_image?.filename) {
 ---
 
 <section
-  class="relative w-screen overflow-hidden bg-black vertical-p"
-  style={`background-image: url('${backgroundImageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+  class="relative w-screen overflow-hidden bg-black vertical-p !pb-4 md:!pb-12 lg:!pb-14 bg-cover bg-center bg-no-repeat"
+  style={`background-image: url('${backgroundImageUrl}');`}
   {...storyblokEditable(blok)}
 >
   <div class="site-container">
     <div
-      class="flex-0 w-full lg:w-1/2 lg:ml-auto bg-teal/80 p-6 sm:p-8 rounded-sm"
+      class="flex-0 w-full lg:w-1/2 max-w-xl lg:ml-auto bg-teal/90 backdrop-blur-xl p-6 sm:p-9 rounded-sm"
     >
       <div
         class="pb-4 border-b border-white text-white"
@@ -37,11 +37,11 @@ if (background_image?.filename) {
         {
           features?.map((feature: { title: string; description: string }) => (
             <div class="flex items-start space-x-4">
-              <div class="flex-1 border-b border-white py-4">
+              <div class="flex-1 border-b border-white py-5">
                 <p class="text-white mb-2 text-lg sm:text-xl font-medium">
                   {feature.title}
                 </p>
-                <p class="text-white text-sm sm:text-base">
+                <p class="text-white text-sm sm:text-base leading-tight">
                   {feature.description}
                 </p>
               </div>
