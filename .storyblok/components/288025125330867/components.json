@@ -154,7 +154,7 @@
         "required": true
       },
       "date": {
-        "type": "text",
+        "type": "datetime",
         "display_name": "Target Date",
         "pos": 3,
         "id": "countdown_date",

@@ -82,32 +82,24 @@ if (background_image?.filename) {
     const dateAttribute =
       countdownElement.getAttribute("data-target-date") || "";
 
-    function parseDate(dateStr: string): number {
-      let cleanDate = dateStr.trim();
-      if (/^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}(:\d{2})?$/.test(cleanDate)) {
-        cleanDate = cleanDate.replace(" ", "T");
-        if (!cleanDate.includes(":", cleanDate.lastIndexOf(":") + 3)) {
-          cleanDate += ":00";
-        }
-      }
+    let targetDate: number;
 
-      if (/^\d{4}-\d{2}-\d{2}$/.test(cleanDate)) {
-        cleanDate += "T00:00:00";
-      }
+    try {
+      const [datePart, timePart] = dateAttribute.split(" ");
 
-      if (/^\d{1,2}\/\d{1,2}\/\d{4}/.test(cleanDate)) {
-        const parts = cleanDate.split(/[\s\/]/);
-        cleanDate = `${parts[2]}-${parts[0].padStart(2, "0")}-${parts[1].padStart(2, "0")}T00:00:00`;
-      }
+      if (datePart && timePart) {
+        const [year, month, day] = datePart.split("-").map(Number);
+        const [hours, minutes] = timePart.split(":").map(Number);
 
-      if (!cleanDate.includes("Z") && !cleanDate.match(/[+-]\d{2}:\d{2}$/)) {
-        cleanDate += "Z";
+        targetDate = new Date(year, month - 1, day, hours, minutes).getTime();
+      } else {
+        targetDate = new Date(dateAttribute).getTime();
       }
-
-      return new Date(cleanDate).getTime();
+    } catch (error) {
+      console.error("Error parsing date:", error);
+      countdownElement.innerHTML = "";
+      return;
     }
-
-    const targetDate = parseDate(dateAttribute);
 
     if (isNaN(targetDate)) {
       countdownElement.innerHTML = "";
@@ -120,7 +112,7 @@ if (background_image?.filename) {
       const distance = targetDate - now;
 
       if (distance < 0) {
-        countdownElement.innerHTML = "EXPIRED";
+        countdownElement.innerHTML = "";
         return;
       }
 
