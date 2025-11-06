@@ -71,7 +71,6 @@ if (background_image?.filename) {
 </section>
 
 <script>
-  // Countdown timer functionality
   document.addEventListener("DOMContentLoaded", function () {
     const countdownElement = document.getElementById(
       "countdown-timer",
@@ -81,7 +80,40 @@ if (background_image?.filename) {
 
     const dateAttribute =
       countdownElement.getAttribute("data-target-date") || "";
-    const targetDate = new Date(dateAttribute).getTime();
+    
+    function parseDate(dateStr: string): number {
+      let cleanDate = dateStr.trim();
+      
+      if (/^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}(:\d{2})?$/.test(cleanDate)) {
+        cleanDate = cleanDate.replace(' ', 'T');
+        if (!cleanDate.includes(':', cleanDate.lastIndexOf(':')+3)) {
+          cleanDate += ':00';
+        }
+      }
+      
+      if (/^\d{4}-\d{2}-\d{2}$/.test(cleanDate)) {
+        cleanDate += 'T00:00:00';
+      }
+      
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}/.test(cleanDate)) {
+        const parts = cleanDate.split(/[\s\/]/);
+        cleanDate = `${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}T00:00:00`;
+      }
+      
+      if (!cleanDate.includes('Z') && !cleanDate.match(/[+-]\d{2}:\d{2}$/)) {
+        cleanDate += 'Z';
+      }
+      
+      return new Date(cleanDate).getTime();
+    }
+    
+    const targetDate = parseDate(dateAttribute);
+    
+    if (isNaN(targetDate)) {
+      countdownElement.innerHTML = '<div class="text-red-500">Invalid date format</div>';
+      console.error('Invalid date string:', dateAttribute);
+      return;
+    }
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -137,7 +169,6 @@ if (background_image?.filename) {
       `;
     }
 
-    // Update countdown immediately and then every second
     updateCountdown();
     setInterval(updateCountdown, 1000);
   });

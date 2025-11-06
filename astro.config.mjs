@@ -8,8 +8,7 @@ import tailwindcss from "@tailwindcss/vite";
 import netlify from "@astrojs/netlify";
 
 const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), 'STORYBLOK');
-const isLocal = env.STORYBLOK_LOCAL === 'yes'
-const isPreview = isLocal ? true : env.STORYBLOK_PREVIEW === 'yes'
+const isPreview = env.STORYBLOK_PREVIEW === 'yes'
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,7 +40,7 @@ export default defineConfig({
         region: 'eu',
       },
     })],
-  adapter: isPreview && !isLocal ? netlify() : undefined,
+  adapter: isPreview ? netlify() : undefined,
   vite: {
       plugins: [tailwindcss()],
 	},
