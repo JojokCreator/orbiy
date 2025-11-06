@@ -17,11 +17,9 @@ try {
 	const { data: siteConfigData } = await sbApi.get(
 		"cdn/stories/site-config",
 		{
-			version:
-				import.meta.env.STORYBLOK_LOCAL &&
-				import.meta.env.STORYBLOK_PREVIEW
-					? "draft"
-					: "published",
+			version: import.meta.env.STORYBLOK_PREVIEW === "yes"
+				? "draft"
+				: "published",
 		},
 	);
 	siteConfig = siteConfigData.story?.content;

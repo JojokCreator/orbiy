@@ -99,14 +99,7 @@ In Netlify dashboard, navigate to **Site settings** > **Environment variables**:
 1. **Storyblok Configuration**
    ```
    STORYBLOK_TOKEN=your_private_token_here
-   STORYBLOK_SPACE_ID=your_space_id_here
-   NODE_ENV=production
-   ```
-
-2. **Optional Variables**
-   ```
-   STORYBLOK_API_URL=https://api.storyblok.com/v2
-   STORYBLOK_CACHE_DURATION=3600
+   STORYBLOK_PREVIEW=no
    ```
 
 ### Preview Site Variables
@@ -115,9 +108,8 @@ For the preview site, use the preview token:
 
 1. **Storyblok Configuration**
    ```
-   STORYBLOK_TOKEN=your_preview_token_here
-   STORYBLOK_SPACE_ID=your_space_id_here
-   NODE_ENV=development
+   STORYBLOK_TOKEN=your_private_token_here
+   STORYBLOK_PREVIEW=yes
    ```
 
 ### Local Development
@@ -126,9 +118,10 @@ Create a `.env` file in your project root:
 
 ```bash
 # .env
-STORYBLOK_TOKEN=your_preview_token_here
-STORYBLOK_SPACE_ID=your_space_id_here
-NODE_ENV=development
+   ```
+   STORYBLOK_TOKEN=your_private_token_here
+   STORYBLOK_PREVIEW=no
+   ```
 ```
 
 **Important**: Add `.env` to your `.gitignore` file to prevent committing sensitive data.
@@ -197,9 +190,8 @@ export default defineConfig({
     tailwind(),
     storyblok({
       accessToken: process.env.STORYBLOK_TOKEN,
-      bridge: process.env.NODE_ENV === 'development',
       apiOptions: {
-        region: 'us', // or 'eu' if your space is in EU
+        region: 'eu', 
       },
     }),
   ],

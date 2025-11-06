@@ -3,7 +3,6 @@
 
 interface ImportMetaEnv {
     readonly STORYBLOK_PREVIEW: string;
-    readonly STORYBLOK_LOCAL: string;
     readonly STORYBLOK_TOKEN: string;
     // more env variables...
   }

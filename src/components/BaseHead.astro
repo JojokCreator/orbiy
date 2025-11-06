@@ -10,6 +10,7 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
 
 const { title, description, ogImage = "/images/og-default.jpg" } = Astro.props;
 ---
@@ -49,3 +50,11 @@ const { title, description, ogImage = "/images/og-default.jpg" } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
+
+<!-- SEO: Noindex for preview mode -->
+{isPreview && (
+  <>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+  </>
+)}

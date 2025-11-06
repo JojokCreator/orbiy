@@ -13,11 +13,8 @@ interface CarData {
 
 
 export async function getStaticPaths() {
-  // Skip getStaticPaths for SSR mode (local + preview)
-  const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
-  const isPreview = isLocal
-    ? true
-    : import.meta.env.STORYBLOK_PREVIEW === "yes";
+  // Skip getStaticPaths for SSR mode (preview)
+  const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
   if (isPreview) {
     return [];
   }
@@ -87,10 +84,7 @@ const { asset_id } = Astro.params;
 let car: CarData = Astro.props.car;
 if (!car) {
   const sbApi = useStoryblokApi();
-  const isLocal = import.meta.env.STORYBLOK_LOCAL === "yes";
-  const isPreview = isLocal
-    ? true
-    : import.meta.env.STORYBLOK_PREVIEW === "yes";
+  const isPreview = import.meta.env.STORYBLOK_PREVIEW === "yes";
 
   const uniqueCars: { [key: string]: CarData } = {};
 
