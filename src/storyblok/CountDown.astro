@@ -110,8 +110,7 @@ if (background_image?.filename) {
     const targetDate = parseDate(dateAttribute);
 
     if (isNaN(targetDate)) {
-      countdownElement.innerHTML =
-        '<div class="text-red-500">Invalid date format</div>';
+      countdownElement.innerHTML = "";
       console.error("Invalid date string:", dateAttribute);
       return;
     }
