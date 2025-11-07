@@ -12,7 +12,7 @@ const isPreview = env.STORYBLOK_PREVIEW === 'yes'
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://orbiy.netlify.app",
+  site: isPreview ? "https://orbiy-previews.netlify.app/" : "https://orbiy.com/",
   image: {
       domains: ['a.storyblok.com'],
 	},
