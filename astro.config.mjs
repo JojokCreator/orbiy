@@ -42,7 +42,8 @@ export default defineConfig({
     }),
     (await import("astro-compress")).default({
 			CSS: false,
-			HTML: true,
+			HTML: 
+      {removeComments: true, collapseWhitespace: true},
 			Image: false,
 			JavaScript: false,
 			SVG: false,
