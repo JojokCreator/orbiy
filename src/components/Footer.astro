@@ -8,9 +8,8 @@ let siteConfig;
 const sbApi = useStoryblokApi();
 try {
   const { data: siteConfigData } = await sbApi.get("cdn/stories/site-config", {
-    version: import.meta.env.STORYBLOK_PREVIEW === "yes"
-      ? "draft"
-      : "published",
+    version:
+      import.meta.env.STORYBLOK_PREVIEW === "yes" ? "draft" : "published",
     resolve_links: "url",
   });
   siteConfig = siteConfigData.story?.content;

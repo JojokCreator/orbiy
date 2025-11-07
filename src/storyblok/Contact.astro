@@ -12,9 +12,7 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
 >
   <div class="site-container">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-      {/* Left Side - Company Information */}
       <div class="space-y-8">
-        {/* Section Header */}
         <div class="mb-12">
           {title && <h1 class=" text-white mb-4">{title}</h1>}
 
@@ -26,10 +24,8 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
             )
           }
         </div>
-        {/* Contact Information */}
         <div class="space-y-6">
           <p class="font-medium text-white mb-8">General Enquiries</p>
-          {/* Phone */}
           {
             phone && (
               <div class="flex items-start justify-start space-x-3">
@@ -49,8 +45,6 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
               </div>
             )
           }
-
-          {/* Email */}
           {
             email && (
               <div class="flex items-start justify-start space-x-3">
@@ -70,8 +64,6 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
               </div>
             )
           }
-
-          {/* Address */}
           {
             address && (
               <div class="flex items-start justify-start space-x-3">
@@ -88,16 +80,18 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
           }
         </div>
       </div>
-
-      {/* Right Side - Contact Form */}
       <div class="lg:border-light-gray lg:border rounded-lg lg:p-8 shadow-lg">
         <form
           class="space-y-6"
           method="POST"
-          action="/api/contact"
+          name="contact"
+          data-netlify="true"
+          action="/form-success"
+          netlify-honeypot="bot-field"
           id="contact-form"
         >
-          {/* Name Fields - First and Last Name in same row */}
+          <input type="hidden" name="bot-field" />
+          <input type="hidden" name="form-name" value="contact" />
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label
@@ -133,8 +127,6 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
               />
             </div>
           </div>
-
-          {/* Email Field */}
           <div>
             <label
               for="email"
@@ -151,8 +143,6 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
               placeholder="your@email.com"
             />
           </div>
-
-          {/* Phone Field - Optional */}
           <div>
             <label
               for="phone"
@@ -168,8 +158,6 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
               placeholder="+1 (555) 123-4567"
             />
           </div>
-
-          {/* Message Field */}
           <div>
             <label
               for="message"
@@ -205,28 +193,27 @@ const { title, subtitle, address, phone, email, submit_button_text } = blok;
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contact-form") as HTMLFormElement;
     if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-
-        console.log("Form submitted:", data);
-
-        const button = form.querySelector('button[type="submit"]');
+      form.addEventListener("submit", function () {
+        const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
         if (!button) return;
-        const originalText = button.textContent;
-        button.textContent = "Message Sent!";
-        button.classList.add("bg-green");
-        button.classList.remove("bg-black");
 
-        form.reset();
+        const originalText = button.textContent;
+        button.textContent = "Sending...";
+        button.disabled = true;
+        button.classList.add("opacity-75", "cursor-not-allowed");
 
         setTimeout(() => {
           button.textContent = originalText;
-          button.classList.remove("bg-green");
-          button.classList.add("bg-black");
-        }, 3000);
+          button.disabled = false;
+          button.classList.remove("opacity-75", "cursor-not-allowed");
+        }, 10000);
+      });
+
+      form.addEventListener("error", function (e) {
+        console.error("Form submission error:", e);
+        window.location.href = "/form-error";
       });
     }
   });
 </script>
+

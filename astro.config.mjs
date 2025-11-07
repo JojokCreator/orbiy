@@ -39,7 +39,15 @@ export default defineConfig({
       apiOptions: {
         region: 'eu',
       },
-    })],
+    }),
+    (await import("astro-compress")).default({
+			CSS: false,
+			HTML: true,
+			Image: false,
+			JavaScript: false,
+			SVG: false,
+		}),
+  ],
   adapter: isPreview ? netlify() : undefined,
   vite: {
       plugins: [tailwindcss()],
