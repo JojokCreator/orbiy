@@ -8,8 +8,7 @@ interface Props {
 }
 
 const { car } = Astro.props;
-const { title, price, description, image, imageAlt, features, link, uuid, id } =
-  car;
+const { title, price, description, image, imageAlt, features, link } = car;
 
 const featuresList = features
   ? features.split("\n").filter((f: string) => f.trim())

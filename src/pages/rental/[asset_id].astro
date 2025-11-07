@@ -52,7 +52,7 @@ export async function getStaticPaths() {
       // Extract cars from ImageGrid components
       if (blok.component === "ImageGrid" && blok.grid_cards) {
         for (const card of blok.grid_cards) {
-          let cardId = card.uuid || card.id || card._uid || Math.random().toString(36).substr(2, 9);
+          let cardId;
 
           if (card.link?.cached_url) {
             const url = card.link.cached_url;
@@ -118,7 +118,7 @@ if (!car) {
       // Extract cars from ImageGrid components
       if (blok.component === "ImageGrid" && blok.grid_cards) {
         for (const card of blok.grid_cards) {
-          let cardId = card.uuid || card.id || card._uid || Math.random().toString(36).substr(2, 9);
+          let cardId;
 
           if (card.link?.cached_url) {
             const url = card.link.cached_url;
